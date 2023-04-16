@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+guid: ae26681ec3f332345997f80ed0125d80
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Neo Sans Std
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1a2c47ed0509f434fa6d6637bc5932bc, type: 3}
+  - {fileID: 12800000, guid: 26f29714153f3184a97cbc03dabfc76f, type: 3}
+  - {fileID: 12800000, guid: 796e76d76ecb56942aae559f5a513463, type: 3}
+  - {fileID: 12800000, guid: 193211d889ed532419bfcc3aa2ecb491, type: 3}
+  - {fileID: 12800000, guid: 3a7d8e4e82e306645b7ef6e00dfa752d, type: 3}
+  - {fileID: 12800000, guid: 5eb50e6aac84ae343852ea2ee0cc353f, type: 3}
+  - {fileID: 12800000, guid: 97972e058ae678a4c90c8b3ad5b5a5a8, type: 3}
+  - {fileID: 12800000, guid: 108275c53b8f9124895b31e98536b0b7, type: 3}
+  - {fileID: 12800000, guid: 8de3905c96926cd40ba42306580896be, type: 3}
+  - {fileID: 12800000, guid: 3041b0de3d9ad3b458409db4c5a17994, type: 3}
+  - {fileID: 12800000, guid: 51e048ea6ad4c3f44a8fed23573633f3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
