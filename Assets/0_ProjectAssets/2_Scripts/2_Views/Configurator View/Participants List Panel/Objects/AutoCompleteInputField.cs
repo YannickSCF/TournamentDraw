@@ -1,0 +1,154 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+using static TMPro.TMP_Dropdown;
+
+namespace YannickSCF.TournamentDraw.Settings.View.Componets {
+    public class AutoCompleteInputField : MonoBehaviour {
+
+        [Header("Basic object references")]
+        [SerializeField] private TMP_InputField inputField;
+        [SerializeField] private Image captionImage;
+        [SerializeField] private ScrollRect optionsScrollRect;
+
+        [Header("Options")]
+        [SerializeField] private OptionDataList options;
+        [SerializeField] private string spritesResourcePath = string.Empty;
+
+
+        private string lastText = "";
+        private Sprite[] allSprites;
+        private string[] allNames;
+
+        #region Mono
+        public void Awake() {
+            if (!string.IsNullOrEmpty(spritesResourcePath)) {
+                allSprites = Resources.LoadAll<Sprite>(spritesResourcePath);
+            }
+            allNames = Enum.GetNames(typeof(Countries));
+
+            SetFinalValue(null);
+        }
+
+        private void OnEnable() {
+            inputField.onValueChanged.AddListener(OnInputFieldChanged);
+        }
+
+        private void OnDisable() {
+            inputField.onValueChanged.RemoveAllListeners();
+        }
+        #endregion
+
+        public void SetInitValue(Countries country) {
+            string countryCode = Enum.GetName(typeof(Countries), country);
+            OptionData initOption = new OptionData(countryCode, allSprites.Where(x => x.name.Equals(countryCode)).FirstOrDefault());
+            SetFinalValue(initOption);
+        }
+
+        public Countries? GetValue() {
+            return CountriesUtils.SearchCountryDescription(inputField.text);
+        }
+
+        private void OnInputFieldChanged(string text) {
+            SetFinalValue(null);
+
+            if (string.IsNullOrEmpty(text)) {
+                optionsScrollRect.gameObject.SetActive(false);
+                options.options.Clear();
+                ClearObjectList();
+                lastText = string.Empty;
+                return;
+            }
+
+            if (text.All(char.IsLetter) && text.Length <= 2) {
+                lastText = text.ToUpper();
+                inputField.SetTextWithoutNotify(lastText);
+                SetValidOptions(lastText);
+                ShowValidOptions();
+            } else {
+                inputField.SetTextWithoutNotify(lastText);
+            }
+        }
+
+        private void SetValidOptions(string text) {
+            options.options.Clear();
+
+            List<Sprite> spritesOptions = null;
+            if (allSprites.Length > 0) {
+                spritesOptions = allSprites.Where(x => x.name.StartsWith(text)).ToList();
+            }
+            List<string> namesOptions = allNames.Where(x => x.StartsWith(text)).ToList();
+
+            for (int i = 0; i < namesOptions.Count; ++i) {
+                OptionData option;
+                if (spritesOptions != null) {
+                    option = new OptionData(namesOptions[i],
+                        spritesOptions.Where(x => x.name.Equals(namesOptions[i])).FirstOrDefault());
+                } else {
+                    option = new OptionData(namesOptions[i]);
+                }
+                options.options.Add(option);
+            }
+        }
+
+        private void ShowValidOptions() {
+            if (options.options.Count == 0) {
+                optionsScrollRect.gameObject.SetActive(false);
+            } else if (options.options.Count == 1) {
+                SetFinalValue(options.options[0]);
+            } else {
+                GameObject templateItem = optionsScrollRect.content.GetChild(0).gameObject;
+                for (int i = 0; i < options.options.Count; ++i) {
+                    GameObject listItem;
+                    if (i < optionsScrollRect.content.childCount) {
+                        listItem = optionsScrollRect.content.GetChild(i).gameObject;
+                    } else {
+                        listItem = Instantiate(templateItem.gameObject, optionsScrollRect.content.transform);
+                    }
+
+                    listItem.GetComponentInChildren<TextMeshProUGUI>().text = options.options[i].text;
+                    if (options.options[i].image != null) {
+                        listItem.GetComponentsInChildren<Image>()[1].sprite = options.options[i].image;
+                    }
+                }
+
+                optionsScrollRect.gameObject.SetActive(true);
+            }
+
+            ClearObjectList();
+        }
+
+        private void ClearObjectList() {
+            int index = 0;
+            foreach (Transform child in optionsScrollRect.content) {
+                if (index != 0) {
+                    if (index >= options.options.Count) {
+                        Destroy(child.gameObject);
+                    }
+                }
+
+                index++;
+            }
+        }
+
+        private void SetFinalValue(OptionData optionData) {
+            if (optionData != null && optionData.image != null) {
+                captionImage.sprite = optionData.image;
+                captionImage.color = Color.white;
+                inputField.SetTextWithoutNotify(optionData.text);
+                optionsScrollRect.gameObject.SetActive(false);
+            } else {
+                captionImage.sprite = null;
+                captionImage.color = new Color(1, 1, 1, 0);
+            }
+        }
+
+        public void SetClickFinalValue(TextMeshProUGUI itemLabel) {
+            SetFinalValue(options.options.Where(x => x.text.Equals(itemLabel.text)).FirstOrDefault());
+        }
+    }
+}
