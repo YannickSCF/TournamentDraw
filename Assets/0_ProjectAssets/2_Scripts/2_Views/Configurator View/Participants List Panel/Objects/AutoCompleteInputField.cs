@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YannickSCF.GeneralApp.CountriesData;
 using static TMPro.TMP_Dropdown;
 
 namespace YannickSCF.TournamentDraw.Settings.View.Componets {
@@ -17,20 +18,11 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
 
         [Header("Options")]
         [SerializeField] private OptionDataList options;
-        [SerializeField] private string spritesResourcePath = string.Empty;
-
 
         private string lastText = "";
-        private Sprite[] allSprites;
-        private string[] allNames;
 
         #region Mono
         public void Awake() {
-            if (!string.IsNullOrEmpty(spritesResourcePath)) {
-                allSprites = Resources.LoadAll<Sprite>(spritesResourcePath);
-            }
-            allNames = Enum.GetNames(typeof(Countries));
-
             SetFinalValue(null);
         }
 
@@ -43,14 +35,13 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
         }
         #endregion
 
-        public void SetInitValue(Countries country) {
-            string countryCode = Enum.GetName(typeof(Countries), country);
-            OptionData initOption = new OptionData(countryCode, allSprites.Where(x => x.name.Equals(countryCode)).FirstOrDefault());
+        public void SetInitValue(string countryCode) {
+            OptionData initOption = new OptionData(countryCode, CountriesDataUtils.GetFlagByCode(countryCode));
             SetFinalValue(initOption);
         }
 
-        public Countries? GetValue() {
-            return CountriesUtils.SearchCountryDescription(inputField.text);
+        public string GetValue() {
+            return inputField.text;
         }
 
         private void OnInputFieldChanged(string text) {
@@ -77,21 +68,9 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
         private void SetValidOptions(string text) {
             options.options.Clear();
 
-            List<Sprite> spritesOptions = null;
-            if (allSprites.Length > 0) {
-                spritesOptions = allSprites.Where(x => x.name.StartsWith(text)).ToList();
-            }
-            List<string> namesOptions = allNames.Where(x => x.StartsWith(text)).ToList();
-
-            for (int i = 0; i < namesOptions.Count; ++i) {
-                OptionData option;
-                if (spritesOptions != null) {
-                    option = new OptionData(namesOptions[i],
-                        spritesOptions.Where(x => x.name.Equals(namesOptions[i])).FirstOrDefault());
-                } else {
-                    option = new OptionData(namesOptions[i]);
-                }
-                options.options.Add(option);
+            Dictionary<string, Sprite> namesOptions = CountriesDataUtils.SearchCountriesByCode(text);
+            foreach (KeyValuePair<string, Sprite> nameOption in namesOptions) {
+                options.options.Add(new OptionData(nameOption.Key, nameOption.Value));
             }
         }
 

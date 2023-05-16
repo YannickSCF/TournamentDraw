@@ -237,7 +237,7 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
             for (int i = 1; i < tableScrollRect.content.childCount - 1; ++i) {
                 TableRow row = tableScrollRect.content.GetChild(i).GetComponent<TableRow>();
                 Participant participant = new Participant(
-                    row.GetCountryField().Value,
+                    row.GetCountryField(),
                     row.GetNameField(),
                     row.GetSurnameField(),
                     row.GetRankField(),

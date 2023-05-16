@@ -255,27 +255,4 @@ namespace YannickSCF.TournamentDraw {
         [Description("Zimbabwe")] ZW = 249,
     }
 
-    public static class CountriesUtils {
-
-        public static string GetEnumDescription(this Enum e) {
-            var descriptionAttribute = e.GetType().GetMember(e.ToString())[0]
-                .GetCustomAttributes(typeof(DescriptionAttribute), inherit: false)[0]
-                as DescriptionAttribute;
-
-            return descriptionAttribute.Description;
-        }
-
-        public static Countries? SearchCountryDescription(string country) {
-            Array allCountries = Enum.GetValues(typeof(Countries));
-
-            for (int i = 0; i < allCountries.Length; ++i) {
-                if (GetEnumDescription((Countries)allCountries.GetValue(i)).Equals(country) ||
-                        country.Equals(Enum.GetName(typeof(Countries), allCountries.GetValue(i)))) {
-                    return (Countries)allCountries.GetValue(i);
-                }
-            }
-
-            return null;
-        }
-    }
 }

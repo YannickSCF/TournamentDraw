@@ -4,7 +4,7 @@ using UnityEngine;
 namespace YannickSCF.TournamentDraw.Model {
     [System.Serializable]
     public class Participant {
-        [SerializeField] private Countries country;
+        [SerializeField] private string country;
 
         [SerializeField] private string name;
         [SerializeField] private string surname;
@@ -17,7 +17,7 @@ namespace YannickSCF.TournamentDraw.Model {
 
         [SerializeField] private int tierLevel;
 
-        public Countries Country { get => country; }
+        public string Country { get => country; }
         public string Name { get => name; }
         public string Surname { get => surname; }
         public Ranks Rank { get => rank; }
@@ -27,7 +27,7 @@ namespace YannickSCF.TournamentDraw.Model {
         public int TierLevel { get => tierLevel; }
 
         public Participant(
-            Countries country,
+            string country,
             string name,
             string surname,
             Ranks rank,

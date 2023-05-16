@@ -31,10 +31,10 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
             TournamentSettingsViewEvents.ThrowOnMandatoryInputFieldUpdated(!string.IsNullOrEmpty(text));
         }
 
-        public void SetCountryField(Countries _country) {
-            countryField?.SetInitValue(_country);
+        public void SetCountryField(string _countryCode) {
+            countryField?.SetInitValue(_countryCode);
         }
-        public Countries? GetCountryField() {
+        public string GetCountryField() {
             return countryField?.GetValue();
         }
 

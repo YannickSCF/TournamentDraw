@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using YannickSCF.GeneralApp.CountriesData;
 using YannickSCF.TournamentDraw.Model;
 
 namespace YannickSCF.TournamentDraw.Importers {
@@ -24,7 +25,7 @@ namespace YannickSCF.TournamentDraw.Importers {
         #region Methods to deserialize list of participants
         public List<Participant> GetParticipantsFromFile(string path) {
             Debug.Log("Participants by CSV: " + path);
-            string jsonText = File.ReadAllText(path, System.Text.Encoding.UTF7);
+            string jsonText = File.ReadAllText(path, System.Text.Encoding.UTF8);
 
             List<string[]> values = GetValues(jsonText);
             List<Participant> finalList = null;
@@ -60,7 +61,7 @@ namespace YannickSCF.TournamentDraw.Importers {
                     List<Styles> styles = ManageStyles(participantStr[(int)FieldsOrder.Styles]);
                     string schoolName = participantStr[(int)FieldsOrder.SchoolName];
                     string academyName = participantStr[(int)FieldsOrder.AcademyName];
-                    Countries country = ManageCountry(participantStr[(int)FieldsOrder.Country]);
+                    string country = ManageCountry(participantStr[(int)FieldsOrder.Country]);
 
                     Participant participant = new Participant(country, name, surnames, rank, styles, schoolName, academyName);
                     res.Add(participant);
@@ -103,17 +104,15 @@ namespace YannickSCF.TournamentDraw.Importers {
             return res;
         }
 
-        private Countries ManageCountry(string countryStr) {
+        private string ManageCountry(string countryStr) {
             countryStr = countryStr.Replace("\r", "");
 
-            string[] rankNames = Enum.GetNames(typeof(Countries));
-            if (rankNames.Contains(countryStr)) {
-                return (Countries)Enum.Parse(typeof(Countries), countryStr);
+            if (CountriesDataUtils.IsCountryNameInList(countryStr)) {
+                return CountriesDataUtils.GetCodeByName(countryStr);
             }
 
-            Countries? country = CountriesUtils.SearchCountryDescription(countryStr);
-            if (country != null) {
-                return country.Value;
+            if (CountriesDataUtils.IsCountryCodeInList(countryStr)) {
+                return countryStr;
             }
 
             throw new Exception("ERROR: No coincidence for Country '" + countryStr + "'. Please, review your CSV");
