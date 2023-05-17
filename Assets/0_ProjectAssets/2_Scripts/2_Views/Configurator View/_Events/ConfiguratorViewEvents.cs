@@ -6,7 +6,7 @@ using YannickSCF.TournamentDraw.Model;
 using YannickSCF.TournamentDraw.Settings.View.Componets;
 
 namespace YannickSCF.TournamentDraw.Settings.View {
-    public static class TournamentSettingsViewEvents {
+    public static class ConfiguratorViewEvents {
 
         // ----------------------------------- Confirmation panel events -----------------------------------
 

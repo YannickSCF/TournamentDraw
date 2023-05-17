@@ -28,7 +28,7 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
         #endregion
 
         private void OnMandatoryInputFilled(string text) {
-            TournamentSettingsViewEvents.ThrowOnMandatoryInputFieldUpdated(!string.IsNullOrEmpty(text));
+            ConfiguratorViewEvents.ThrowOnMandatoryInputFieldUpdated(!string.IsNullOrEmpty(text));
         }
 
         public void SetCountryField(string _countryCode) {

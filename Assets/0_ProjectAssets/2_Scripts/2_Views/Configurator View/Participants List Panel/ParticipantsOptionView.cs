@@ -22,83 +22,63 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
         [SerializeField] private Button addRowButton;
         [SerializeField] private Button removeRowButton;
 
-        [Header("Objects finish/modify interactions")]
-        [SerializeField] private GameObject blockPanel;
-        [SerializeField] private Button finishedBtn;
-        [SerializeField] private Button modifyBtn;
-        [SerializeField] private TextMeshProUGUI errorText;
-
         private bool[] checkBoxesMarked = new bool[Enum.GetValues(typeof(ParticipantBasicInfo)).Length];
 
         #region Mono
         private void Start() {
             removeRowButton.interactable = false;
-            SetTableState(false);
-            CheckEverythingIsCorrect();
         }
 
         private void OnEnable() {
             loadFileButton.onClick.AddListener(LoadParticipantsFromFile);
 
-            TournamentSettingsViewEvents.OnCheckBoxClicked += ModifyTableByCheckBox;
-            TournamentSettingsViewEvents.OnMandatoryInputFieldUpdated += OnMandatoryInputUpdated;
+            ConfiguratorViewEvents.OnCheckBoxClicked += ModifyTableByCheckBox;
 
             addRowButton.onClick.AddListener(AddNewRow);
             removeRowButton.onClick.AddListener(RemoveNewRow);
-
-            finishedBtn.onClick.AddListener(FinishedParticipantsTable);
-            modifyBtn.onClick.AddListener(ModifyParticipantsTable);
         }
 
         private void OnDisable() {
             loadFileButton.onClick.RemoveAllListeners();
 
-            TournamentSettingsViewEvents.OnCheckBoxClicked -= ModifyTableByCheckBox;
-            TournamentSettingsViewEvents.OnMandatoryInputFieldUpdated -= OnMandatoryInputUpdated;
+            ConfiguratorViewEvents.OnCheckBoxClicked -= ModifyTableByCheckBox;
 
             addRowButton.onClick.RemoveAllListeners();
             removeRowButton.onClick.RemoveAllListeners();
-
-            finishedBtn.onClick.RemoveAllListeners();
-            modifyBtn.onClick.RemoveAllListeners();
         }
         #endregion
 
         #region Methods to control confirmation panel
         private void FinishedParticipantsTable() {
             // TODO: Cambiar texto por LocalizeStringEvent
-            TournamentSettingsViewEvents.ThrowOpenConfirmationPanel("Are you sure you have finished editing the table?");
-            TournamentSettingsViewEvents.OnConfirmationPanelAction += FinishParticipantsTable;
+            ConfiguratorViewEvents.ThrowOpenConfirmationPanel("Are you sure you have finished editing the table?");
+            ConfiguratorViewEvents.OnConfirmationPanelAction += FinishParticipantsTable;
         }
         private void FinishParticipantsTable(bool clickedYes) {
             if (clickedYes) {
-                SetTableState(true);
-
-                TournamentSettingsViewEvents.ThrowTournamentParticipantsSetted(GetParticipantsFromTable());
-                TournamentSettingsViewEvents.ThrowTournamentParticipantDataSetted(GetParticipantData());
-                TournamentSettingsViewEvents.ThrowParticipantPanelStateSetted(true);
+                ConfiguratorViewEvents.ThrowTournamentParticipantsSetted(GetParticipantsFromTable());
+                ConfiguratorViewEvents.ThrowTournamentParticipantDataSetted(GetParticipantData());
+                ConfiguratorViewEvents.ThrowParticipantPanelStateSetted(true);
             }
 
-            TournamentSettingsViewEvents.ThrowCloseConfirmationPanel();
-            TournamentSettingsViewEvents.OnConfirmationPanelAction -= FinishParticipantsTable;
+            ConfiguratorViewEvents.ThrowCloseConfirmationPanel();
+            ConfiguratorViewEvents.OnConfirmationPanelAction -= FinishParticipantsTable;
         }
 
         private void ModifyParticipantsTable() {
             // TODO: Cambiar texto por LocalizeStringEvent
-            TournamentSettingsViewEvents.ThrowOpenConfirmationPanel("Are you sure you want to re-edit the table? You will lose the configuration you had so far.");
-            TournamentSettingsViewEvents.OnConfirmationPanelAction += ModifyParticipantsTable;
+            ConfiguratorViewEvents.ThrowOpenConfirmationPanel("Are you sure you want to re-edit the table? You will lose the configuration you had so far.");
+            ConfiguratorViewEvents.OnConfirmationPanelAction += ModifyParticipantsTable;
         }
         private void ModifyParticipantsTable(bool clickedYes) {
             if (clickedYes) {
-                SetTableState(false);
-
-                TournamentSettingsViewEvents.ThrowTournamentParticipantsSetted(null);
-                TournamentSettingsViewEvents.ThrowTournamentParticipantDataSetted(null);
-                TournamentSettingsViewEvents.ThrowParticipantPanelStateSetted(false);
+                ConfiguratorViewEvents.ThrowTournamentParticipantsSetted(null);
+                ConfiguratorViewEvents.ThrowTournamentParticipantDataSetted(null);
+                ConfiguratorViewEvents.ThrowParticipantPanelStateSetted(false);
             }
 
-            TournamentSettingsViewEvents.ThrowCloseConfirmationPanel();
-            TournamentSettingsViewEvents.OnConfirmationPanelAction -= ModifyParticipantsTable;
+            ConfiguratorViewEvents.ThrowCloseConfirmationPanel();
+            ConfiguratorViewEvents.OnConfirmationPanelAction -= ModifyParticipantsTable;
         }
         #endregion
 
@@ -112,8 +92,6 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
                     LoadParticipantsOnTable(participants);
                 }
             }
-
-            CheckEverythingIsCorrect();
         }
 
         private void LoadParticipantsOnTable(List<Participant> participants) {
@@ -166,8 +144,6 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
             if (tableScrollRect.content.childCount > 2) {
                 removeRowButton.interactable = true;
             }
-
-            CheckEverythingIsCorrect();
         }
 
         private void RemoveNewRow() {
@@ -175,15 +151,6 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
             if (tableScrollRect.content.childCount <= 3) {
                 removeRowButton.interactable = false;
             }
-
-            CheckEverythingIsCorrect();
-        }
-        
-        private void SetTableState(bool isFinished) {
-            blockPanel.SetActive(isFinished);
-
-            finishedBtn.gameObject.SetActive(!isFinished);
-            modifyBtn.gameObject.SetActive(isFinished);
         }
         #endregion
 
@@ -197,10 +164,6 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
             AddNewRow();
             // Reset checkboxes to ignore columns
             ResetIgnoreCheckboxValues();
-            // Set the table as NOT finished
-            SetTableState(false);
-            // Set the initial error message
-            CheckEverythingIsCorrect();
         }
 
         private void ResetIgnoreCheckboxValues() {
@@ -268,27 +231,6 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
 
 
         #region Table Checkers
-        private void OnMandatoryInputUpdated(bool isFilled) {
-            CheckEverythingIsCorrect();
-        }
-
-        private void CheckEverythingIsCorrect() {
-            if (!CheckNamesAndSurnames(out string errorNamesStr)) {
-                finishedBtn.interactable = false;
-                errorText.text = errorNamesStr;
-                return;
-            }
-
-            if (!CheckMinParticipants(out string errorMinStr)) {
-                finishedBtn.interactable = false;
-                errorText.text = errorMinStr;
-                return;
-            }
-
-            finishedBtn.interactable = true;
-            errorText.text = string.Empty;
-        }
-
         private bool CheckMinParticipants(out string errorStr) {
             errorStr = "Configure at least 4 participants";
 
