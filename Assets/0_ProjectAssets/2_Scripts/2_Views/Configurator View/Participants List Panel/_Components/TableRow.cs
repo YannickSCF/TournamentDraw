@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using TournamentMaker.Settings.View.Componets;
 using UnityEngine;
+// Custom dependencies
+using YannickSCF.TournamentDraw.Views.Configurator.ParticipantList.Components.InputType;
+using YannickSCF.TournamentDraw.Views.Configurator.ParticipantList.Components.InputType.StyleColumn;
 
-namespace YannickSCF.TournamentDraw.Settings.View.Componets {
+namespace YannickSCF.TournamentDraw.Views.Configurator.ParticipantList.Components {
     public class TableRow : MonoBehaviour {
 
         [SerializeField] private AutoCompleteInputField countryField;
@@ -15,21 +17,6 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
         [SerializeField] private TMP_InputField academyField;
         [SerializeField] private TMP_InputField schoolField;
         [SerializeField] private TMP_InputField tierField;
-
-        #region Mono
-        private void OnEnable() {
-            surnameField.onValueChanged.AddListener(OnMandatoryInputFilled);
-            nameField.onValueChanged.AddListener(OnMandatoryInputFilled);
-        }
-        private void OnDisable() {
-            surnameField.onValueChanged.RemoveAllListeners();
-            nameField.onValueChanged.RemoveAllListeners();
-        }
-        #endregion
-
-        private void OnMandatoryInputFilled(string text) {
-            ConfiguratorViewEvents.ThrowOnMandatoryInputFieldUpdated(!string.IsNullOrEmpty(text));
-        }
 
         public void SetCountryField(string _countryCode) {
             countryField?.SetInitValue(_countryCode);

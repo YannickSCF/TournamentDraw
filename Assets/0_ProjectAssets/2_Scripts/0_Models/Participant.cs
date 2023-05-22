@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace YannickSCF.TournamentDraw.Model {
+namespace YannickSCF.TournamentDraw.Models {
     [System.Serializable]
     public class Participant {
         [SerializeField] private string country;
@@ -25,6 +25,8 @@ namespace YannickSCF.TournamentDraw.Model {
         public string SchoolName { get => schoolName; }
         public string AcademyName { get => academyName; }
         public int TierLevel { get => tierLevel; }
+
+        public Participant() { }
 
         public Participant(
             string country,

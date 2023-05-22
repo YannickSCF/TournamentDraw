@@ -1,97 +1,105 @@
-using System.Collections;
 using System.Collections.Generic;
-using TournamentMaker.Settings.View.Componets;
-using UnityEngine;
-using YannickSCF.TournamentDraw.Model;
-using YannickSCF.TournamentDraw.Settings.View.Componets;
+// Custom dependencies
+using YannickSCF.TournamentDraw.Models;
 
-namespace YannickSCF.TournamentDraw.Settings.View {
+namespace YannickSCF.TournamentDraw.Views.Configurator.Events {
     public static class ConfiguratorViewEvents {
 
-        // ----------------------------------- Confirmation panel events -----------------------------------
+        // ----------------------------- Delegates -----------------------------
 
-        public delegate void OpenConfirmationPanel(string confirmationStr);
-        public static event OpenConfirmationPanel OnOpenConfirmationPanel;
+        // Possible common delegates
+        public delegate void SimpleEvent();
+        public delegate void StringEvent(string strValue);
+        public delegate void IntegerEvent(int intValue);
+        public delegate void BooleanEvent(bool boolValue);
+        // Specific view delegates
+        public delegate void ParticipantDataEvent(ParticipantBasicInfo infoType, string dataUpdated, int participantIndex);
+        public delegate void ParticipantInfoCheckboxEvent(ParticipantBasicInfo checkboxInfo, bool isChecked);
+
+        // ------------------------------- Events -------------------------------
+
+        #region --------------- Participants panel events ---------------
+        public static event SimpleEvent OnLoadParticipantsFromFile;
+        public static void ThrowOnLoadParticipantsFromFile() {
+            OnLoadParticipantsFromFile?.Invoke();
+        }
+
+        public static event SimpleEvent OnParticipantAdded;
+        public static void ThrowOnParticipantAdded() {
+            OnParticipantAdded?.Invoke();
+        }
+
+        public static event SimpleEvent OnParticipantRemoved;
+        public static void ThrowOnParticipantRemoved() {
+            OnParticipantRemoved?.Invoke();
+        }
+
+        public static event ParticipantDataEvent OnParticipantDataUpdated;
+        public static void ThrowOnParticipantDataUpdated(
+            ParticipantBasicInfo infoType, string dataUpdated, int participantIndex) {
+            OnParticipantDataUpdated?.Invoke(infoType, dataUpdated, participantIndex);
+        }
+        #endregion
+
+        #region ------------------ Draw options events ------------------
+        public static event StringEvent OnDrawNameChanged;
+        public static void ThrowOnDrawNameChanged(string newDrawName) {
+            OnDrawNameChanged?.Invoke(newDrawName);
+        }
+
+        public static event StringEvent OnNumberOfPoulesChanged;
+        public static void ThrowOnNumberOfPoulesChanged(string newNumberOfPoules) {
+            OnNumberOfPoulesChanged?.Invoke(newNumberOfPoules);
+        }
+
+        public static event StringEvent OnMaxPouleSizeChanged;
+        public static void ThrowOnMaxPouleSizeChanged(string newMaxPouleSize) {
+            OnMaxPouleSizeChanged?.Invoke(newMaxPouleSize);
+        }
+
+        public static event IntegerEvent OnPouleAssignChanged;
+        public static void ThrowOnPouleAssignChanged(int indexSelected) {
+            OnPouleAssignChanged?.Invoke(indexSelected);
+        }
+
+        public static event IntegerEvent OnParticipantSelectionChanged;
+        public static void ThrowOnParticipantSelectionChanged(int indexSelected) {
+            OnParticipantSelectionChanged?.Invoke(indexSelected);
+        }
+
+        public static event ParticipantInfoCheckboxEvent OnParticipantInfoCheckboxToggle;
+        public static void ThrowOnParticipantInfoCheckboxToggle(ParticipantBasicInfo checkboxInfo, bool isChecked) {
+            OnParticipantInfoCheckboxToggle?.Invoke(checkboxInfo, isChecked);
+        }
+        #endregion
+
+        #region --------------- Confirmation panel events ---------------
+        public static event StringEvent OnOpenConfirmationPanel;
         public static void ThrowOpenConfirmationPanel(string _confirmationStr) {
             OnOpenConfirmationPanel?.Invoke(_confirmationStr);
         }
 
-        public delegate void CloseConfirmationPanel();
-        public static event CloseConfirmationPanel OnCloseConfirmationPanel;
-        public static void ThrowCloseConfirmationPanel() {
-            OnCloseConfirmationPanel?.Invoke();
-        }
-
-        public delegate void ConfirmationPanelAction(bool clickedYes);
-        public static event ConfirmationPanelAction OnConfirmationPanelAction;
+        public static event BooleanEvent OnConfirmationPanelAction;
         public static void ThrowConfirmationPanelAction(bool _clickedYes) {
             OnConfirmationPanelAction?.Invoke(_clickedYes);
         }
 
-        // ------------------------------------- Participants panel events -------------------------------------
-
-        public delegate void TournamentParticipantsSetted(List<Participant> participants);
-        public static event TournamentParticipantsSetted OnTournamentParticipantsSetted;
-        public static void ThrowTournamentParticipantsSetted(List<Participant> _participants) {
-            OnTournamentParticipantsSetted?.Invoke(_participants);
+        public static event SimpleEvent OnCloseConfirmationPanel;
+        public static void ThrowCloseConfirmationPanel() {
+            OnCloseConfirmationPanel?.Invoke();
         }
 
-        public delegate void TournamentParticipantDataSetted(List<ParticipantBasicInfo> participantData);
-        public static event TournamentParticipantDataSetted OnTournamentParticipantDataSetted;
-        public static void ThrowTournamentParticipantDataSetted(List<ParticipantBasicInfo> _participantData) {
-            OnTournamentParticipantDataSetted?.Invoke(_participantData);
+        public static event StringEvent OnConditionsToContinueChanged;
+        public static void ThrowOnConditionsToContinueChanged(string conditionsToContinue) {
+            OnConditionsToContinueChanged?.Invoke(conditionsToContinue);
         }
+        #endregion
 
-        public delegate void ParticipantPanelStateSetted(bool isClosing);
-        public static event ParticipantPanelStateSetted OnParticipantPanelStateSetted;
-        public static void ThrowParticipantPanelStateSetted(bool _isClosing) {
-            OnParticipantPanelStateSetted?.Invoke(_isClosing);
-        }
+        // --------------- EXITED ---------------
 
-        public delegate void CheckBoxClicked(ParticipantBasicInfo checkBox, bool isMarked);
-        public static event CheckBoxClicked OnCheckBoxClicked;
-        public static void ThrowOnCheckBoxClicked(ParticipantBasicInfo _checkBox, bool _isMarked) {
-            OnCheckBoxClicked?.Invoke(_checkBox, _isMarked);
-        }
-
-
-        public delegate void MandatoryInputFieldUpdated(bool isFilled);
-        public static event MandatoryInputFieldUpdated OnMandatoryInputFieldUpdated;
-        public static void ThrowOnMandatoryInputFieldUpdated(bool _isFilled) {
-            OnMandatoryInputFieldUpdated?.Invoke(_isFilled);
-        }
-
-        // ------------------------------------- General panel events -------------------------------------
-
-        public delegate void TournamentNameSetted(string newName);
-        public static event TournamentNameSetted OnTournamentNameSetted;
-        public static void ThrowTournamentNameSetted(string _newName) {
-            OnTournamentNameSetted?.Invoke(_newName);
-        }
-
-        // -------------------------------------- Poules panel events -------------------------------------
-
-
-        public delegate void TournamentNumSizePoulesSetted(int[,] newNumSizePoules);
-        public static event TournamentNumSizePoulesSetted OnTournamentNumSizePoulesSetted;
-        public static void ThrowTournamentNumSizePoulesSetted(int[,] _newNumSizePoules) {
-            OnTournamentNumSizePoulesSetted?.Invoke(_newNumSizePoules);
-        }
-
-        // --------------------------------------------- EXITED -------------------------------------------
-
-        public delegate void TournamentSettingsExited();
-        public static event TournamentSettingsExited OnTournamentSettingsExited;
+        public static event SimpleEvent OnTournamentSettingsExited;
         public static void ThrowTournamentSettingsExited() {
             OnTournamentSettingsExited?.Invoke();
-        }
-
-        // --------------------------------------------- ENDING -------------------------------------------
-
-        public delegate void TournamentSettingsEnded();
-        public static event TournamentSettingsEnded OnTournamentSettingsEnded;
-        public static void ThrowTournamentSettingsEnded() {
-            OnTournamentSettingsEnded?.Invoke();
         }
     }
 }

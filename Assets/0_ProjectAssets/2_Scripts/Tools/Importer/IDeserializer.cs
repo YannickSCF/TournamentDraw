@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using YannickSCF.TournamentDraw.Model;
+using YannickSCF.TournamentDraw.Models;
 
 namespace YannickSCF.TournamentDraw.Importers {
     public interface IDeserializer {

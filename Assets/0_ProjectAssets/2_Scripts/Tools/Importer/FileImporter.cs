@@ -2,7 +2,7 @@ using AnotherFileBrowser.Windows;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using YannickSCF.TournamentDraw.Model;
+using YannickSCF.TournamentDraw.Models;
 
 namespace YannickSCF.TournamentDraw.Importers {
     public static class FileImporter {

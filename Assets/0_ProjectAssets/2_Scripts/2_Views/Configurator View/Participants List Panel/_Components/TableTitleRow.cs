@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using YannickSCF.TournamentDraw.Settings.View.Componets;
 
-namespace TournamentMaker.Settings.View.Componets {
+namespace YannickSCF.TournamentDraw.Views.Configurator.ParticipantList.Components {
     public class TableTitleRow : MonoBehaviour {
 
         [SerializeField] private GameObject countryField;

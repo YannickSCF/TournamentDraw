@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using YannickSCF.TournamentDraw.Model;
+using YannickSCF.TournamentDraw.Models;
 
 namespace YannickSCF.TournamentDraw.Importers {
     public class JSONDeserializer : IDeserializer {

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -8,8 +6,11 @@ using UnityEngine.UI;
 using YannickSCF.GeneralApp.CountriesData;
 using static TMPro.TMP_Dropdown;
 
-namespace YannickSCF.TournamentDraw.Settings.View.Componets {
+namespace YannickSCF.TournamentDraw.Views.Configurator.ParticipantList.Components.InputType {
     public class AutoCompleteInputField : MonoBehaviour {
+
+        public delegate void FinalValue(string finalValue);
+        public event FinalValue OnFinalValueSetted;
 
         [Header("Basic object references")]
         [SerializeField] private TMP_InputField inputField;
@@ -120,9 +121,13 @@ namespace YannickSCF.TournamentDraw.Settings.View.Componets {
                 captionImage.color = Color.white;
                 inputField.SetTextWithoutNotify(optionData.text);
                 optionsScrollRect.gameObject.SetActive(false);
+
+                OnFinalValueSetted?.Invoke(CountriesDataUtils.GetNameByCode(optionData.text, null));
             } else {
                 captionImage.sprite = null;
                 captionImage.color = new Color(1, 1, 1, 0);
+
+                OnFinalValueSetted?.Invoke("");
             }
         }
 

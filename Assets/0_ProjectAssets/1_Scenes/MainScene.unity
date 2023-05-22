@@ -5376,6 +5376,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Academy Checkbox Title (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+      propertyPath: toggleType
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5471,15 +5475,15 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1226805572}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1226805574 stripped
+--- !u!114 &1226805575 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8962436319911944490, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1226805572}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6541f8e25c675ce4aac936bcaacb666b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1267685496
@@ -6716,15 +6720,15 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1473091664}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1473091666 stripped
+--- !u!114 &1473091667 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8962436319911944490, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1473091664}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6541f8e25c675ce4aac936bcaacb666b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1479212946
@@ -6972,6 +6976,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tier Checkbox Title (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+      propertyPath: toggleType
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7067,17 +7075,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1498285575}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1498285577 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8962436319911944490, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
-  m_PrefabInstance: {fileID: 1498285575}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1522228023
 GameObject:
   m_ObjectHideFlags: 0
@@ -7247,6 +7244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rank Checkbox Title (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+      propertyPath: toggleType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7346,15 +7347,15 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1543295299}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1543295301 stripped
+--- !u!114 &1543295302 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8962436319911944490, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1543295299}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6541f8e25c675ce4aac936bcaacb666b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1571837331
@@ -7858,6 +7859,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: School Checkbox Title (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+      propertyPath: toggleType
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7953,15 +7958,15 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1699859881}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1699859883 stripped
+--- !u!114 &1699859884 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8962436319911944490, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1699859881}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6541f8e25c675ce4aac936bcaacb666b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1728155208
@@ -8803,6 +8808,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Styles Checkbox Title (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+      propertyPath: toggleType
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -8898,15 +8907,15 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1923845935}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1923845937 stripped
+--- !u!114 &1923845938 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8962436319911944490, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 1923845935}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6541f8e25c675ce4aac936bcaacb666b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1935997883
@@ -8989,6 +8998,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: -100, y: -200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1963245479 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+  m_PrefabInstance: {fileID: 1498285575}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6541f8e25c675ce4aac936bcaacb666b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1967447183
 GameObject:
   m_ObjectHideFlags: 0
@@ -10857,15 +10877,15 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6222343112062929879, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 2630879812996703699}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2630879812996703701 stripped
+--- !u!114 &2630879812996703702 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8962436319911944490, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4753181507071864060, guid: 8b950519ec174c14d848cb3db23ff5b4, type: 3}
   m_PrefabInstance: {fileID: 2630879812996703699}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 6541f8e25c675ce4aac936bcaacb666b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2902734767176569603
@@ -12747,7 +12767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.675, y: 1}
-  m_AnchoredPosition: {x: 0, y: 40.516907}
+  m_AnchoredPosition: {x: 0, y: 40.516846}
   m_SizeDelta: {x: -35, y: -116.0338}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5871965400036661067
@@ -14887,13 +14907,13 @@ MonoBehaviour:
   pouleAssignDropdown: {fileID: 1100564192}
   participantSelectionDropdown: {fileID: 1463520650}
   allInfoCheckmarks:
-  - {fileID: 2630879812996703701}
-  - {fileID: 1543295301}
-  - {fileID: 1923845937}
-  - {fileID: 1226805574}
-  - {fileID: 1699859883}
-  - {fileID: 1498285577}
-  - {fileID: 1473091666}
+  - {fileID: 2630879812996703702}
+  - {fileID: 1543295302}
+  - {fileID: 1923845938}
+  - {fileID: 1226805575}
+  - {fileID: 1699859884}
+  - {fileID: 1963245479}
+  - {fileID: 1473091667}
 --- !u!114 &6463361527596999061
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace YannickSCF.TournamentDraw.Settings.View.Componets {
+namespace YannickSCF.TournamentDraw.Views.Configurator.ParticipantList.Components.InputType.StyleColumn {
     public class StyleCheckbox : MonoBehaviour {
 
         public delegate void CheckboxClicked(Styles styleCheckbox, bool checkboxValue);

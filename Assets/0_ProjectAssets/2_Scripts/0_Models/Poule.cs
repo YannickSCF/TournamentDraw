@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace YannickSCF.TournamentDraw.Model {
+namespace YannickSCF.TournamentDraw.Models {
     [System.Serializable]
     public class Poule {
         [SerializeField] private string pouleName;

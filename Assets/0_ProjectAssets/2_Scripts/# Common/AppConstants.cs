@@ -12,6 +12,11 @@ namespace YannickSCF.TournamentDraw {
         Form3Staff, Form4Staff, Form5Staff,
         Form6, Form7
     }
+    public enum ParticipantBasicInfo { Country, Surname, Name, Rank, Styles, Academy, School, Tier };
+
+    public enum PouleAssignType { OneByOne, PouleByPoule, Custom }
+
+    public enum ParticipantSelectionType { Random, ByLevel, ByRank }
 
     public static class AppConstants {
         public const string LocalizationEmpty = "Empty";

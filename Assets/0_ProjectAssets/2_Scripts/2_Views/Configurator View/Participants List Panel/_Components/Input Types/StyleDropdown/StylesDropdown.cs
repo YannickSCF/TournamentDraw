@@ -1,14 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static TMPro.TMP_Dropdown;
 
-namespace YannickSCF.TournamentDraw.Settings.View.Componets {
+namespace YannickSCF.TournamentDraw.Views.Configurator.ParticipantList.Components.InputType.StyleColumn {
     public class StylesDropdown : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
         [Header("Basic object references")]
