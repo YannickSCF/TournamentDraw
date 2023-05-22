@@ -103,6 +103,7 @@ namespace YannickSCF.TournamentDraw.Views.Configurator.ParticipantList {
         private void AddNewRow(bool throwEvent = true) {
             GameObject newRow = Instantiate(tableRowPrefab, tableScrollRect.content);
             newRow.transform.SetSiblingIndex(tableScrollRect.content.childCount - 2);
+            newRow.GetComponent<TableRow>().RowIndex = tableScrollRect.content.childCount - 2;
             if (tableScrollRect.content.childCount > 2) {
                 removeRowButton.interactable = true;
             }

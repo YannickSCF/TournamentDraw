@@ -18,6 +18,10 @@ namespace YannickSCF.TournamentDraw.Views.Configurator.ParticipantList.Component
         [SerializeField] private TMP_InputField schoolField;
         [SerializeField] private TMP_InputField tierField;
 
+        private int rowIndex;
+
+        public int RowIndex { get => rowIndex; set => rowIndex = value; }
+
         public void SetCountryField(string _countryCode) {
             countryField?.SetInitValue(_countryCode);
         }
