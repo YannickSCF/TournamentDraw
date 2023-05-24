@@ -23,7 +23,7 @@ namespace YannickSCF.TournamentDraw.Importers {
                     deserializer = new CSVDeserializer();
                 }
 
-                List<Participant> participants = deserializer.GetParticipantsFromFile(path);
+                List<ParticipantModel> participants = deserializer.GetParticipantsFromFile(path);
 
                 //PouleBuilder pouleBuilder = new AlphaPouleBuilder();
                 //ITierListBuilder tierListBuilder = new StyleTierListBuilder();
@@ -34,7 +34,7 @@ namespace YannickSCF.TournamentDraw.Importers {
             Debug.Log("Returned path: " + myPath);
         }
 
-        public static List<Participant> ImportParticipantsFromFile(string filePath) {
+        public static List<ParticipantModel> ImportParticipantsFromFile(string filePath) {
             IDeserializer deserializer;
 
             if (filePath.ToLower().EndsWith(".json")) {

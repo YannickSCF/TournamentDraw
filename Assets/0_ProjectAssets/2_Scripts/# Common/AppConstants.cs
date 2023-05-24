@@ -19,6 +19,8 @@ namespace YannickSCF.TournamentDraw {
     public enum ParticipantSelectionType { Random, ByLevel, ByRank }
 
     public static class AppConstants {
+        public static readonly bool[] ParticipantInfoDefault = { false, true, true, true, false, true, false, false };
+
         public const string LocalizationEmpty = "Empty";
 
         public static Color BlackLS = new Color(0.1529412f, 0.1647059f, 0.1490196f, 1f);

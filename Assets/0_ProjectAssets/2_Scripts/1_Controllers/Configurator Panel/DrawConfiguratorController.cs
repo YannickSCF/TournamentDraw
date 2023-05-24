@@ -1,0 +1,382 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using YannickSCF.TournamentDraw.Importers;
+using YannickSCF.TournamentDraw.Models;
+// Custom Dependencies
+using YannickSCF.TournamentDraw.Scriptables;
+using YannickSCF.TournamentDraw.Views.Configurator;
+using YannickSCF.TournamentDraw.Views.Configurator.Events;
+
+namespace YannickSCF.TournamentDraw.Controllers.Configurator {
+
+    public class DrawConfiguratorController : MonoBehaviour {
+
+        [SerializeField] private DrawConfiguratorView view;
+
+        private DrawConfiguration configuration;
+
+        private List<string> errorsList = new List<string>();
+        private int numberOfParticipantsError = 0;
+
+        #region Mono
+        private void OnEnable() {
+            ConfiguratorViewEvents.OnLoadParticipantsFromFile += LoadParticipantsFromFile;
+            ConfiguratorViewEvents.OnParticipantAdded += ParticipantAdded;
+            ConfiguratorViewEvents.OnParticipantRemoved += ParticipantRemoved;
+            ConfiguratorViewEvents.OnParticipantDataUpdated += ParticipantDataUpdated;
+
+            ConfiguratorViewEvents.OnDrawNameChanged += DrawNameChanged;
+
+            ConfiguratorViewEvents.OnNumberOfPoulesChanged += NumberOfPoulesChanged;
+            ConfiguratorViewEvents.OnMaxPouleSizeChanged += MaxPouleSizeChanged;
+
+            ConfiguratorViewEvents.OnPouleAssignChanged += PouleAssignChanged;
+            ConfiguratorViewEvents.OnParticipantSelectionChanged += ParticipantSelectionChanged;
+
+            ConfiguratorViewEvents.OnParticipantInfoCheckboxToggle += ParticipantInfoCheckboxToggle;
+        }
+
+        private void OnDisable() {
+            ConfiguratorViewEvents.OnLoadParticipantsFromFile -= LoadParticipantsFromFile;
+            ConfiguratorViewEvents.OnParticipantAdded -= ParticipantAdded;
+            ConfiguratorViewEvents.OnParticipantRemoved -= ParticipantRemoved;
+            ConfiguratorViewEvents.OnParticipantDataUpdated -= ParticipantDataUpdated;
+
+            ConfiguratorViewEvents.OnDrawNameChanged -= DrawNameChanged;
+
+            ConfiguratorViewEvents.OnNumberOfPoulesChanged -= NumberOfPoulesChanged;
+            ConfiguratorViewEvents.OnMaxPouleSizeChanged -= MaxPouleSizeChanged;
+
+            ConfiguratorViewEvents.OnPouleAssignChanged -= PouleAssignChanged;
+            ConfiguratorViewEvents.OnParticipantSelectionChanged -= ParticipantSelectionChanged;
+
+            ConfiguratorViewEvents.OnParticipantInfoCheckboxToggle -= ParticipantInfoCheckboxToggle;
+        }
+
+        private void OnApplicationQuit() {
+            configuration.ResetConfiguration();
+        }
+        #endregion
+
+        public void Init(DrawConfiguration configuration) {
+            view.Init(configuration);
+        }
+
+        #region Event listeners methods
+        private void LoadParticipantsFromFile() {
+            string filePath = FileImporter.SelectFileWithBrowser();
+            if (!string.IsNullOrEmpty(filePath)) {
+                // Get all participants
+                List<ParticipantModel> participants = FileImporter.ImportParticipantsFromFile(filePath);
+                if (participants.Count > 0) {
+                    view.SetFilePath(filePath);
+                    // Fulfill table (reseting it first)
+                    view.ResetAllTable();
+                    configuration.Participants.Clear();
+                    foreach (ParticipantModel participant in participants) {
+                        view.LoadParticipantOnTable(participant.Country, participant.Surname,
+                            participant.Name, participant.Rank, participant.Styles,
+                            participant.AcademyName, participant.SchoolName,
+                            participant.TierLevel);
+
+                        configuration.Participants.Add(new ParticipantModel(participant.Country,
+                            participant.Surname, participant.Name, participant.Rank,
+                            participant.Styles, participant.AcademyName, participant.SchoolName,
+                            participant.TierLevel));
+                    }
+                }
+            }
+
+            view.SetTotalParticipantsText(configuration.Participants.Count.ToString());
+            AllChecks();
+        }
+
+        private void ParticipantAdded() {
+            configuration.Participants.Add(new ParticipantModel());
+
+            CheckMinParticipants();
+            CheckNamesAndSurnames();
+
+            view.SetTotalParticipantsText(configuration.Participants.Count.ToString());
+        }
+
+        private void ParticipantRemoved() {
+            configuration.Participants.RemoveAt(configuration.Participants.Count - 1);
+
+            CheckMinParticipants();
+            CheckNamesAndSurnames();
+
+            view.SetTotalParticipantsText(configuration.Participants.Count.ToString());
+        }
+
+        private void ParticipantDataUpdated(
+            ParticipantBasicInfo infoType, string dataUpdated, int participantIndex) {
+
+            switch (infoType) {
+                case ParticipantBasicInfo.Country:
+                    configuration.Participants[participantIndex].Country = dataUpdated;
+                    break;
+                case ParticipantBasicInfo.Surname:
+                    configuration.Participants[participantIndex].Surname = dataUpdated;
+                    CheckNamesAndSurnames();
+                    break;
+                case ParticipantBasicInfo.Name:
+                    configuration.Participants[participantIndex].Name = dataUpdated;
+                    CheckNamesAndSurnames();
+                    break;
+                case ParticipantBasicInfo.Rank:
+                    Ranks newRank = (Ranks)int.Parse(dataUpdated);
+                    configuration.Participants[participantIndex].Rank = newRank;
+                    break;
+                case ParticipantBasicInfo.Styles:
+                    List<Styles> newStyles = new List<Styles>();
+                    string[] dataSeparated = dataUpdated.Split(",");
+                    foreach (string styleIntStr in dataSeparated) {
+                        Styles newStyle = (Styles)int.Parse(styleIntStr);
+                        newStyles.Add(newStyle);
+                    }
+                    configuration.Participants[participantIndex].Styles = newStyles;
+                    break;
+                case ParticipantBasicInfo.Academy:
+                    configuration.Participants[participantIndex].AcademyName = dataUpdated;
+                    break;
+                case ParticipantBasicInfo.School:
+                    configuration.Participants[participantIndex].SchoolName = dataUpdated;
+                    break;
+                case ParticipantBasicInfo.Tier:
+                    configuration.Participants[participantIndex].TierLevel = int.Parse(dataUpdated);
+                    break;
+                default:
+                    Debug.LogWarning("ParticipantDataUpdated: Participant Basic Info NOT found!");
+                    break;
+            }
+        }
+
+        private void DrawNameChanged(string strValue) {
+            if (CheckDrawName(strValue)) {
+                configuration.DrawName = strValue;
+            }
+        }
+
+        private void NumberOfPoulesChanged(string strValue) {
+            CheckNumberOfPoules(strValue, out int numberOfPoules);
+
+            configuration.NumberOfPoules = numberOfPoules;
+            CheckPoulesAndParticipants();
+        }
+
+        private void MaxPouleSizeChanged(string strValue) {
+            CheckMaxPouleSize(strValue, out int maxPouleSize);
+
+            configuration.MaxPouleSize = maxPouleSize;
+            CheckPoulesAndParticipants();
+        }
+
+        private void PouleAssignChanged(int indexSelection) {
+            if (indexSelection < 0 ||
+                indexSelection > Enum.GetValues(typeof(PouleAssignType)).Length) {
+                Debug.LogError("PouleAssignChanged wrong! -> " + indexSelection);
+                return;
+            }
+
+            configuration.PouleAssign = (PouleAssignType)indexSelection;
+        }
+
+        private void ParticipantSelectionChanged(int indexSelection) {
+            if (indexSelection < 0 ||
+                indexSelection > Enum.GetValues(typeof(ParticipantSelectionType)).Length) {
+                Debug.LogError("ParticipantSelectionChanged wrong! -> " + indexSelection);
+                return;
+            }
+
+            configuration.ParticipantSelection = (ParticipantSelectionType)indexSelection;
+        }
+
+        private void ParticipantInfoCheckboxToggle(ParticipantBasicInfo checkboxInfo, bool isChecked) {
+            configuration.ParticipantInfoSelected[(int)checkboxInfo] = isChecked;
+        }
+        #endregion
+
+        #region CHECKERS
+        private void AllChecks() {
+            CheckMinParticipants();
+
+            CheckNamesAndSurnames();
+
+            CheckDrawName();
+
+            CheckNumberOfPoules();
+            CheckMaxPouleSize();
+            CheckPoulesAndParticipants();
+        }
+
+        private bool CheckMinParticipants() {
+            bool res = false;
+            if (configuration.Participants.Count < 4) {
+                AddErrorToList(LocalizationKeys.MIN_OF_PARTICIPANTS);
+            } else {
+                RemoveErrorFromList(LocalizationKeys.MIN_OF_PARTICIPANTS);
+                res = true;
+            }
+
+            view.UpdateErrors(errorsList);
+            return res;
+        }
+
+        private bool CheckNamesAndSurnames() {
+            bool res = false;
+            numberOfParticipantsError = 0;
+
+            foreach(ParticipantModel participant in configuration.Participants) {
+                if (string.IsNullOrEmpty(participant.Surname) || string.IsNullOrEmpty(participant.Name)) {
+                    ++numberOfParticipantsError;
+                }
+            }
+
+            if (numberOfParticipantsError > 0) {
+                AddErrorToList(LocalizationKeys.X_PARTICIPANT_INCOMPLETE_NAME);
+            } else {
+                RemoveErrorFromList(LocalizationKeys.X_PARTICIPANT_INCOMPLETE_NAME);
+                res = true;
+            }
+
+            view.UpdateErrors(errorsList);
+            return res;
+        }
+
+        private bool CheckDrawName(string newDrawName) {
+            bool res = false;
+            if (string.IsNullOrEmpty(newDrawName)) {
+                AddErrorToList(LocalizationKeys.DRAW_NAME_NEEDED);
+            } else {
+                RemoveErrorFromList(LocalizationKeys.DRAW_NAME_NEEDED);
+                res = true;
+            }
+
+            view.UpdateErrors(errorsList);
+            return res;
+        }
+        private bool CheckDrawName() {
+            return CheckDrawName(view.GetDrawName());
+        }
+
+        private bool CheckNumberOfPoules(string newNumberOfPoulesStr, out int numberOfPoules) {
+            bool res = false;
+            if (string.IsNullOrEmpty(newNumberOfPoulesStr)) {
+                newNumberOfPoulesStr = "0";
+            }
+
+            if (!int.TryParse(newNumberOfPoulesStr, out numberOfPoules)) {
+                AddErrorToList(LocalizationKeys.INCORRECT_VALUE_FOR_INPUT);
+            } else {
+                if (numberOfPoules <= 0) {
+                    AddErrorToList(LocalizationKeys.NUMBER_OF_POULES_NEEDED);
+                } else {
+                    RemoveErrorFromList(LocalizationKeys.NUMBER_OF_POULES_NEEDED);
+                    res = true;
+                }
+            }
+
+            view.UpdateErrors(errorsList);
+            return res;
+        }
+        private bool CheckNumberOfPoules() {
+            return CheckNumberOfPoules(view.GetNumberOfPoules().ToString(), out int emptyAux);
+        }
+
+        private bool CheckMaxPouleSize(string newMaxPouleSizeStr, out int maxPouleSize) {
+            bool res = false;
+            if (string.IsNullOrEmpty(newMaxPouleSizeStr)) {
+                newMaxPouleSizeStr = "0";
+            }
+
+            if (!int.TryParse(newMaxPouleSizeStr, out maxPouleSize)) {
+                AddErrorToList(LocalizationKeys.INCORRECT_VALUE_FOR_INPUT);
+            } else {
+                if (maxPouleSize <= 0) {
+                    AddErrorToList(LocalizationKeys.MAX_POULE_SIZE_NEEDED);
+                } else {
+                    RemoveErrorFromList(LocalizationKeys.MAX_POULE_SIZE_NEEDED);
+                    res = true;
+                }
+            }
+
+            view.UpdateErrors(errorsList);
+            return res;
+        }
+        private bool CheckMaxPouleSize() {
+            return CheckMaxPouleSize(view.GetMaxPouleSize().ToString(), out int emptyAux);
+        }
+
+        private bool CheckPoulesAndParticipants() {
+            bool res = false;
+            int numberOfParticipants = configuration.Participants.Count;
+            int numberOfPoules = configuration.NumberOfPoules;
+            int maxPouleSize = configuration.MaxPouleSize;
+
+            if (numberOfPoules > 0 && maxPouleSize > 0) {
+                int minTournamentSizeByPoules = numberOfPoules == 1 ?
+                    maxPouleSize : (numberOfPoules * (maxPouleSize - 1)) + 1;
+                int maxTournamentSizeByPoules = numberOfPoules * maxPouleSize;
+
+                if (minTournamentSizeByPoules == maxTournamentSizeByPoules) {
+                    if (numberOfParticipants != minTournamentSizeByPoules) {
+                        AddErrorToList(LocalizationKeys.INVALID_POULES_EQUAL);
+                    } else {
+                        RemoveErrorFromList(LocalizationKeys.INVALID_POULES_EQUAL);
+                        res = true;
+                    }
+                } else {
+                    if (numberOfParticipants < minTournamentSizeByPoules) {
+                        AddErrorToList(LocalizationKeys.INVALID_POULES_MIN);
+                    } else {
+                        RemoveErrorFromList(LocalizationKeys.INVALID_POULES_MIN);
+                        res = true;
+                    }
+
+                    if (numberOfParticipants > maxTournamentSizeByPoules) {
+                        AddErrorToList(LocalizationKeys.INVALID_POULES_MAX);
+                        res &= false;
+                    } else {
+                        RemoveErrorFromList(LocalizationKeys.INVALID_POULES_MAX);
+                        res &= true;
+                    }
+                }
+            } else {
+                RemoveErrorFromList(LocalizationKeys.INVALID_POULES_EQUAL);
+                RemoveErrorFromList(LocalizationKeys.INVALID_POULES_MIN);
+                RemoveErrorFromList(LocalizationKeys.INVALID_POULES_MAX);
+            }
+
+            view.UpdateErrors(errorsList);
+            return res;
+        }
+
+        private void AddErrorToList(string errorKeyMsg) {
+            if (!errorsList.Contains(errorKeyMsg)) {
+                errorsList.Add(errorKeyMsg);
+            }
+        }
+        private void RemoveErrorFromList(string errorKeyMsg) {
+            if (errorsList.Contains(errorKeyMsg)) {
+                errorsList.Remove(errorKeyMsg);
+            }
+        }
+        #endregion
+
+        [ContextMenu("Open Configurator")]
+        public void OpenConfigurator() {
+            view.OpenPanel();
+
+            AllChecks();
+        }
+
+        [ContextMenu("Close Configurator")]
+        public void CloseConfigurator() {
+            view.ClosePanel();
+            configuration.ResetConfiguration();
+        }
+    }
+}

@@ -18,17 +18,17 @@ namespace YannickSCF.TournamentDraw.Importers {
             Country = 6
         }
 
-        public List<Poule> GetPoulesFromFile(string path) {
+        public List<PouleModel> GetPoulesFromFile(string path) {
             throw new NotImplementedException();
         }
 
         #region Methods to deserialize list of participants
-        public List<Participant> GetParticipantsFromFile(string path) {
+        public List<ParticipantModel> GetParticipantsFromFile(string path) {
             Debug.Log("Participants by CSV: " + path);
             string jsonText = File.ReadAllText(path, System.Text.Encoding.UTF8);
 
             List<string[]> values = GetValues(jsonText);
-            List<Participant> finalList = null;
+            List<ParticipantModel> finalList = null;
             try {
                 finalList = ToParticipantObjectList(values);
             } catch (Exception ex) {
@@ -50,8 +50,8 @@ namespace YannickSCF.TournamentDraw.Importers {
             return res;
         }
 
-        private List<Participant> ToParticipantObjectList(List<string[]> participantStrings) {
-            List<Participant> res = new List<Participant>();
+        private List<ParticipantModel> ToParticipantObjectList(List<string[]> participantStrings) {
+            List<ParticipantModel> res = new List<ParticipantModel>();
 
             try {
                 foreach (string[] participantStr in participantStrings) {
@@ -63,7 +63,7 @@ namespace YannickSCF.TournamentDraw.Importers {
                     string academyName = participantStr[(int)FieldsOrder.AcademyName];
                     string country = ManageCountry(participantStr[(int)FieldsOrder.Country]);
 
-                    Participant participant = new Participant(country, name, surnames, rank, styles, schoolName, academyName);
+                    ParticipantModel participant = new ParticipantModel(country, name, surnames, rank, styles, schoolName, academyName);
                     res.Add(participant);
                 }
             } catch (Exception ex) {

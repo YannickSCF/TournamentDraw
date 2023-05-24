@@ -3,7 +3,7 @@ using YannickSCF.TournamentDraw.Models;
 
 namespace YannickSCF.TournamentDraw.Importers {
     public interface IDeserializer {
-        public List<Poule> GetPoulesFromFile(string path);
-        public List<Participant> GetParticipantsFromFile(string path);
+        public List<PouleModel> GetPoulesFromFile(string path);
+        public List<ParticipantModel> GetParticipantsFromFile(string path);
     }
 }

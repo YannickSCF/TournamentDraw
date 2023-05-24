@@ -17,6 +17,7 @@ namespace YannickSCF.TournamentDraw {
         public const string DRAW_NAME_NEEDED = "DRAW_NAME_NEEDED";
         public const string INVALID_POULES_MIN = "INVALID_POULES_MIN";
         public const string INVALID_POULES_MAX = "INVALID_POULES_MAX";
+        public const string INVALID_POULES_EQUAL = "INVALID_POULES_EQUAL";
         public const string NUMBER_OF_POULES_NEEDED = "NUMBER_OF_POULES_NEEDED";
         public const string MAX_POULE_SIZE_NEEDED = "MAX_POULE_SIZE_NEEDED";
 
