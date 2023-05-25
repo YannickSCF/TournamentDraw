@@ -15,7 +15,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
 
         [SerializeField] private DrawConfiguratorView view;
 
-        private DrawConfiguration configuration;
+        private DrawConfiguration _config;
 
         private List<string> errorsList = new List<string>();
         private int numberOfParticipantsError = 0;
@@ -56,12 +56,13 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
         }
 
         private void OnApplicationQuit() {
-            configuration.ResetConfiguration();
+            _config.ResetConfiguration();
         }
         #endregion
 
         public void Init(DrawConfiguration configuration) {
-            view.Init(configuration);
+            _config = configuration;
+            view.Init(_config);
         }
 
         #region Event listeners methods
@@ -74,14 +75,14 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                     view.SetFilePath(filePath);
                     // Fulfill table (reseting it first)
                     view.ResetAllTable();
-                    configuration.Participants.Clear();
+                    _config.Participants.Clear();
                     foreach (ParticipantModel participant in participants) {
                         view.LoadParticipantOnTable(participant.Country, participant.Surname,
                             participant.Name, participant.Rank, participant.Styles,
                             participant.AcademyName, participant.SchoolName,
                             participant.TierLevel);
 
-                        configuration.Participants.Add(new ParticipantModel(participant.Country,
+                        _config.Participants.Add(new ParticipantModel(participant.Country,
                             participant.Surname, participant.Name, participant.Rank,
                             participant.Styles, participant.AcademyName, participant.SchoolName,
                             participant.TierLevel));
@@ -89,26 +90,26 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 }
             }
 
-            view.SetTotalParticipantsText(configuration.Participants.Count.ToString());
+            view.SetTotalParticipantsText(_config.Participants.Count.ToString());
             AllChecks();
         }
 
         private void ParticipantAdded() {
-            configuration.Participants.Add(new ParticipantModel());
+            _config.Participants.Add(new ParticipantModel());
 
             CheckMinParticipants();
             CheckNamesAndSurnames();
 
-            view.SetTotalParticipantsText(configuration.Participants.Count.ToString());
+            view.SetTotalParticipantsText(_config.Participants.Count.ToString());
         }
 
         private void ParticipantRemoved() {
-            configuration.Participants.RemoveAt(configuration.Participants.Count - 1);
+            _config.Participants.RemoveAt(_config.Participants.Count - 1);
 
             CheckMinParticipants();
             CheckNamesAndSurnames();
 
-            view.SetTotalParticipantsText(configuration.Participants.Count.ToString());
+            view.SetTotalParticipantsText(_config.Participants.Count.ToString());
         }
 
         private void ParticipantDataUpdated(
@@ -116,19 +117,19 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
 
             switch (infoType) {
                 case ParticipantBasicInfo.Country:
-                    configuration.Participants[participantIndex].Country = dataUpdated;
+                    _config.Participants[participantIndex].Country = dataUpdated;
                     break;
                 case ParticipantBasicInfo.Surname:
-                    configuration.Participants[participantIndex].Surname = dataUpdated;
+                    _config.Participants[participantIndex].Surname = dataUpdated;
                     CheckNamesAndSurnames();
                     break;
                 case ParticipantBasicInfo.Name:
-                    configuration.Participants[participantIndex].Name = dataUpdated;
+                    _config.Participants[participantIndex].Name = dataUpdated;
                     CheckNamesAndSurnames();
                     break;
                 case ParticipantBasicInfo.Rank:
                     Ranks newRank = (Ranks)int.Parse(dataUpdated);
-                    configuration.Participants[participantIndex].Rank = newRank;
+                    _config.Participants[participantIndex].Rank = newRank;
                     break;
                 case ParticipantBasicInfo.Styles:
                     List<Styles> newStyles = new List<Styles>();
@@ -137,16 +138,16 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                         Styles newStyle = (Styles)int.Parse(styleIntStr);
                         newStyles.Add(newStyle);
                     }
-                    configuration.Participants[participantIndex].Styles = newStyles;
+                    _config.Participants[participantIndex].Styles = newStyles;
                     break;
                 case ParticipantBasicInfo.Academy:
-                    configuration.Participants[participantIndex].AcademyName = dataUpdated;
+                    _config.Participants[participantIndex].AcademyName = dataUpdated;
                     break;
                 case ParticipantBasicInfo.School:
-                    configuration.Participants[participantIndex].SchoolName = dataUpdated;
+                    _config.Participants[participantIndex].SchoolName = dataUpdated;
                     break;
                 case ParticipantBasicInfo.Tier:
-                    configuration.Participants[participantIndex].TierLevel = int.Parse(dataUpdated);
+                    _config.Participants[participantIndex].TierLevel = int.Parse(dataUpdated);
                     break;
                 default:
                     Debug.LogWarning("ParticipantDataUpdated: Participant Basic Info NOT found!");
@@ -156,21 +157,21 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
 
         private void DrawNameChanged(string strValue) {
             if (CheckDrawName(strValue)) {
-                configuration.DrawName = strValue;
+                _config.DrawName = strValue;
             }
         }
 
         private void NumberOfPoulesChanged(string strValue) {
             CheckNumberOfPoules(strValue, out int numberOfPoules);
 
-            configuration.NumberOfPoules = numberOfPoules;
+            _config.NumberOfPoules = numberOfPoules;
             CheckPoulesAndParticipants();
         }
 
         private void MaxPouleSizeChanged(string strValue) {
             CheckMaxPouleSize(strValue, out int maxPouleSize);
 
-            configuration.MaxPouleSize = maxPouleSize;
+            _config.MaxPouleSize = maxPouleSize;
             CheckPoulesAndParticipants();
         }
 
@@ -181,7 +182,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 return;
             }
 
-            configuration.PouleAssign = (PouleAssignType)indexSelection;
+            _config.PouleAssign = (PouleAssignType)indexSelection;
         }
 
         private void ParticipantSelectionChanged(int indexSelection) {
@@ -191,11 +192,11 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 return;
             }
 
-            configuration.ParticipantSelection = (ParticipantSelectionType)indexSelection;
+            _config.ParticipantSelection = (ParticipantSelectionType)indexSelection;
         }
 
         private void ParticipantInfoCheckboxToggle(ParticipantBasicInfo checkboxInfo, bool isChecked) {
-            configuration.ParticipantInfoSelected[(int)checkboxInfo] = isChecked;
+            _config.ParticipantInfoSelected[(int)checkboxInfo] = isChecked;
         }
         #endregion
 
@@ -214,7 +215,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
 
         private bool CheckMinParticipants() {
             bool res = false;
-            if (configuration.Participants.Count < 4) {
+            if (_config.Participants.Count < 4) {
                 AddErrorToList(LocalizationKeys.MIN_OF_PARTICIPANTS);
             } else {
                 RemoveErrorFromList(LocalizationKeys.MIN_OF_PARTICIPANTS);
@@ -229,7 +230,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
             bool res = false;
             numberOfParticipantsError = 0;
 
-            foreach(ParticipantModel participant in configuration.Participants) {
+            foreach(ParticipantModel participant in _config.Participants) {
                 if (string.IsNullOrEmpty(participant.Surname) || string.IsNullOrEmpty(participant.Name)) {
                     ++numberOfParticipantsError;
                 }
@@ -312,9 +313,9 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
 
         private bool CheckPoulesAndParticipants() {
             bool res = false;
-            int numberOfParticipants = configuration.Participants.Count;
-            int numberOfPoules = configuration.NumberOfPoules;
-            int maxPouleSize = configuration.MaxPouleSize;
+            int numberOfParticipants = _config.Participants.Count;
+            int numberOfPoules = _config.NumberOfPoules;
+            int maxPouleSize = _config.MaxPouleSize;
 
             if (numberOfPoules > 0 && maxPouleSize > 0) {
                 int minTournamentSizeByPoules = numberOfPoules == 1 ?
@@ -376,7 +377,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
         [ContextMenu("Close Configurator")]
         public void CloseConfigurator() {
             view.ClosePanel();
-            configuration.ResetConfiguration();
+            _config.ResetConfiguration();
         }
     }
 }

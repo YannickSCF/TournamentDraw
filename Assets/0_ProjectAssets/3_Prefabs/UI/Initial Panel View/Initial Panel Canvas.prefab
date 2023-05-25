@@ -279,9 +279,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2798604954142662156}
+  - component: {fileID: 697650643340883450}
+  - component: {fileID: 8426128073669318114}
   - component: {fileID: 2798604954142662157}
   m_Layer: 5
-  m_Name: Initial Canvas
+  m_Name: Initial Panel Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -310,6 +312,34 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -47.5}
   m_SizeDelta: {x: -50, y: -145}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &697650643340883450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798604954142662155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edb090e326dfea442abbf279a6da471a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialPanelView: {fileID: 8426128073669318114}
+--- !u!114 &8426128073669318114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798604954142662155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8ecb7c027bd5744aa79dcd21de1392e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newDrawButton: {fileID: 2798604954759691530}
+  loadDrawButton: {fileID: 2798604954584672800}
+  settingsButton: {fileID: 2798604954352070850}
 --- !u!114 &2798604954142662157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,7 +483,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2798604954352070851}
   m_OnClick:
     m_PersistentCalls:
@@ -575,7 +605,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 2798604954584672801}
   m_OnClick:
     m_PersistentCalls:

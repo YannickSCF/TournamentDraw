@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
+using YannickSCF.TournamentDraw.Views.InitialPanel;
 using YannickSCF.TournamentDraw.Views.InitialPanel.Events;
 
 namespace YannickSCF.TournamentDraw.Controllers.InitialPanel {
     public class InitialPanelController : MonoBehaviour {
+
+        [SerializeField] private InitialPanelView initialPanelView;
 
         #region Mono
         private void OnEnable() {
@@ -23,7 +26,7 @@ namespace YannickSCF.TournamentDraw.Controllers.InitialPanel {
 
         #region Events listeners methods
         private void NewDrawButtonPressed() {
-            GameManager.Instance.OpenConfiguratorPanel();
+            GameManager.Instance.SwitchState(States.Configurator);
         }
 
         private void LoadDrawButtonPressed() {

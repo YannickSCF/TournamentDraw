@@ -430,7 +430,7 @@ MonoBehaviour:
   bgImage: {fileID: 6242430476950895005}
   uiTitle: {fileID: 6242430476045600533}
   mainSpace: {fileID: 4223470806246605217}
-  initialPanelPrefab: {fileID: 2798604954142662155, guid: b58807d3979c83d41a1d1b768fd4b14d, type: 3}
+  initialPanelPrefab: {fileID: 697650643340883450, guid: b58807d3979c83d41a1d1b768fd4b14d, type: 3}
   configuratorPanelPrefab: {fileID: 7319447076854810419, guid: e5975ad2200b97141a3819a880202147, type: 3}
   drawPanelPrefab: {fileID: 0}
 --- !u!1 &6242430476589794341

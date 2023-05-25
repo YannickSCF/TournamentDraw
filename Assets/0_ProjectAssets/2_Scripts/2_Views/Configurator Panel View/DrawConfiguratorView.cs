@@ -21,7 +21,9 @@ namespace YannickSCF.TournamentDraw.Views.Configurator {
         #region Public control methods
         public void Init(DrawConfiguration configuration) {
             _configuration = configuration;
+
             participantsPanel.Init(_configuration);
+            drawOptionsPanel.SetParticipantInfoSelected(_configuration.ParticipantInfoSelected);
         }
 
         public void OpenPanel() {

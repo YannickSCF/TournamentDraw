@@ -50,6 +50,8 @@ namespace YannickSCF.TournamentDraw.Views.Configurator.ParticipantList {
 
         public void Init(DrawConfiguration configuration) {
             _configuration = configuration;
+
+            SetTableInfoSelectedColumns(_configuration.ParticipantInfoSelected);
         }
 
         #region Events listeners methods
