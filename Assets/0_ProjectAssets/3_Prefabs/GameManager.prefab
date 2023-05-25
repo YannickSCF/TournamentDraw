@@ -432,7 +432,7 @@ MonoBehaviour:
   mainSpace: {fileID: 4223470806246605217}
   initialPanelPrefab: {fileID: 697650643340883450, guid: b58807d3979c83d41a1d1b768fd4b14d, type: 3}
   configuratorPanelPrefab: {fileID: 7319447076854810419, guid: e5975ad2200b97141a3819a880202147, type: 3}
-  drawPanelPrefab: {fileID: 0}
+  drawPanelPrefab: {fileID: 7397914091255303323, guid: f0a628a3e0cc5e047b002132633c83e6, type: 3}
 --- !u!1 &6242430476589794341
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,9 +479,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7099a4b32fad342bdef1ebdd72065d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
+  _debugConfig: {fileID: 11400000, guid: 7ee46acff764eca4c95709cff1780e41, type: 2}
+  openPanelAuto: 1
   gameUIManager: {fileID: 169614056571177693}
   loadingController: {fileID: 3530057854478534923}
-  configuration: {fileID: 11400000, guid: c963936eda91ab94c867a9c7f5fc06f0, type: 2}
+  _config: {fileID: 11400000, guid: c963936eda91ab94c867a9c7f5fc06f0, type: 2}
 --- !u!1 &6242430476926760611
 GameObject:
   m_ObjectHideFlags: 0

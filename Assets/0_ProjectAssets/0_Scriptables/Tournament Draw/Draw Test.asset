@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69635942695ea104fb6d8960d87e8f84, type: 3}
+  m_Name: Draw Test
+  m_EditorClassIdentifier: 
+  drawName: Test Tournament
+  participants:
+  - country: ES
+    name: "Mart\xEDnez Oller"
+    surname: Daniel
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: "P\xE9rez"
+    surname: Arnau
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: IT
+    name: "Balc\xE1zar"
+    surname: "Adri\xE1"
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: "Faixedas de Bol\xE9s"
+    surname: Roc
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: "Pallar\xE9s"
+    surname: Jordi
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Bonet
+    surname: Andrea
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Torres
+    surname: Guillermo
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: "Rodr\xEDguez"
+    surname: Ariadna
+    rank: 1
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Lozano
+    surname: Albert
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: P?mpanas
+    surname: Luciano
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Todorovich
+    surname: Vinicius
+    rank: 1
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Delgado
+    surname: Marina
+    rank: 1
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Leandro
+    surname: Cristina
+    rank: 3
+    styles: 000000000100000002000000030000000400000005000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Beriso
+    surname: Cristina
+    rank: 1
+    styles: 0000000001000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Lizaga
+    surname: Carlos
+    rank: 1
+    styles: 0000000001000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Altisent
+    surname: Julio
+    rank: 0
+    styles: 0000000001000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  numberOfPoules: 4
+  maxPouleSize: 4
+  pouleAssign: 0
+  participantSelection: 0
+  participantInfoSelected: 0001010100010000
+  seed: 123456789

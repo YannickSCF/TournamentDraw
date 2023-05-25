@@ -54,10 +54,6 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
 
             ConfiguratorViewEvents.OnParticipantInfoCheckboxToggle -= ParticipantInfoCheckboxToggle;
         }
-
-        private void OnApplicationQuit() {
-            _config.ResetConfiguration();
-        }
         #endregion
 
         public void Init(DrawConfiguration configuration) {
@@ -377,7 +373,6 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
         [ContextMenu("Close Configurator")]
         public void CloseConfigurator() {
             view.ClosePanel();
-            _config.ResetConfiguration();
         }
     }
 }

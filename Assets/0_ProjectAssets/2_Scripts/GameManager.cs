@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using YannickSCF.GeneralApp.Controller.LoadingPanel;
 using YannickSCF.TournamentDraw.Controllers.Configurator;
+using YannickSCF.TournamentDraw.Controllers.Draw;
 using YannickSCF.TournamentDraw.Scriptables;
 using YannickSCF.TournamentDraw.Views;
 using YannickSCF.TournamentDraw.Views.InitialPanel.Events;
@@ -12,21 +13,38 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
     public class GameManager : GlobalSingleton<GameManager> {
 
+        [Header("Debug Values")]
+        [SerializeField] private bool debug = false;
+        [SerializeField, ConditionalHide("debug", true)] private DrawConfiguration _debugConfig;
+        [SerializeField, ConditionalHide("debug", true)] private States openPanelAuto = States.Initial;
+
+        [Header("Main Controllers")]
         [SerializeField] private UIManager gameUIManager;
         [SerializeField] private LoadingPanelController loadingController;
 
         [Header("Settings files")]
-        [SerializeField] private DrawConfiguration configuration;
+        [SerializeField] private DrawConfiguration _config;
 
         private States c_state = States.None;
 
+        public DrawConfiguration Config {
+            get { return debug ? _debugConfig : _config; }
+            set {
+                if (debug) {
+                    _debugConfig = value;
+                } else {
+                    _config = value;
+                }
+            }
+        }
+
         #region Mono
         private void Start() {
-            SwitchState(States.Initial);
+            SwitchState(debug ? openPanelAuto : States.Initial);
         }
 
         private void OnApplicationQuit() {
-            configuration.ResetConfiguration();
+            _config.ResetConfiguration();
         }
         #endregion
 
@@ -65,6 +83,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         // ------------------------ Initial Panel -----------------------
 
         private void OpenInitialPanel() {
+            _config.ResetConfiguration();
             gameUIManager.OpenInitialPanel();
         }
 
@@ -76,13 +95,19 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         private void InitializeConfiguratorData(DrawConfiguratorController configuratorController) {
-            configuratorController.Init(configuration);
+            configuratorController.Init(Config);
         }
 
         // ------------------------- Draw Panel -------------------------
 
         private void OpenDrawPanel() {
-            //gameUIManager.OpenDrawPanel(configuration);
+            gameUIManager.OpenDrawPanel(InitializeDrawPanelData);
+        }
+
+        private void InitializeDrawPanelData(DrawPanelController drawPanelController) {
+            gameUIManager.ChangeTitle(Config.DrawName);
+
+            drawPanelController.Init(Config);
         }
     }
 }
