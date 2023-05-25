@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrbLoot01-LS
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b194bab640ad0b147beda6f65c5369e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7960104872217429531, guid: b194bab640ad0b147beda6f65c5369e4, type: 3}
       propertyPath: m_IsActive
       value: 0
