@@ -79,7 +79,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                             participant.TierLevel);
 
                         _config.Participants.Add(new ParticipantModel(participant.Country,
-                            participant.Surname, participant.Name, participant.Rank,
+                            participant.Name, participant.Surname, participant.Rank,
                             participant.Styles, participant.AcademyName, participant.SchoolName,
                             participant.TierLevel));
                     }

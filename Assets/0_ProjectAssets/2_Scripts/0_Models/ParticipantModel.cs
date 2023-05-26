@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,6 +26,8 @@ namespace YannickSCF.TournamentDraw.Models {
         public string SchoolName { get => schoolName; set => schoolName = value; }
         public string AcademyName { get => academyName; set => academyName = value; }
         public int TierLevel { get => tierLevel; set => tierLevel = value; }
+
+        public string FullName { get => Surname + ", " + Name; }
 
         public ParticipantModel() { }
 

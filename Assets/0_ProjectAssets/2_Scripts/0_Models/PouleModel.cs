@@ -9,9 +9,9 @@ namespace YannickSCF.TournamentDraw.Models {
 
         [SerializeField] private List<ParticipantModel> pouleParticipants;
 
-        public PouleModel(string _pouleName, int pouleParticipantCapacity) {
+        public PouleModel(string _pouleName) {
             pouleName = _pouleName;
-            pouleParticipants = new List<ParticipantModel>(pouleParticipantCapacity);
+            pouleParticipants = new List<ParticipantModel>();
         }
 
         public PouleModel(string _pouleName, List<ParticipantModel> _pouleParticipants) {

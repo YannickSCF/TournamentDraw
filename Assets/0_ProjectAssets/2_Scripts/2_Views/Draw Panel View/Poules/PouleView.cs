@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using YannickSCF.TournamentDraw.Views.DrawPanel.Poules.CompetitorRow;
@@ -12,6 +13,7 @@ namespace YannickSCF.TournamentDraw.Views.DrawPanel.Poules {
         [SerializeField] private BasicCompetitorRow _pouleCompetitorInfoRow;
 
         private RectTransform _rectTransform;
+        private List<BasicCompetitorRow> allRows;
 
         #region Mono
         private void Awake() {
@@ -31,9 +33,20 @@ namespace YannickSCF.TournamentDraw.Views.DrawPanel.Poules {
         }
 
         private void AddEmptyRows(int numberOfRows = 1) {
+            allRows = new List<BasicCompetitorRow>();
             for (int i = 0; i < numberOfRows; ++i) {
                 BasicCompetitorRow newRow = Instantiate(_pouleCompetitorInfoRow.gameObject, _pouleContentParent).GetComponent<BasicCompetitorRow>();
                 newRow.InitRowEmpty();
+                allRows.Add(newRow);
+            }
+        }
+
+        public void AddParticipantToPoule(string completeName, string academyName) {
+            foreach (BasicCompetitorRow row in allRows) {
+                if (!row.IsRowFilled) {
+                    row.SetNameAndAcademy(completeName, academyName);
+                    break;
+                }
             }
         }
 

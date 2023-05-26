@@ -15,129 +15,129 @@ MonoBehaviour:
   drawName: Test Tournament
   participants:
   - country: ES
-    name: "Mart\xEDnez Oller"
-    surname: Daniel
+    name: Daniel
+    surname: "Mart\xEDnez Oller"
     rank: 0
     styles: 00000000
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
   - country: ES
-    name: "P\xE9rez"
-    surname: Arnau
+    name: Arnau
+    surname: "P\xE9rez"
     rank: 0
     styles: 00000000
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
   - country: IT
-    name: "Balc\xE1zar"
-    surname: "Adri\xE1"
-    rank: 0
-    styles: 00000000
-    schoolName: LS Barcelona
-    academyName: El enclave
-    tierLevel: 0
-  - country: ES
-    name: "Faixedas de Bol\xE9s"
-    surname: Roc
-    rank: 0
-    styles: 00000000
-    schoolName: LS Barcelona
-    academyName: El enclave
-    tierLevel: 0
-  - country: ES
-    name: "Pallar\xE9s"
-    surname: Jordi
-    rank: 0
-    styles: 00000000
-    schoolName: LS Barcelona
-    academyName: El enclave
-    tierLevel: 0
-  - country: ES
-    name: Bonet
-    surname: Andrea
-    rank: 0
-    styles: 00000000
-    schoolName: LS Barcelona
-    academyName: El enclave
-    tierLevel: 0
-  - country: ES
-    name: Torres
-    surname: Guillermo
-    rank: 0
-    styles: 00000000
-    schoolName: LS Barcelona
-    academyName: El enclave
-    tierLevel: 0
-  - country: ES
-    name: "Rodr\xEDguez"
-    surname: Ariadna
+    name: "Adri\xE1"
+    surname: "Balc\xE1zar"
     rank: 1
     styles: 00000000
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
   - country: ES
-    name: Lozano
-    surname: Albert
-    rank: 0
-    styles: 00000000
-    schoolName: LS Barcelona
-    academyName: El enclave
-    tierLevel: 0
-  - country: ES
-    name: P?mpanas
-    surname: Luciano
-    rank: 0
-    styles: 00000000
-    schoolName: LS Barcelona
-    academyName: El enclave
-    tierLevel: 0
-  - country: ES
-    name: Todorovich
-    surname: Vinicius
+    name: Roc
+    surname: "Faixedas de Bol\xE9s"
     rank: 1
     styles: 00000000
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
   - country: ES
-    name: Delgado
-    surname: Marina
+    name: Jordi
+    surname: "Pallar\xE9s"
+    rank: 2
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Andrea
+    surname: Bonet
+    rank: 2
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Guillermo
+    surname: Torres
+    rank: 2
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Ariadna
+    surname: "Rodr\xEDguez"
+    rank: 2
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Albert
+    surname: Lozano
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Luciano
+    surname: P?mpanas
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Vinicius
+    surname: Todorovich
+    rank: 0
+    styles: 00000000
+    schoolName: LS Barcelona
+    academyName: El enclave
+    tierLevel: 0
+  - country: ES
+    name: Marina
+    surname: Delgado
     rank: 1
     styles: 00000000
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
   - country: ES
-    name: Leandro
-    surname: Cristina
-    rank: 3
+    name: Cristina
+    surname: Leandro
+    rank: 1
     styles: 000000000100000002000000030000000400000005000000
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
   - country: ES
-    name: Beriso
-    surname: Cristina
-    rank: 1
+    name: Cristina
+    surname: Beriso
+    rank: 2
     styles: 0000000001000000
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
   - country: ES
-    name: Lizaga
-    surname: Carlos
-    rank: 1
+    name: Carlos
+    surname: Lizaga
+    rank: 3
     styles: 0000000001000000
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
   - country: ES
-    name: Altisent
-    surname: Julio
-    rank: 0
+    name: Julio
+    surname: Altisent
+    rank: 2
     styles: 0000000001000000
     schoolName: LS Barcelona
     academyName: El enclave
@@ -145,6 +145,6 @@ MonoBehaviour:
   numberOfPoules: 4
   maxPouleSize: 4
   pouleAssign: 0
-  participantSelection: 0
+  participantSelection: 2
   participantInfoSelected: 0001010100010000
   seed: 123456789
