@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Collider))]
 public class LootBox : MonoBehaviour
@@ -15,6 +16,9 @@ public class LootBox : MonoBehaviour
     private Animator animator;    
     private RaycastHit hit;
     private Ray ray;
+
+    public UnityEvent OnInit;
+    public UnityEvent OnEnd;
 
     void Start()
     {
@@ -86,5 +90,13 @@ public class LootBox : MonoBehaviour
     IEnumerator RestartCo ()
     {
         yield return new WaitForFixedUpdate();
+    }
+
+    public void ThrowInitEvent() {
+        OnInit?.Invoke();
+    }
+
+    public void ThrowEndEvent() {
+        OnEnd?.Invoke();
     }
 }
