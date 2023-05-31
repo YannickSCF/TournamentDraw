@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using YannickSCF.TournamentDraw.Views.DrawPanel.Poules.CompetitorRow;
+using YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow;
 
-namespace YannickSCF.TournamentDraw.Views.DrawPanel.Poules {
+namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules {
 
     public class PouleView : MonoBehaviour {
         [SerializeField] private TextMeshProUGUI _pouleNameTitle;

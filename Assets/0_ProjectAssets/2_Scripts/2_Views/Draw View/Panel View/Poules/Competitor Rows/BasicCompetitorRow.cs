@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace YannickSCF.TournamentDraw.Views.DrawPanel.Poules.CompetitorRow {
+namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
     public class BasicCompetitorRow : MonoBehaviour {
 
         [Header("Basic Competitor INFO")]

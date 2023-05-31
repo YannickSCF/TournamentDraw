@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using YannickSCF.TournamentDraw;
 
 [RequireComponent(typeof(Collider))]
 public class LootBox : MonoBehaviour
 {
-    public Animator cameraAnimator;
-    public GameObject lootBox;
-    public GameObject lootBoxFractured;
-    public GameObject lootReward;
+    public event CommonEventsDelegates.SimpleEvent OnVFXCanInit;
 
-    private GameObject fracturedObject;
-    private GameObject loot;
+    public delegate void LootBoxEvent(LootBox thisLootBox);
+    public event LootBoxEvent OnStartReveal;
+    public event LootBoxEvent OnRevealEnds;
+
     private Animator animator;    
     private RaycastHit hit;
     private Ray ray;
 
-    public UnityEvent OnInit;
-    public UnityEvent OnEnd;
+    private bool _isOpening = false;
 
     void Start()
     {
@@ -27,76 +26,47 @@ public class LootBox : MonoBehaviour
 
     void Update()
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!_isOpening) {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit)) 
-        {
-            if (hit.transform.name == gameObject.name)
+            if (Physics.Raycast(ray, out hit)) 
             {
-                animator.SetBool("Idle", false);
-                animator.SetBool("Hover", true);
+                if (hit.transform.name == gameObject.name)
+                {
+                    //animator.SetBool("Idle", false);
+                    //animator.SetBool("Hover", true);
 
-                cameraAnimator.SetBool("Idle", false);
-                cameraAnimator.SetBool("Hover", true);
-
-                if (Input.GetMouseButtonDown(0)) 
-                {            
-                    animator.SetBool("Open", true);
-                    cameraAnimator.SetBool("Open", true);
+                    if (Input.GetMouseButtonDown(0)) 
+                    {
+                        //animator.SetBool("Open", true);
+                        _isOpening = true;
+                        OnStartReveal?.Invoke(this);
+                    }
+                }
+                else
+                {
+                    //animator.SetBool("Idle", true);
+                    //animator.SetBool("Hover", false);
                 }
             }
-            else
-            {
-                animator.SetBool("Idle", true);
-                animator.SetBool("Hover", false);
-                
-                cameraAnimator.SetBool("Idle", true);
-                cameraAnimator.SetBool("Hover", false);
-            } 
-        }      
-    }
 
-    //called via animation
-    public void LootReward ()
-    {  
-        loot = Instantiate (lootReward) as GameObject;
-
-        lootBox.SetActive (false);
-
-        if(lootBoxFractured != null)
-        {
-            fracturedObject = Instantiate (lootBoxFractured) as GameObject;
         }
     }
 
-    public void Restart ()
-    {        
-        animator.Rebind();
-        animator.SetBool("Idle", true);
-        animator.SetBool("Open", false);
-        animator.SetBool("Hover", false);
-
-        cameraAnimator.Rebind();
-        cameraAnimator.SetBool("Idle", true);
-        cameraAnimator.SetBool("Open", false);
-        cameraAnimator.SetBool("Hover", false);
-
-        Destroy (loot);
-        Destroy (fracturedObject);
-
-        lootBox.SetActive (true);
+    public void OpenDrawBall() {
+        animator.SetTrigger("OpenBall");
     }
 
-    IEnumerator RestartCo ()
-    {
-        yield return new WaitForFixedUpdate();
+    public void ResetDrawBall() {
+        animator.SetTrigger("ResetBall");
+        _isOpening = false;
     }
 
-    public void ThrowInitEvent() {
-        OnInit?.Invoke();
+    public void CanInitVFX() {
+        OnVFXCanInit?.Invoke();
     }
 
-    public void ThrowEndEvent() {
-        OnEnd?.Invoke();
+    public void RevealEnds() {
+        OnRevealEnds?.Invoke(this);
     }
 }

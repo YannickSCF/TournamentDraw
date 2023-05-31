@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace YannickSCF.TournamentDraw.Views.DrawPanel.Poules {
+namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules {
     
     public class PoulesViewOrganizer : MonoBehaviour {
         [SerializeField] private GridLayoutGroup layout;

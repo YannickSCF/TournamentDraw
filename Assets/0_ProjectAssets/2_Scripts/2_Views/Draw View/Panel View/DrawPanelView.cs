@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.TournamentDraw.Scriptables;
 using YannickSCF.TournamentDraw.Views.Draw.Events;
-using YannickSCF.TournamentDraw.Views.DrawPanel.Poules;
+using YannickSCF.TournamentDraw.Views.Draw.Panel.Poules;
 
-namespace YannickSCF.TournamentDraw.Views.Draw {
+namespace YannickSCF.TournamentDraw.Views.Draw.Panel {
     public class DrawPanelView : MonoBehaviour {
 
         [SerializeField] private ScrollRect pouleContent;

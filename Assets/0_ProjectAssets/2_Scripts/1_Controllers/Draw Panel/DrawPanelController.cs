@@ -6,7 +6,7 @@ using UnityEngine;
 using YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors;
 using YannickSCF.TournamentDraw.Models;
 using YannickSCF.TournamentDraw.Scriptables;
-using YannickSCF.TournamentDraw.Views.Draw;
+using YannickSCF.TournamentDraw.Views.Draw.Panel;
 using YannickSCF.TournamentDraw.Views.Draw.Events;
 
 namespace YannickSCF.TournamentDraw.Controllers.Draw {
