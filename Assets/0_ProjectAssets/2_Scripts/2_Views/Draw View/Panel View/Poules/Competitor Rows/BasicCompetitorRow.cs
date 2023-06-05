@@ -4,6 +4,7 @@ using UnityEngine;
 namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
     public class BasicCompetitorRow : MonoBehaviour {
 
+        [SerializeField] private Animator _revealAnimator;
         [Header("Basic Competitor INFO")]
         [SerializeField] private TextMeshProUGUI _competitorNameText;
         [SerializeField] private TextMeshProUGUI _competitorAcademyText;
@@ -21,6 +22,9 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
         public void SetNameAndAcademy(string competitorName, string academyName) {
             _competitorNameText.text = competitorName;
             _competitorAcademyText.text = academyName;
+
+            _revealAnimator.SetTrigger("Open");
+
             rowFilled = true;
         }
 
