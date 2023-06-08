@@ -33,5 +33,9 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
             _competitorAcademyText.text = string.Empty;
             rowFilled = false;
         }
+
+        public float GetRowHeight() {
+            return GetComponent<RectTransform>().sizeDelta.y;
+        }
     }
 }

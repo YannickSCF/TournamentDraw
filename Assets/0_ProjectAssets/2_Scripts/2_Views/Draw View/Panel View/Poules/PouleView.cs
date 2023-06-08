@@ -13,7 +13,9 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules {
         [SerializeField] private BasicCompetitorRow _pouleCompetitorInfoRow;
 
         private RectTransform _rectTransform;
-        private List<BasicCompetitorRow> allRows;
+        private List<BasicCompetitorRow> _allRows;
+
+        private float _rowHeight = 0;
 
         #region Mono
         private void Awake() {
@@ -27,22 +29,27 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules {
             AddEmptyRows(numberOfRows);
 
             float totalHeight = transform.GetChild(0).GetComponent<RectTransform>().rect.height;
-            totalHeight += numberOfRows * 25;
+            totalHeight += numberOfRows * _rowHeight;
 
             _rectTransform.sizeDelta = new Vector2(_rectTransform.sizeDelta.x, totalHeight);
         }
 
         private void AddEmptyRows(int numberOfRows = 1) {
-            allRows = new List<BasicCompetitorRow>();
+            _allRows = new List<BasicCompetitorRow>();
             for (int i = 0; i < numberOfRows; ++i) {
                 BasicCompetitorRow newRow = Instantiate(_pouleCompetitorInfoRow.gameObject, _pouleContentParent).GetComponent<BasicCompetitorRow>();
                 newRow.InitRowEmpty();
-                allRows.Add(newRow);
+                _allRows.Add(newRow);
+
+                float newRowHeight = newRow.GetRowHeight();
+                if (_rowHeight < newRowHeight) {
+                    _rowHeight = newRowHeight;
+                }
             }
         }
 
         public void AddParticipantToPoule(string completeName, string academyName) {
-            foreach (BasicCompetitorRow row in allRows) {
+            foreach (BasicCompetitorRow row in _allRows) {
                 if (!row.IsRowFilled) {
                     row.SetNameAndAcademy(completeName, academyName);
                     break;
