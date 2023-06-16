@@ -9,45 +9,30 @@ using YannickSCF.TournamentDraw.Controllers.InitialPanel;
 
 namespace YannickSCF.TournamentDraw.Views {
     public class UIManager : MonoBehaviour {
-
-        [SerializeField] private Image bgImage;
-        [SerializeField] private TextMeshProUGUI uiTitle;
-        [SerializeField] private Transform mainSpace;
-
-        [Header("UI Panels")]
-        [SerializeField] private InitialPanelController initialPanelPrefab;
-        [SerializeField] private DrawConfiguratorController configuratorPanelPrefab;
-        [SerializeField] private DrawPanelController drawPanelPrefab;
+        
+        private InitialPanelController _initialPanel;
+        private DrawConfiguratorController _configuratorPanel;
+        private DrawPanelController _drawPanel;
 
         private Action<DrawConfiguratorController> actionOnConfiguratorOpen;
         private Action<DrawPanelController> actionOnDrawOpen;
 
         public void OpenInitialPanel() {
-            GameObject initialPanel = Instantiate(initialPanelPrefab.gameObject, mainSpace);
+            _initialPanel = FindObjectOfType<InitialPanelController>();
         }
 
         public void OpenConfiguratorPanel(Action<DrawConfiguratorController> onInstantiated) {
-            GameObject configPanel = Instantiate(configuratorPanelPrefab.gameObject, mainSpace);
+            _configuratorPanel = FindObjectOfType<DrawConfiguratorController>();
             actionOnConfiguratorOpen = onInstantiated;
 
-            actionOnConfiguratorOpen?.Invoke(configPanel.GetComponent<DrawConfiguratorController>());
+            actionOnConfiguratorOpen?.Invoke(_configuratorPanel);
         }
 
         public void OpenDrawPanel(Action<DrawPanelController> onInstantiated) {
-            GameObject drawPanel = Instantiate(drawPanelPrefab.gameObject, mainSpace);
+            _drawPanel = FindObjectOfType<DrawPanelController>();
             actionOnDrawOpen = onInstantiated;
 
-            actionOnDrawOpen?.Invoke(drawPanel.GetComponent<DrawPanelController>());
-        }
-
-        public void CloseCurrentPanel() {
-            if(mainSpace.childCount > 0) {
-                Destroy(mainSpace.GetChild(0).gameObject);
-            }
-        }
-
-        public void ChangeTitle(string newTitle) {
-            uiTitle.text = newTitle;
+            actionOnDrawOpen?.Invoke(_drawPanel);
         }
     }
 }

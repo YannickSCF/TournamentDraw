@@ -3,7 +3,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using YannickSCF.GeneralApp.CountriesData;
+using YannickSCF.CountriesData;
 using static TMPro.TMP_Dropdown;
 
 namespace YannickSCF.TournamentDraw.Views.Configurator.ParticipantList.Components.InputType.AutoCompleteCountry {

@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/0_ProjectAssets/1_Scenes/MainScene.unity
+    guid: 20d4e667fd38746479320c4f666b73e7
+  - enabled: 1
+    path: Assets/0_ProjectAssets/1_Scenes/DrawScene.unity
+    guid: 71fbf765dde0b8e4691fbe4328e71641
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: d927df408f6d5c348b1da9cb45161299, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 74711fbfb0db17749a4f2d6e92e140ed, type: 2}

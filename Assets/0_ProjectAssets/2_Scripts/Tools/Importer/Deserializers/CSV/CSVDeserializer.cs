@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-using YannickSCF.GeneralApp.CountriesData;
+using YannickSCF.CountriesData;
 using YannickSCF.TournamentDraw.Models;
 
 namespace YannickSCF.TournamentDraw.Importers {

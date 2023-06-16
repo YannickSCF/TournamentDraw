@@ -26,7 +26,7 @@ namespace YannickSCF.TournamentDraw.Controllers.InitialPanel {
 
         #region Events listeners methods
         private void NewDrawButtonPressed() {
-            GameManager.Instance.SwitchState(States.Configurator);
+            
         }
 
         private void LoadDrawButtonPressed() {

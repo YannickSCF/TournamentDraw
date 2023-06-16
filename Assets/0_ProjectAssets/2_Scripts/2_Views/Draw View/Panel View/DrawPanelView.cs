@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.TournamentDraw.Scriptables;
@@ -8,6 +9,10 @@ using YannickSCF.TournamentDraw.Views.Draw.Panel.Poules;
 
 namespace YannickSCF.TournamentDraw.Views.Draw.Panel {
     public class DrawPanelView : MonoBehaviour {
+
+        [Header("Main parameters")]
+        [SerializeField] private TextMeshProUGUI _drawNameText;
+        [SerializeField] private Image _bgLogoImage;
 
         [SerializeField] private ScrollRect pouleContent;
 
@@ -29,6 +34,8 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel {
         #endregion
 
         public void Init(DrawConfiguration config) {
+            _drawNameText.text = config.DrawName;
+
             CreatePoules(config.NumberOfPoules, config.MaxPouleSize);
 
             pouleContent.content.GetComponent<RectTransform>().sizeDelta = new Vector2(0, 760);
