@@ -1,33 +1,32 @@
-using System;
+
 using UnityEngine;
-using UnityEngine.UI;
-using YannickSCF.GeneralApp.Controller.LoadingPanel;
-using YannickSCF.GeneralApp.GameManager;
-using YannickSCF.GeneralApp.View.LoadingPanel.Events;
+using YannickSCF.GeneralApp.Controller;
+using YannickSCF.GeneralApp.Controller.Audio;
+using YannickSCF.GeneralApp.Controller.Scenes;
+using YannickSCF.GeneralApp.View.UI.LoadingPanel.Events;
 using YannickSCF.TournamentDraw.Controllers.Configurator;
 using YannickSCF.TournamentDraw.Controllers.Draw;
 using YannickSCF.TournamentDraw.Scriptables;
 using YannickSCF.TournamentDraw.Views;
-using YannickSCF.TournamentDraw.Views.InitialPanel.Events;
 
 namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
     public enum Scenes { None, Main, Draw }
 
-    public class GameManager : BaseGameManager {
+    public class GameManager : GlobalSingleton<GameManager> {
+
+        [Header("Other Main Controllers")]
+        [SerializeField] private BaseAudioController _audioController;
 
         [Header("Debug Values")]
         [SerializeField] private bool debug = false;
         [SerializeField, ConditionalHide("debug", true)] private DrawConfiguration _debugConfig;
         [SerializeField, ConditionalHide("debug", true)] private Scenes openPanelAuto = Scenes.Main;
 
-        [Header("Main Controllers")]
-        [SerializeField] private UIManager _gameUIManager;
-
         [Header("Settings files")]
         [SerializeField] private DrawConfiguration _config;
-        [SerializeField] private Button _GoScene;
 
+        private UIController _uIController;
         private Scenes c_state = Scenes.None;
 
         public DrawConfiguration Config {
@@ -42,19 +41,16 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         #region Mono
+        private void Awake() {
+            _uIController = UIController.GetComponent<UIController>();
+        }
+
         private void Start() {
             SwitchState(debug ? openPanelAuto : Scenes.Main);
         }
 
         private void OnApplicationQuit() {
             _config.ResetConfiguration();
-        }
-
-        private void OnEnable() {
-            _GoScene?.onClick.AddListener(() => SwitchState(Scenes.Draw));
-        }
-        private void OnDisable() {
-            _GoScene?.onClick.RemoveAllListeners();
         }
         #endregion
 
@@ -65,13 +61,68 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             //      - Configurator Panel -> Draw options finished -> Change scene and open Draw Panel
             //      - etc,...
 
-            if (sceneController.CurrentSceneIndex != (int)stateToSwitch - 1) {
+            if (SceneController.CurrentSceneIndex != (int)stateToSwitch - 1) {
                 ChangeSingleScene((int)stateToSwitch - 1, false);
                 c_state = stateToSwitch;
             }
         }
 
-        protected override void SceneLoaded() {
+        // ------------------------ Initial Panel -----------------------
+
+        private void OpenMainScene() {
+            _config.ResetConfiguration();
+            _uIController.OpenInitialPanel();
+        }
+
+        // ---- Configurator Panel ----
+
+        [ContextMenu("Open Configurator")]
+        public void OpenConfiguratorPanel() {
+            _uIController.OpenConfiguratorPanel(InitializeConfiguratorData);
+        }
+
+        private void InitializeConfiguratorData(DrawConfiguratorController configuratorController) {
+            configuratorController.Init(Config);
+        }
+
+        // ------------------------- Draw Panel -------------------------
+
+        private void OpenDrawScene() {
+            _uIController.OpenDrawPanel(InitializeDrawPanelData);
+        }
+
+        private void InitializeDrawPanelData(DrawPanelController drawPanelController) {
+            drawPanelController.Init(Config);
+        }
+
+
+        [SerializeField] protected UIController UIController;
+        [SerializeField] protected SceneController SceneController;
+
+        protected int _sceneToGo = 0;
+        protected bool _showProgress = false;
+
+        #region Load single scenes methods
+        public virtual void ChangeSingleScene(int sceneToGo, bool showProgress = false) {
+            _sceneToGo = sceneToGo;
+            _showProgress = showProgress;
+
+            UIController.LoadingController.FadeIn();
+
+            LoadingPanelViewEvents.OnFadeInFinished += ChangeSingleSceneOnFadeInFinished;
+        }
+
+        protected virtual void ChangeSingleSceneOnFadeInFinished() {
+            UIController.LoadingController.ShowLoadingValues(true, _showProgress);
+            if (_showProgress) SceneController.OnSceneLoadProgress += UIController.LoadingController.UpdateProgressBar;
+
+            SceneController.LoadSceneByIndex(_sceneToGo);
+
+            LoadingPanelViewEvents.OnFadeInFinished -= ChangeSingleSceneOnFadeInFinished;
+            SceneController.OnSceneLoaded += SceneLoaded;
+        }
+
+        protected virtual void SceneLoaded() {
             switch (c_state) {
                 case Scenes.Main:
                     OpenMainScene();
@@ -83,35 +134,22 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
                     break;
             }
 
-            base.SceneLoaded();
+            UIController.LoadingController.FadeOut();
+
+            if (_showProgress) SceneController.OnSceneLoadProgress -= UIController.LoadingController.UpdateProgressBar;
+            SceneController.OnSceneLoaded -= SceneLoaded;
+            _sceneToGo = 0;
+        }
+        #endregion
+
+        #region Load/Unload additive scenes
+        public virtual void AddAdditiveScene(int c_sceneToGo) {
+            SceneController.LoadSceneByIndex(c_sceneToGo, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         }
 
-        // ------------------------ Initial Panel -----------------------
-
-        private void OpenMainScene() {
-            _config.ResetConfiguration();
-            _gameUIManager.OpenInitialPanel();
+        public virtual void RemoveAdditiveScene(int c_sceneToGo) {
+            SceneController.UnloadSceneByIndex(c_sceneToGo);
         }
-
-        // ---- Configurator Panel ----
-
-        [ContextMenu("Open Configurator")]
-        private void OpenConfiguratorPanel() {
-            _gameUIManager.OpenConfiguratorPanel(InitializeConfiguratorData);
-        }
-
-        private void InitializeConfiguratorData(DrawConfiguratorController configuratorController) {
-            configuratorController.Init(Config);
-        }
-
-        // ------------------------- Draw Panel -------------------------
-
-        private void OpenDrawScene() {
-            _gameUIManager.OpenDrawPanel(InitializeDrawPanelData);
-        }
-
-        private void InitializeDrawPanelData(DrawPanelController drawPanelController) {
-            drawPanelController.Init(Config);
-        }
+        #endregion
     }
 }

@@ -2,13 +2,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using YannickSCF.GeneralApp.View.UI.Windows;
 using YannickSCF.TournamentDraw.Scriptables;
 // Custom dependencies
 using YannickSCF.TournamentDraw.Views.Configurator.DrawOptions;
 using YannickSCF.TournamentDraw.Views.Configurator.ParticipantList;
 
 namespace YannickSCF.TournamentDraw.Views.Configurator {
-    public class DrawConfiguratorView : MonoBehaviour {
+    public class DrawConfiguratorView : WindowsView {
         
         [SerializeField] private ParticipantsListView participantsPanel;
         [SerializeField] private DrawOptionsView drawOptionsPanel;
@@ -84,6 +85,18 @@ namespace YannickSCF.TournamentDraw.Views.Configurator {
 
             participantsPanel.LoadParticipantOnTable(country, surname, name,
                 rank, styles, academy, school, tier);
+        }
+
+        public override void Init() {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Open() {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Close() {
+            throw new System.NotImplementedException();
         }
         #endregion
     }

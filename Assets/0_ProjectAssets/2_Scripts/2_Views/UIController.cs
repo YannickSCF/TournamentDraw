@@ -1,14 +1,15 @@
+/// Dependencies
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-// Custom dependencies
+/// Custom dependencies
+using YannickSCF.GeneralApp.Controller.UI;
+using YannickSCF.GeneralApp.View.UI.Windows;
 using YannickSCF.TournamentDraw.Controllers.Configurator;
 using YannickSCF.TournamentDraw.Controllers.Draw;
 using YannickSCF.TournamentDraw.Controllers.InitialPanel;
 
 namespace YannickSCF.TournamentDraw.Views {
-    public class UIManager : MonoBehaviour {
+    public class UIController : BaseUIController {
         
         private InitialPanelController _initialPanel;
         private DrawConfiguratorController _configuratorPanel;
@@ -18,11 +19,12 @@ namespace YannickSCF.TournamentDraw.Views {
         private Action<DrawPanelController> actionOnDrawOpen;
 
         public void OpenInitialPanel() {
-            _initialPanel = FindObjectOfType<InitialPanelController>();
+            ShowView("Initial");
         }
 
         public void OpenConfiguratorPanel(Action<DrawConfiguratorController> onInstantiated) {
-            _configuratorPanel = FindObjectOfType<DrawConfiguratorController>();
+            WindowsView configView = ShowView("Config");
+            _configuratorPanel = configView.GetComponent<DrawConfiguratorController>();
             actionOnConfiguratorOpen = onInstantiated;
 
             actionOnConfiguratorOpen?.Invoke(_configuratorPanel);
