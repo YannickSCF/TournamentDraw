@@ -13,14 +13,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
     public enum Scenes { None, Main, Draw }
 
-    public partial class GameManager : GlobalSingleton<GameManager> {
-
-        [Header("Other Main Controllers")]
-        [SerializeField] protected UIController UIController;
-        [SerializeField] protected SceneController SceneController;
-
-        [Header("Other Main Controllers")]
-        [SerializeField] private BaseAudioController _audioController;
+    public class GameManager : YannickSCF.GeneralApp.Controller.GameManager {
 
         [Header("Debug Values")]
         [SerializeField] private bool debug = false;
@@ -45,6 +38,10 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         #region Mono
+        private void Awake() {
+            _uIController = BaseUIController as UIController;
+        }
+
         private void Start() {
             SwitchState(debug ? openPanelAuto : Scenes.Main);
         }
@@ -62,7 +59,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             //      - etc,...
 
             if (SceneController.CurrentSceneIndex != (int)stateToSwitch - 1) {
-                ChangeSingleScene((int)stateToSwitch - 1, false);
+                SceneUtils.ChangeSingleScene((int)stateToSwitch - 1, false);
                 c_state = stateToSwitch;
             }
         }
@@ -94,62 +91,5 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         private void InitializeDrawPanelData(DrawPanelController drawPanelController) {
             drawPanelController.Init(Config);
         }
-
-        #region Advanced Scene Management
-        protected int _sceneToGo = 0;
-        protected bool _showProgress = false;
-
-        #region Load single scenes methods
-        private void ChangeSingleScene(int sceneToGo, bool showProgress = false) {
-            _sceneToGo = sceneToGo;
-            _showProgress = showProgress;
-
-            UIController.LoadingController.FadeIn();
-
-            LoadingPanelViewEvents.OnFadeInFinished += ChangeSingleSceneOnFadeInFinished;
-        }
-
-        private void ChangeSingleSceneOnFadeInFinished() {
-            UIController.LoadingController.ShowLoadingValues(true, _showProgress);
-            if (_showProgress) SceneController.OnSceneLoadProgress += UIController.LoadingController.UpdateProgressBar;
-
-            SceneController.LoadSceneByIndex(_sceneToGo);
-
-            LoadingPanelViewEvents.OnFadeInFinished -= ChangeSingleSceneOnFadeInFinished;
-            SceneController.OnSceneLoaded += SceneLoaded;
-        }
-
-        private void SceneLoaded() {
-            switch (c_state) {
-                case Scenes.Main:
-                    OpenMainScene();
-                    break;
-                case Scenes.Draw:
-                    OpenDrawScene();
-                    break;
-                default:
-                    break;
-            }
-
-            UIController.LoadingController.FadeOut();
-
-            if (_showProgress) SceneController.OnSceneLoadProgress -= UIController.LoadingController.UpdateProgressBar;
-            SceneController.OnSceneLoaded -= SceneLoaded;
-            _sceneToGo = 0;
-        }
-        #endregion
-
-        #region Load/Unload additive scenes
-        private void AddAdditiveScene(int c_sceneToGo) {
-            SceneController.LoadSceneByIndex(c_sceneToGo, UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        }
-
-        private void RemoveAdditiveScene(int c_sceneToGo) {
-            SceneController.UnloadSceneByIndex(c_sceneToGo);
-            LoadAllNew();
-        }
-        #endregion
-        #endregion
-
     }
 }
