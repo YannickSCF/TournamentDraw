@@ -13,7 +13,11 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
     public enum Scenes { None, Main, Draw }
 
-    public class GameManager : GlobalSingleton<GameManager> {
+    public partial class GameManager : GlobalSingleton<GameManager> {
+
+        [Header("Other Main Controllers")]
+        [SerializeField] protected UIController UIController;
+        [SerializeField] protected SceneController SceneController;
 
         [Header("Other Main Controllers")]
         [SerializeField] private BaseAudioController _audioController;
@@ -41,10 +45,6 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         #region Mono
-        private void Awake() {
-            _uIController = UIController.GetComponent<UIController>();
-        }
-
         private void Start() {
             SwitchState(debug ? openPanelAuto : Scenes.Main);
         }
@@ -95,15 +95,12 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             drawPanelController.Init(Config);
         }
 
-
-        [SerializeField] protected UIController UIController;
-        [SerializeField] protected SceneController SceneController;
-
+        #region Advanced Scene Management
         protected int _sceneToGo = 0;
         protected bool _showProgress = false;
 
         #region Load single scenes methods
-        public virtual void ChangeSingleScene(int sceneToGo, bool showProgress = false) {
+        private void ChangeSingleScene(int sceneToGo, bool showProgress = false) {
             _sceneToGo = sceneToGo;
             _showProgress = showProgress;
 
@@ -112,7 +109,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             LoadingPanelViewEvents.OnFadeInFinished += ChangeSingleSceneOnFadeInFinished;
         }
 
-        protected virtual void ChangeSingleSceneOnFadeInFinished() {
+        private void ChangeSingleSceneOnFadeInFinished() {
             UIController.LoadingController.ShowLoadingValues(true, _showProgress);
             if (_showProgress) SceneController.OnSceneLoadProgress += UIController.LoadingController.UpdateProgressBar;
 
@@ -122,7 +119,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             SceneController.OnSceneLoaded += SceneLoaded;
         }
 
-        protected virtual void SceneLoaded() {
+        private void SceneLoaded() {
             switch (c_state) {
                 case Scenes.Main:
                     OpenMainScene();
@@ -143,13 +140,16 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         #endregion
 
         #region Load/Unload additive scenes
-        public virtual void AddAdditiveScene(int c_sceneToGo) {
+        private void AddAdditiveScene(int c_sceneToGo) {
             SceneController.LoadSceneByIndex(c_sceneToGo, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         }
 
-        public virtual void RemoveAdditiveScene(int c_sceneToGo) {
+        private void RemoveAdditiveScene(int c_sceneToGo) {
             SceneController.UnloadSceneByIndex(c_sceneToGo);
+            LoadAllNew();
         }
         #endregion
+        #endregion
+
     }
 }
