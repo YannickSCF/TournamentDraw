@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using YannickSCF.GeneralApp.View.UI.Windows;
 using YannickSCF.TournamentDraw.Views.InitialPanel.Events;
 
 namespace YannickSCF.TournamentDraw.Views.InitialPanel {
-    public class InitialPanelView : MonoBehaviour {
+    public class InitialPanelView : WindowView {
 
         [SerializeField] private Button newDrawButton;
         [SerializeField] private Button loadDrawButton;
@@ -38,6 +39,9 @@ namespace YannickSCF.TournamentDraw.Views.InitialPanel {
             InitialPanelViewEvents.ThrowOnSettingsButtonPressed();
 
         }
+        #endregion
+
+        #region Windows View methods
         #endregion
     }
 }

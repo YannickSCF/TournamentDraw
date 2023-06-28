@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fd146d6903fd4f48b9e0beea16c8c9d, type: 3}
-  m_Name: Windows Database
+  m_Name: Main Scene Windows Database
   m_EditorClassIdentifier: 
   _allWindows:
   - _windowId: Initial

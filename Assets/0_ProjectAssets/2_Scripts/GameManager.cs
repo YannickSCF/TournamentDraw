@@ -1,30 +1,32 @@
-
 using UnityEngine;
-using YannickSCF.GeneralApp.Controller;
 using YannickSCF.GeneralApp.Controller.Audio;
 using YannickSCF.GeneralApp.Controller.Scenes;
+using YannickSCF.GeneralApp.Controller.UI;
 using YannickSCF.GeneralApp.View.UI.LoadingPanel.Events;
-using YannickSCF.TournamentDraw.Controllers.Configurator;
-using YannickSCF.TournamentDraw.Controllers.Draw;
+using YannickSCF.TournamentDraw.Controllers.DrawScene;
+using YannickSCF.TournamentDraw.Controllers.MainScene;
 using YannickSCF.TournamentDraw.Scriptables;
-using YannickSCF.TournamentDraw.Views;
 
 namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
-    public enum Scenes { None, Main, Draw }
+    public enum States { None, Initial, Draw }
 
-    public class GameManager : YannickSCF.GeneralApp.Controller.GameManager {
+    public class GameManager : GlobalSingleton<GameManager> {
+
+        [Header("Main Controllers")]
+        [SerializeField] protected BaseUIController _baseUIController;
+        [SerializeField] protected BaseAudioController _baseAudioController;
+        [SerializeField] protected SceneController _sceneController;
 
         [Header("Debug Values")]
         [SerializeField] private bool debug = false;
         [SerializeField, ConditionalHide("debug", true)] private DrawConfiguration _debugConfig;
-        [SerializeField, ConditionalHide("debug", true)] private Scenes openPanelAuto = Scenes.Main;
+        [SerializeField, ConditionalHide("debug", true)] private States openPanelAuto = States.Initial;
 
         [Header("Settings files")]
         [SerializeField] private DrawConfiguration _config;
 
-        private UIController _uIController;
-        private Scenes c_state = Scenes.None;
+        private States c_state = States.None;
 
         public DrawConfiguration Config {
             get { return debug ? _debugConfig : _config; }
@@ -38,12 +40,8 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         #region Mono
-        private void Awake() {
-            _uIController = BaseUIController as UIController;
-        }
-
         private void Start() {
-            SwitchState(debug ? openPanelAuto : Scenes.Main);
+            SwitchState(debug ? openPanelAuto : States.Initial);
         }
 
         private void OnApplicationQuit() {
@@ -51,45 +49,83 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
         #endregion
 
-        public void SwitchState(Scenes stateToSwitch) {
-            // TODO Metodo para cambiar de cosas 
-            // Ejemplos:
-            //      - Initial Panel -> New Draw Button Pressed -> Open Configurator
-            //      - Configurator Panel -> Draw options finished -> Change scene and open Draw Panel
-            //      - etc,...
-
-            if (SceneController.CurrentSceneIndex != (int)stateToSwitch - 1) {
-                SceneUtils.ChangeSingleScene((int)stateToSwitch - 1, false);
+        public void SwitchState(States stateToSwitch) {
+            if (c_state == States.None) {
+                c_state = stateToSwitch;
+                InitSceneData();
+            } else if (_sceneController.CurrentSceneIndex != (int)stateToSwitch - 1) {
+                ChangeSingleScene((int)stateToSwitch - 1, false);
                 c_state = stateToSwitch;
             }
         }
 
-        // ------------------------ Initial Panel -----------------------
-
-        private void OpenMainScene() {
-            _config.ResetConfiguration();
-            _uIController.OpenInitialPanel();
+        private void InitSceneData() {
+            switch (c_state) {
+                case States.Initial:
+                    MainSceneController mainSceneController = FindObjectOfType<MainSceneController>();
+                    mainSceneController.Init();
+                    break;
+                case States.Draw:
+                    DrawSceneController drawSceneController = FindObjectOfType<DrawSceneController>();
+                    drawSceneController.Init();
+                    break;
+                default:
+                    Debug.LogError("Error on state given!");
+                    break;
+            }
         }
 
-        // ---- Configurator Panel ----
+        #region Scene management
+        private int _sceneToGo = 0;
+        private bool _showProgress = false;
 
-        [ContextMenu("Open Configurator")]
-        public void OpenConfiguratorPanel() {
-            _uIController.OpenConfiguratorPanel(InitializeConfiguratorData);
+        #region Load single scenes methods
+        public void ChangeSingleScene(int sceneToGo, bool showProgress = false) {
+            _sceneToGo = sceneToGo;
+            _showProgress = showProgress;
+
+            _baseUIController.LoadingController.FadeIn();
+
+            LoadingPanelViewEvents.OnFadeInFinished += ChangeSingleSceneOnFadeInFinished;
         }
 
-        private void InitializeConfiguratorData(DrawConfiguratorController configuratorController) {
-            configuratorController.Init(Config);
+        private void ChangeSingleSceneOnFadeInFinished() {
+            _baseUIController.LoadingController.ShowLoadingValues(true, _showProgress);
+            if (_showProgress) {
+                _sceneController.OnSceneLoadProgress +=
+                    _baseUIController.LoadingController.UpdateProgressBar;
+            }
+
+            _sceneController.LoadSceneByIndex(_sceneToGo);
+
+            LoadingPanelViewEvents.OnFadeInFinished -= ChangeSingleSceneOnFadeInFinished;
+            _sceneController.OnSceneLoaded += SceneLoaded;
         }
 
-        // ------------------------- Draw Panel -------------------------
+        private void SceneLoaded() {
 
-        private void OpenDrawScene() {
-            _uIController.OpenDrawPanel(InitializeDrawPanelData);
+
+            _baseUIController.LoadingController.FadeOut();
+
+            if (_showProgress) {
+                _sceneController.OnSceneLoadProgress -=
+                    _baseUIController.LoadingController.UpdateProgressBar;
+            }
+
+            _sceneController.OnSceneLoaded -= SceneLoaded;
+            _sceneToGo = 0;
+        }
+        #endregion
+
+        #region Load/Unload additive scenes
+        public void AddAdditiveScene(int c_sceneToGo) {
+            _sceneController.LoadSceneByIndex(c_sceneToGo, UnityEngine.SceneManagement.LoadSceneMode.Additive);
         }
 
-        private void InitializeDrawPanelData(DrawPanelController drawPanelController) {
-            drawPanelController.Init(Config);
+        public void RemoveAdditiveScene(int c_sceneToGo) {
+            _sceneController.UnloadSceneByIndex(c_sceneToGo);
         }
+        #endregion
+        #endregion
     }
 }

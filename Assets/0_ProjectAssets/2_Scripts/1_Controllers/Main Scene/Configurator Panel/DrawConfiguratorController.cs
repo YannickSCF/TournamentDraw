@@ -2,16 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YannickSCF.TournamentDraw.Importers;
-using YannickSCF.TournamentDraw.Models;
 // Custom Dependencies
+using YannickSCF.GeneralApp.Controller.UI.Windows;
+using YannickSCF.GeneralApp.View.UI.Windows;
+using YannickSCF.TournamentDraw.Importers;
+using YannickSCF.TournamentDraw.MainManagers.Controllers;
+using YannickSCF.TournamentDraw.Models;
 using YannickSCF.TournamentDraw.Scriptables;
 using YannickSCF.TournamentDraw.Views.Configurator;
 using YannickSCF.TournamentDraw.Views.Configurator.Events;
 
 namespace YannickSCF.TournamentDraw.Controllers.Configurator {
 
-    public class DrawConfiguratorController : MonoBehaviour {
+    public class DrawConfiguratorController : WindowController<DrawConfiguratorView> {
 
         [SerializeField] private DrawConfiguratorView view;
 
@@ -21,7 +24,9 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
         private int numberOfParticipantsError = 0;
 
         #region Mono
-        private void OnEnable() {
+        protected override void OnEnable() {
+            base.OnEnable();
+
             ConfiguratorViewEvents.OnLoadParticipantsFromFile += LoadParticipantsFromFile;
             ConfiguratorViewEvents.OnParticipantAdded += ParticipantAdded;
             ConfiguratorViewEvents.OnParticipantRemoved += ParticipantRemoved;
@@ -38,7 +43,9 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
             ConfiguratorViewEvents.OnParticipantInfoCheckboxToggle += ParticipantInfoCheckboxToggle;
         }
 
-        private void OnDisable() {
+        protected override void OnDisable() {
+            base.OnDisable();
+
             ConfiguratorViewEvents.OnLoadParticipantsFromFile -= LoadParticipantsFromFile;
             ConfiguratorViewEvents.OnParticipantAdded -= ParticipantAdded;
             ConfiguratorViewEvents.OnParticipantRemoved -= ParticipantRemoved;
@@ -56,8 +63,8 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
         }
         #endregion
 
-        public void Init(DrawConfiguration configuration) {
-            _config = configuration;
+        public void Init() {
+            _config = GameManager.Instance.Config;
             view.Init(_config);
         }
 

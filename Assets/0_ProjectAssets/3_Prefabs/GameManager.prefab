@@ -651,7 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7099a4b32fad342bdef1ebdd72065d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseUIController: {fileID: 9175948807578851049}
+  _baseUIController: {fileID: 199045128420671915}
   _baseAudioController: {fileID: 1337071380}
   _sceneController: {fileID: 688586892}
   debug: 0
@@ -667,7 +667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6242430476952800649}
-  - component: {fileID: 9175948807578851049}
+  - component: {fileID: 199045128420671915}
   - component: {fileID: 6242430476952800886}
   - component: {fileID: 6242430476952800887}
   - component: {fileID: 6242430476952800884}
@@ -701,7 +701,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &9175948807578851049
+--- !u!114 &199045128420671915
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -710,7 +710,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6242430476952800885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49d12335b7ecb0245ae8a5a7ad16e420, type: 3}
+  m_Script: {fileID: 11500000, guid: 8dfab8ed70dbece4f8e5d1a25badc90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   WindowsController: {fileID: 6224797443926353575}
@@ -735,7 +735,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &6242430476952800887
 MonoBehaviour:
