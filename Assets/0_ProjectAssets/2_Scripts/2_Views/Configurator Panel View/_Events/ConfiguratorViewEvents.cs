@@ -90,9 +90,14 @@ namespace YannickSCF.TournamentDraw.Views.Configurator.Events {
 
         // --------------- EXITED ---------------
 
-        public static event SimpleEvent OnTournamentSettingsExited;
-        public static void ThrowTournamentSettingsExited() {
-            OnTournamentSettingsExited?.Invoke();
+        public static event SimpleEvent OnConfiguratorExited;
+        public static void ThrowConfiguratorExited() {
+            OnConfiguratorExited?.Invoke();
+        }
+
+        public static event SimpleEvent OnConfiguratorFinished;
+        public static void ThrowConfiguratorFinished() {
+            OnConfiguratorFinished?.Invoke();
         }
     }
 }

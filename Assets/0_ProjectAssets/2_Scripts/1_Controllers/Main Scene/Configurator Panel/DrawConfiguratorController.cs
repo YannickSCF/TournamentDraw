@@ -23,6 +23,9 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
         private List<string> errorsList = new List<string>();
         private int numberOfParticipantsError = 0;
 
+        private Action _onCloseAction = null;
+        private Action _onFinishAction = null;
+
         #region Mono
         protected override void OnEnable() {
             base.OnEnable();
@@ -41,6 +44,9 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
             ConfiguratorViewEvents.OnParticipantSelectionChanged += ParticipantSelectionChanged;
 
             ConfiguratorViewEvents.OnParticipantInfoCheckboxToggle += ParticipantInfoCheckboxToggle;
+
+            ConfiguratorViewEvents.OnConfiguratorExited += CloseAction;
+            ConfiguratorViewEvents.OnConfiguratorFinished += FinishAction;
         }
 
         protected override void OnDisable() {
@@ -60,12 +66,29 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
             ConfiguratorViewEvents.OnParticipantSelectionChanged -= ParticipantSelectionChanged;
 
             ConfiguratorViewEvents.OnParticipantInfoCheckboxToggle -= ParticipantInfoCheckboxToggle;
+
+            ConfiguratorViewEvents.OnConfiguratorExited -= CloseAction;
+            ConfiguratorViewEvents.OnConfiguratorFinished -= FinishAction;
         }
         #endregion
 
-        public void Init() {
+        public override void Init(string windowId) {
+            base.Init(windowId);
+
             _config = GameManager.Instance.Config;
-            view.Init(_config);
+            view.InitData(_config);
+        }
+
+        public void SetAllCallback(Action closeAction, Action finishAction) {
+            _onCloseAction = closeAction;
+            _onFinishAction = finishAction;
+        }
+
+        private void CloseAction() {
+            _onCloseAction?.Invoke();
+        }
+        private void FinishAction() {
+            _onFinishAction?.Invoke();
         }
 
         #region Event listeners methods
@@ -369,17 +392,5 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
             }
         }
         #endregion
-
-        [ContextMenu("Open Configurator")]
-        public void OpenConfigurator() {
-            view.OpenPanel();
-
-            AllChecks();
-        }
-
-        [ContextMenu("Close Configurator")]
-        public void CloseConfigurator() {
-            view.ClosePanel();
-        }
     }
 }
