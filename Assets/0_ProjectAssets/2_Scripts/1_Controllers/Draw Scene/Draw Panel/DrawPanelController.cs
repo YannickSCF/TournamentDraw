@@ -7,7 +7,7 @@ using YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors;
 using YannickSCF.TournamentDraw.Models;
 using YannickSCF.TournamentDraw.Scriptables;
 using YannickSCF.TournamentDraw.Views.Draw.Panel;
-using YannickSCF.TournamentDraw.Views.Draw.Events;
+using YannickSCF.TournamentDraw.Views.DrawScene.Events;
 
 namespace YannickSCF.TournamentDraw.Controllers.Draw {
     public class DrawPanelController : MonoBehaviour {

@@ -14,9 +14,9 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
     public class GameManager : GlobalSingleton<GameManager> {
 
         [Header("Main Controllers")]
-        [SerializeField] protected BaseUIController _baseUIController;
-        [SerializeField] protected BaseAudioController _baseAudioController;
-        [SerializeField] protected SceneController _sceneController;
+        [SerializeField] private BaseUIController _baseUIController;
+        [SerializeField] private BaseAudioController _baseAudioController;
+        [SerializeField] private SceneController _sceneController;
 
         [Header("Debug Values")]
         [SerializeField] private bool debug = false;
@@ -27,6 +27,8 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         [SerializeField] private DrawConfiguration _config;
 
         private States c_state = States.None;
+
+        public BaseUIController BaseUIController { get => _baseUIController; }
 
         public DrawConfiguration Config {
             get { return debug ? _debugConfig : _config; }
@@ -40,6 +42,10 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         #region Mono
+        private void Awake() {
+            _baseUIController.LoadingController.gameObject.SetActive(true);
+        }
+
         private void Start() {
             SwitchState(debug ? openPanelAuto : States.Initial);
         }

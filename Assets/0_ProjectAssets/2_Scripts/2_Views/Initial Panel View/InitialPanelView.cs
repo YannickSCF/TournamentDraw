@@ -40,8 +40,5 @@ namespace YannickSCF.TournamentDraw.Views.InitialPanel {
 
         }
         #endregion
-
-        #region Windows View methods
-        #endregion
     }
 }

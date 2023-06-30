@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6fbb6d52a8018b408e672aa4fc21d57, type: 3}
   m_Name: Popups Database
   m_EditorClassIdentifier: 
-  _allPopups: []
+  _allPopups:
+  - _popupId: SeedSelector
+    _popup: {fileID: 6217142490255937499, guid: 76d233cc14ef1544cb00d354f9a86fea, type: 3}

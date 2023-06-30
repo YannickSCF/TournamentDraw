@@ -4,8 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.TournamentDraw.Scriptables;
-using YannickSCF.TournamentDraw.Views.Draw.Events;
 using YannickSCF.TournamentDraw.Views.Draw.Panel.Poules;
+using YannickSCF.TournamentDraw.Views.DrawScene.Events;
 
 namespace YannickSCF.TournamentDraw.Views.Draw.Panel {
     public class DrawPanelView : MonoBehaviour {
