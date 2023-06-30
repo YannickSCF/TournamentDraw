@@ -42,8 +42,12 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         #region Mono
-        private void Awake() {
-            _baseUIController.LoadingController.gameObject.SetActive(true);
+        protected override void Awake() {
+            base.Awake();
+
+            if (_baseUIController != null && _baseUIController.LoadingController != null) {
+                _baseUIController.LoadingController.gameObject.SetActive(true);
+            }
         }
 
         private void Start() {
