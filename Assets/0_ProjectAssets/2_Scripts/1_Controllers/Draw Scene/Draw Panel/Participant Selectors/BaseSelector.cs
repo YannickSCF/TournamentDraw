@@ -14,6 +14,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors {
         }
 
         public abstract ParticipantModel GetNextParticipant();
+        public abstract bool IsAnyParticipantToReveal();
 
         protected List<ParticipantModel> ShuffleParticipants(List<ParticipantModel> participantsToSort) {
             participantsToSort = participantsToSort.OrderBy(x => x.FullName).ToList();

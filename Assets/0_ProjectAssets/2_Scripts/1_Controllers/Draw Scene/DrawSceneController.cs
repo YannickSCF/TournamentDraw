@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors;
+using YannickSCF.TournamentDraw.FileManagement;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Models;
 using YannickSCF.TournamentDraw.Popups;
@@ -19,44 +20,68 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         private DrawConfiguration _config;
 
         private BaseSelector participantSelector;
-        private List<PouleModel> allPoules;
+        private List<PouleModel> _allPoules;
         private int c_pouleIndex = -1;
+        private bool isDrawAlreadyStarted = false;
 
         #region Mono
         private void OnEnable() {
-            DrawPanelViewEvents.OnStartButtonClicked += ShowSeedSelector;
+            DrawPanelViewEvents.OnStartButtonClicked += StartButtonPressed;
             DrawPanelViewEvents.OnNextButtonClicked += RevealNewParticipant;
+            DrawPanelViewEvents.OnSaveButtonClicked += SaveDataPressed;
         }
 
         private void OnDisable() {
-            DrawPanelViewEvents.OnStartButtonClicked -= ShowSeedSelector;
+            DrawPanelViewEvents.OnStartButtonClicked -= StartButtonPressed;
             DrawPanelViewEvents.OnNextButtonClicked -= RevealNewParticipant;
+            DrawPanelViewEvents.OnSaveButtonClicked -= SaveDataPressed;
         }
         #endregion
 
         public void Init() {
             _config = GameManager.Instance.Config;
 
-            _view.Init(_config.DrawName, _config.NumberOfPoules, _config.MaxPouleSize);
+            int participantsAlreadyRevealed = InitPouleModels();
 
-            allPoules = new List<PouleModel>();
-            for (int i = 0; i < _config.NumberOfPoules; ++i) {
-                allPoules.Add(new PouleModel((i + 1).ToString()));
+            if (participantsAlreadyRevealed > 0) {
+                isDrawAlreadyStarted = true;
+
+                participantSelector = BaseSelector.GetBaseSelector(_config.ParticipantSelection);
+                participantSelector.InitializeSelector(_config.Participants, _config.Seed);
             }
 
-            // TODO Move to popup functionality
-            participantSelector = BaseSelector.GetBaseSelector(_config.ParticipantSelection);
-            participantSelector.InitializeSelector(_config.Participants, _config.Seed);
+            _view.Init(_config.DrawName, _config.NumberOfPoules, _config.MaxPouleSize, participantsAlreadyRevealed);
+        }
+
+        private int InitPouleModels() {
+            if (_config.Poules.Count <= 0) {
+                _allPoules = new List<PouleModel>();
+                for (int i = 0; i < _config.NumberOfPoules; ++i) {
+                    _allPoules.Add(new PouleModel((i + 1).ToString()));
+                }
+
+                _config.Poules = _allPoules;
+                return 0;
+            } else {
+                _allPoules = _config.Poules;
+            }
+
+            int participantsAlreadyRevealed = 0;
+            foreach (PouleModel poule in _allPoules) {
+                participantsAlreadyRevealed += poule.PouleParticipants.Count;
+            }
+
+            return participantsAlreadyRevealed;
         }
 
         #region Event listeners methods
-        private void ShowSeedSelector() {
-            _view.SetStartPressed();
+        private void StartButtonPressed() {
+            _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.OnGoing);
 
-            SeedSelectorController seedSelector = GameManager.Instance.BaseUIController.ShowPopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
-            seedSelector.SetCallbacks(ChangeSeedAndStart);
-
-            _view.ShowPoules();
+            if (!isDrawAlreadyStarted) {
+                SeedSelectorController seedSelector = GameManager.Instance.BaseUIController.ShowPopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
+                seedSelector.SetCallbacks(ChangeSeedAndStart);
+            }
         }
 
         private void ChangeSeedAndStart(int newSeed) {
@@ -66,8 +91,6 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             participantSelector.InitializeSelector(_config.Participants, newSeed);
 
             GameManager.Instance.BaseUIController.ClosePopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
-
-            _view.StartDraw();
         }
 
         private void RevealNewParticipant() {
@@ -79,7 +102,20 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
                 revealedParticipant.AcademyName,
                 pouleIndex);
 
-            allPoules[pouleIndex].PouleParticipants.Add(revealedParticipant);
+            _allPoules[pouleIndex].PouleParticipants.Add(revealedParticipant);
+
+            if (!participantSelector.IsAnyParticipantToReveal()) {
+                _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.Finished);
+            }
+        }
+
+        private void SaveDataPressed() {
+            SaveDataPopupController saveData = GameManager.Instance.BaseUIController.ShowPopup<SaveDataPopupController, SaveDataPopupView>("SaveData");
+            saveData.SetClosePopupCallback(CloseSaveDataPopup);
+        }
+
+        private void CloseSaveDataPopup() {
+            GameManager.Instance.BaseUIController.ClosePopup<SaveDataPopupController, SaveDataPopupView>("SaveData");
         }
         #endregion
 

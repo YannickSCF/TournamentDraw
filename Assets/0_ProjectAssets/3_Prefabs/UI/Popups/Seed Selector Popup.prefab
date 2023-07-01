@@ -1407,7 +1407,6 @@ GameObject:
   - component: {fileID: 6217142491430102220}
   - component: {fileID: 6217142491430102221}
   - component: {fileID: 6217142491430102258}
-  - component: {fileID: 6217142491430102223}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -1433,10 +1432,10 @@ RectTransform:
   m_Father: {fileID: 6217142490255937498}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.30266958, y: 0.28318796}
+  m_AnchorMax: {x: 0.6973304, y: 0.716812}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 468.314}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6217142491430102220
 CanvasRenderer:
@@ -1491,20 +1490,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -10, y: -7}
   m_UseGraphicAlpha: 1
---- !u!114 &6217142491430102223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6217142491430102256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AspectMode: 2
-  m_AspectRatio: 1.6180358
 --- !u!1 &6217142491436199637
 GameObject:
   m_ObjectHideFlags: 0

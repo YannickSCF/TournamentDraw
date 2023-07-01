@@ -9,21 +9,25 @@ namespace YannickSCF.TournamentDraw.Scriptables {
     public class DrawConfiguration : ScriptableObject {
         [SerializeField] private string drawName;
 
+        [Header("PARTICIPANTS DATA")]
         [SerializeField] private List<ParticipantModel> participants = new List<ParticipantModel>();
+        [SerializeField] private List<PouleModel> poules = new List<PouleModel>();
 
+        [SerializeField] private bool[] participantInfoSelected = (bool[])AppConstants.ParticipantInfoDefault.Clone();
+
+        [Header("DRAW SETTINGS")]
         [SerializeField] private int numberOfPoules;
         [SerializeField] private int maxPouleSize;
 
         [SerializeField] private PouleAssignType pouleAssign;
         [SerializeField] private ParticipantSelectionType participantSelection;
 
-        [SerializeField] private bool[] participantInfoSelected = (bool[])AppConstants.ParticipantInfoDefault.Clone();
-
         [SerializeField] private int seed;
 
         #region Getters/Setters
         public string DrawName { get => drawName; set => drawName = value; }
         public List<ParticipantModel> Participants { get => participants; set => participants = value; }
+        public List<PouleModel> Poules { get => poules; set => poules = value; }
         public int NumberOfPoules { get => numberOfPoules; set => numberOfPoules = value; }
         public int MaxPouleSize { get => maxPouleSize; set => maxPouleSize = value; }
         public PouleAssignType PouleAssign { get => pouleAssign; set => pouleAssign = value; }
@@ -36,6 +40,7 @@ namespace YannickSCF.TournamentDraw.Scriptables {
             drawName = string.Empty;
 
             participants.Clear();
+            poules.Clear();
 
             numberOfPoules = 0;
             maxPouleSize = 0;

@@ -28,5 +28,9 @@ namespace YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors {
                 return null;
             }
         }
+
+        public override bool IsAnyParticipantToReveal() {
+            return participantQueue.Count > 0;
+        }
     }
 }

@@ -57,6 +57,14 @@ namespace YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors {
             }
         }
 
+        public override bool IsAnyParticipantToReveal() {
+            bool res = false;
+            foreach (KeyValuePair<int, Queue<ParticipantModel>> queue in allQueues) {
+                res |= queue.Value.Count > 0;
+            }
+            return res;
+        }
+
         private Queue<ParticipantModel> GetCorrectQueue() {
             for (int i = 0; i <= maxTierLevel; ++i) {
                 if (allQueues.ContainsKey(i) &&

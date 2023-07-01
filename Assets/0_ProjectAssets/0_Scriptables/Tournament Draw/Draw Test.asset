@@ -142,9 +142,10 @@ MonoBehaviour:
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
-  numberOfPoules: 8
-  maxPouleSize: 8
+  poules: []
+  participantInfoSelected: 0001010100010000
+  numberOfPoules: 4
+  maxPouleSize: 4
   pouleAssign: 0
   participantSelection: 2
-  participantInfoSelected: 0001010100010000
-  seed: 123456789
+  seed: 841193132

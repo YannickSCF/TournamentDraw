@@ -53,6 +53,14 @@ namespace YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors {
             }
         }
 
+        public override bool IsAnyParticipantToReveal() {
+            bool res = false;
+            foreach (KeyValuePair<Ranks, Queue<ParticipantModel>> queue in allQueues) {
+                res |= queue.Value.Count > 0;
+            }
+            return res;
+        }
+
         private Queue<ParticipantModel> GetCorrectQueue() {
             Array allRanks = Enum.GetValues(typeof(Ranks));
             for (int i = allRanks.Length - 1; i >= 0; --i) {

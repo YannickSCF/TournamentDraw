@@ -9,13 +9,19 @@ using YannickSCF.TournamentDraw.Views.DrawScene.Events;
 namespace YannickSCF.TournamentDraw.Views.DrawScene {
     public class DrawSceneView : MonoBehaviour {
 
+        public enum DrawScenePhaseView { ToStart, OnGoing, Finished };
+
         [Header("Main Scene Objects")]
         [SerializeField] private TextMeshProUGUI _titleText;
+        [Header("Draw flow objects")]
         [SerializeField] private Button _startDrawButton;
         [SerializeField] private Button _nextParticipantButton;
+        [SerializeField] private Button _saveDrawButton;
+
+        [Header("Settings objects")]
         [SerializeField] private Button _settingsMenuButton;
 
-        [Header("")]
+        [Header("Poules objects")]
         [SerializeField] private ScrollRect _poulesSpace;
         [SerializeField] private PouleView _poulePrefab;
 
@@ -30,20 +36,27 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
         private void OnEnable() {
             _startDrawButton.onClick.AddListener(() => DrawPanelViewEvents.ThrowOnStartButtonClicked());
             _nextParticipantButton.onClick.AddListener(() => DrawPanelViewEvents.ThrowOnNextButtonClicked());
+            _saveDrawButton.onClick.AddListener(() => DrawPanelViewEvents.ThrowOnSaveButtonClicked());
         }
 
         private void OnDisable() {
             _startDrawButton.onClick.RemoveAllListeners();
             _nextParticipantButton.onClick.RemoveAllListeners();
+            _saveDrawButton.onClick.RemoveAllListeners();
         }
         #endregion
 
-        public void Init(string drawTitle, int numberOfPoules, int maxPouleSize) {
+        public void Init(string drawTitle, int numberOfPoules, int maxPouleSize, int participantsAlreadyRevealed = 0) {
             _titleText.text = drawTitle;
             CreatePoules(numberOfPoules, maxPouleSize);
 
-            _nextParticipantButton.interactable = false;
-            _poulesSpace.content.gameObject.SetActive(false);
+            if (participantsAlreadyRevealed > 0) {
+                for (int i = 0; i < participantsAlreadyRevealed; ++i) {
+                    DrawPanelViewEvents.ThrowOnNextButtonClicked();
+                }
+            }
+
+            SwitchDrawPhaseView(DrawScenePhaseView.ToStart);
         }
 
         private void CreatePoules(int numberOfPoules, int maxPouleSize) {
@@ -67,16 +80,40 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
             _allPouleViews[pouleIndex].AddParticipantToPoule(completeName, academyName);
         }
 
-        public void SetStartPressed() {
-            _startDrawButton.gameObject.SetActive(false);
-        }
+        public void SwitchDrawPhaseView(DrawScenePhaseView phaseToSwitch) {
+            switch (phaseToSwitch) {
+                case DrawScenePhaseView.ToStart:
+                default:
+                    _startDrawButton.gameObject.SetActive(true);
+                    
+                    _nextParticipantButton.gameObject.SetActive(true);
+                    _nextParticipantButton.interactable = false;
 
-        public void ShowPoules() {
-            _poulesSpace.content.gameObject.SetActive(true);
-        }
+                    _saveDrawButton.gameObject.SetActive(false);
 
-        public void StartDraw() {
-            _nextParticipantButton.interactable = true;
+                    _poulesSpace.content.gameObject.SetActive(false);
+                    break;
+                case DrawScenePhaseView.OnGoing:
+                    _startDrawButton.gameObject.SetActive(false);
+                    
+                    _nextParticipantButton.gameObject.SetActive(true);
+                    _nextParticipantButton.interactable = true;
+                    
+                    _saveDrawButton.gameObject.SetActive(false);
+
+                    _poulesSpace.content.gameObject.SetActive(true);
+                    break;
+                case DrawScenePhaseView.Finished:
+                    _startDrawButton.gameObject.SetActive(false);
+                    
+                    _nextParticipantButton.gameObject.SetActive(false);
+                    _nextParticipantButton.interactable = false;
+                    
+                    _saveDrawButton.gameObject.SetActive(true);
+
+                    _poulesSpace.content.gameObject.SetActive(true);
+                    break;
+            }
         }
     }
 }

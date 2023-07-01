@@ -11,5 +11,10 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene.Events {
         public static void ThrowOnNextButtonClicked() {
             OnNextButtonClicked?.Invoke();
         }
+
+        public static event CommonEventsDelegates.SimpleEvent OnSaveButtonClicked;
+        public static void ThrowOnSaveButtonClicked() {
+            OnSaveButtonClicked?.Invoke();
+        }
     }
 }

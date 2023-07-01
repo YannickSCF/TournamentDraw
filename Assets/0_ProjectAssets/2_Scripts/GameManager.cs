@@ -26,6 +26,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         [Header("Settings files")]
         [SerializeField] private DrawConfiguration _config;
 
+        private DataController _dataController;
         private States c_state = States.None;
 
         public BaseUIController BaseUIController { get => _baseUIController; }
@@ -52,6 +53,8 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
         private void Start() {
             SwitchState(debug ? openPanelAuto : States.Initial);
+
+            _dataController = new DataController();
         }
 
         private void OnApplicationQuit() {
@@ -83,6 +86,11 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
                     Debug.LogError("Error on state given!");
                     break;
             }
+        }
+
+        [ContextMenu("Save Data")]
+        public void SaveData() {
+            _dataController.SaveDraw();
         }
 
         #region Scene management
