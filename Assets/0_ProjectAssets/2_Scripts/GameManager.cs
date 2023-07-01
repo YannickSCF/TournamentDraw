@@ -113,7 +113,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         private void SceneLoaded() {
-
+            InitSceneData();
 
             _baseUIController.LoadingController.FadeOut();
 
