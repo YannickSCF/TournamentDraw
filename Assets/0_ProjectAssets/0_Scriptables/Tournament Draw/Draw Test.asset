@@ -142,10 +142,146 @@ MonoBehaviour:
     schoolName: LS Barcelona
     academyName: El enclave
     tierLevel: 0
-  poules: []
+  poules:
+  - pouleName: 1
+    pouleParticipants:
+    - country: ES
+      name: Carlos
+      surname: Lizaga
+      rank: 3
+      styles: 0000000001000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Guillermo
+      surname: Torres
+      rank: 2
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Roc
+      surname: "Faixedas de Bol\xE9s"
+      rank: 1
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Daniel
+      surname: "Mart\xEDnez Oller"
+      rank: 0
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+  - pouleName: 2
+    pouleParticipants:
+    - country: ES
+      name: Julio
+      surname: Altisent
+      rank: 2
+      styles: 0000000001000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Ariadna
+      surname: "Rodr\xEDguez"
+      rank: 2
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: IT
+      name: "Adri\xE1"
+      surname: "Balc\xE1zar"
+      rank: 1
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Luciano
+      surname: P?mpanas
+      rank: 0
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+  - pouleName: 3
+    pouleParticipants:
+    - country: ES
+      name: Andrea
+      surname: Bonet
+      rank: 2
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Cristina
+      surname: Beriso
+      rank: 2
+      styles: 0000000001000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Cristina
+      surname: Leandro
+      rank: 1
+      styles: 000000000100000002000000030000000400000005000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Vinicius
+      surname: Todorovich
+      rank: 0
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+  - pouleName: 4
+    pouleParticipants:
+    - country: ES
+      name: Jordi
+      surname: "Pallar\xE9s"
+      rank: 2
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Marina
+      surname: Delgado
+      rank: 1
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Arnau
+      surname: "P\xE9rez"
+      rank: 0
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
+    - country: ES
+      name: Albert
+      surname: Lozano
+      rank: 0
+      styles: 00000000
+      schoolName: LS Barcelona
+      academyName: El enclave
+      tierLevel: 0
   participantInfoSelected: 0001010100010000
   numberOfPoules: 4
   maxPouleSize: 4
   pouleAssign: 0
   participantSelection: 2
-  seed: 841193132
+  seed: 1191582474
