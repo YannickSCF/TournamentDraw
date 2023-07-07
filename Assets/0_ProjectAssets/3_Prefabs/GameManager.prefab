@@ -603,7 +603,7 @@ MonoBehaviour:
   _hiddenPopupsDisplay: {fileID: 5252127794380180629}
   _popupBackground: {fileID: 7816243877085341363}
   _backgroundActiveAlpha: 0.5
-  _timeToSetFinalBackground: 0.2
+  _timeToSetFinalBackground: 0
 --- !u!1 &6242430476589794341
 GameObject:
   m_ObjectHideFlags: 0

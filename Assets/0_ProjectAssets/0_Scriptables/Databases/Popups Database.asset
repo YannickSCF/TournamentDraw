@@ -19,3 +19,5 @@ MonoBehaviour:
     _popup: {fileID: 2180497292528196654, guid: da1983841be497d409d0562ec0da3032, type: 3}
   - _popupId: AskExit
     _popup: {fileID: 6808254675774954497, guid: 97e03a48a40091b41b8c8bd28d1d6be0, type: 3}
+  - _popupId: Error
+    _popup: {fileID: 1458716430843953165, guid: 66e188ca2b15ee047982ba5c8dfb9953, type: 3}

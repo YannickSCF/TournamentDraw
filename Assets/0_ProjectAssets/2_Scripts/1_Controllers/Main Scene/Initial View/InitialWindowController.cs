@@ -58,7 +58,9 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Initial {
                         _gameManager.Config = FileImporter.ImportDrawFormJSON(filePath);
                         SwitchState(InitialButtonsStates.ConfigurationDraw);
                     } else {
-                        //_gameManager.BaseUIController.ShowPopup<>("LoadFailed");
+                        ErrorPopupController errorPopup = _gameManager.BaseUIController.ShowPopup<ErrorPopupController, ErrorPopupView>("Error");
+                        errorPopup.SetErrorTexts("Error: Carga fallida", "El formato del fichero seleccionado no es válido");
+                        errorPopup.SetCallback(CloseErrorPopup);
                     }
                     break;
                 case ButtonType.Back: GoBack(); break;
@@ -109,6 +111,10 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Initial {
         private void CloseExitPopup() {
             _gameManager.BaseUIController.ClosePopup<ExitAppPopupController, ExitAppPopupView>("AskExit");
             GoBack();
+        }
+
+        private void CloseErrorPopup() {
+            _gameManager.BaseUIController.ClosePopup<ErrorPopupController, ErrorPopupView>("Error");
         }
 
         private void ExitApp(bool saveAndExit) {

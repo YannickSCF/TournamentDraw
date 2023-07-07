@@ -21,12 +21,14 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
 
         #region Methods to manage draw configuration from NEW
         private void OpenConfigurationWindow() {
+            GameManager.Instance.Config.ResetConfiguration();
             _sceneCanvas.HideWindow<InitialWindowController, InitialWindowView>("Initial");
             DrawConfiguratorController draw = _sceneCanvas.ShowWindow<DrawConfiguratorController, DrawConfiguratorView>("Config");
             draw.SetAllCallback(OnConfiguratorClosed, OnConfiguratorFinished);
         }
 
         private void OnConfiguratorClosed() {
+            GameManager.Instance.Config.ResetConfiguration();
             _sceneCanvas.CloseWindow<DrawConfiguratorController, DrawConfiguratorView>("Config");
             InitialWindowController window = _sceneCanvas.ShowWindow<InitialWindowController, InitialWindowView>("Initial");
             window.GoBack();
