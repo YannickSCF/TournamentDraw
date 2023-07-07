@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using YannickSCF.TournamentDraw.Models;
+using YannickSCF.TournamentDraw.Scriptables;
 
 namespace YannickSCF.TournamentDraw.Importers {
     public class JSONDeserializer : IDeserializer {
@@ -17,6 +18,12 @@ namespace YannickSCF.TournamentDraw.Importers {
 
             if (participants.Count == 0) return null;
             else return participants;
+        }
+
+        public DrawConfiguration ImportDrawFormJSON(string filePath) {
+            string jsonText = File.ReadAllText(filePath);
+            DrawConfiguration drawConfig = JsonUtility.FromJson<DrawConfiguration>(jsonText);
+            return drawConfig;
         }
     }
 }

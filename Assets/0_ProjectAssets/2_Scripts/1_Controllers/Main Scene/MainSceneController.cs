@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 using YannickSCF.GeneralApp.Controller.UI.Windows;
-using YannickSCF.GeneralApp.View.UI.Windows;
-using YannickSCF.TournamentDraw.Controllers.Configurator;
-using YannickSCF.TournamentDraw.Controllers.MainScene.InitialPanel;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
+using YannickSCF.TournamentDraw.Controllers.Configurator;
 using YannickSCF.TournamentDraw.Views.Configurator;
-using YannickSCF.TournamentDraw.Views.InitialPanel;
+using YannickSCF.TournamentDraw.Controllers.MainScene.Initial;
+using YannickSCF.TournamentDraw.Views.MainScene.Initial;
 
 namespace YannickSCF.TournamentDraw.Controllers.MainScene {
     public class MainSceneController : MonoBehaviour {
@@ -18,23 +15,21 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
         [SerializeField] private WindowsController _sceneCanvas;
 
         public void Init() {
-            InitialPanelController window = _sceneCanvas.ShowWindow<InitialPanelController, InitialPanelView>("Initial");
-            window.SetAllCallbacks(NewDrawButtonPressed, LoadDrawButtonPressed, SettingsButtonPressed);
+            InitialWindowController window = _sceneCanvas.ShowWindow<InitialWindowController, InitialWindowView>("Initial");
+            window.SetCallbacks(OpenConfigurationWindow, OpenSettingsWindow);
         }
 
-        #region Methods to manage initial buttons
-        #endregion
-
         #region Methods to manage draw configuration from NEW
-        private void NewDrawButtonPressed() {
-            _sceneCanvas.HideWindow<InitialPanelController, InitialPanelView>("Initial");
+        private void OpenConfigurationWindow() {
+            _sceneCanvas.HideWindow<InitialWindowController, InitialWindowView>("Initial");
             DrawConfiguratorController draw = _sceneCanvas.ShowWindow<DrawConfiguratorController, DrawConfiguratorView>("Config");
             draw.SetAllCallback(OnConfiguratorClosed, OnConfiguratorFinished);
         }
 
         private void OnConfiguratorClosed() {
             _sceneCanvas.CloseWindow<DrawConfiguratorController, DrawConfiguratorView>("Config");
-            _ = _sceneCanvas.ShowWindow<InitialPanelController, InitialPanelView>("Initial");
+            InitialWindowController window = _sceneCanvas.ShowWindow<InitialWindowController, InitialWindowView>("Initial");
+            window.GoBack();
         }
 
         private void OnConfiguratorFinished() {
@@ -42,18 +37,19 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
         }
         #endregion
 
-        #region Methods to manage draw configuration from LOAD
-        #endregion
 
-        #region Methods to manage settings panel
-        #endregion
-
-        private void LoadDrawButtonPressed() {
-            Debug.Log("LoadDrawButtonPressed");
+        #region Methods to manage draw configuration from NEW
+        private void OpenSettingsWindow() {
+            //_sceneCanvas.HideWindow<InitialWindowController, InitialWindowView>("Initial");
+            //DrawConfiguratorController draw = _sceneCanvas.ShowWindow<DrawConfiguratorController, DrawConfiguratorView>("Config");
+            //draw.SetAllCallback(OnConfiguratorClosed, OnConfiguratorFinished);
         }
 
-        private void SettingsButtonPressed() {
-            Debug.Log("SettingsButtonPressed");
+        private void OnSettingsClosed() {
+            //_sceneCanvas.CloseWindow<DrawConfiguratorController, DrawConfiguratorView>("Config");
+            //InitialWindowController window = _sceneCanvas.ShowWindow<InitialWindowController, InitialWindowView>("Initial");
+            //window.GoBack();
         }
+        #endregion
     }
 }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using YannickSCF.TournamentDraw.Models;
+using YannickSCF.TournamentDraw.Scriptables;
 
 namespace YannickSCF.TournamentDraw.Importers {
     public static class FileImporter {
@@ -47,6 +48,11 @@ namespace YannickSCF.TournamentDraw.Importers {
             }
 
             return deserializer.GetParticipantsFromFile(filePath);
+        }
+
+        public static DrawConfiguration ImportDrawFormJSON(string filePath) {
+            JSONDeserializer deserializer = new JSONDeserializer();
+            return deserializer.ImportDrawFormJSON(filePath);
         }
 
         public static string SelectFileWithBrowser() {

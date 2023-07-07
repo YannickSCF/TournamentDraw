@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _allWindows:
   - _windowId: Initial
-    _window: {fileID: 2798604954142662155, guid: b58807d3979c83d41a1d1b768fd4b14d, type: 3}
+    _window: {fileID: 8573941898085814234, guid: c4512269cb009d54499b54d5323fe779, type: 3}
   - _windowId: Config
     _window: {fileID: 7319447076854810428, guid: e5975ad2200b97141a3819a880202147, type: 3}

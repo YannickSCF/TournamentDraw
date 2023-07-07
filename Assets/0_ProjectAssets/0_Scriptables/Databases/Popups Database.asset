@@ -17,3 +17,5 @@ MonoBehaviour:
     _popup: {fileID: 6217142490255937499, guid: 76d233cc14ef1544cb00d354f9a86fea, type: 3}
   - _popupId: SaveData
     _popup: {fileID: 2180497292528196654, guid: da1983841be497d409d0562ec0da3032, type: 3}
+  - _popupId: AskExit
+    _popup: {fileID: 6808254675774954497, guid: 97e03a48a40091b41b8c8bd28d1d6be0, type: 3}

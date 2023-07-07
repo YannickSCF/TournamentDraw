@@ -1,4 +1,5 @@
 using UnityEngine;
+
 using YannickSCF.GeneralApp.Controller.Audio;
 using YannickSCF.GeneralApp.Controller.Scenes;
 using YannickSCF.GeneralApp.Controller.UI;
@@ -6,6 +7,10 @@ using YannickSCF.GeneralApp.View.UI.LoadingPanel.Events;
 using YannickSCF.TournamentDraw.Controllers.DrawScene;
 using YannickSCF.TournamentDraw.Controllers.MainScene;
 using YannickSCF.TournamentDraw.Scriptables;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
@@ -53,10 +58,6 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         private void Start() {
             SwitchState(debug ? openPanelAuto : States.Initial);
         }
-
-        private void OnApplicationQuit() {
-            _config.ResetConfiguration();
-        }
         #endregion
 
         public void SwitchState(States stateToSwitch) {
@@ -83,6 +84,22 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
                     Debug.LogError("Error on state given!");
                     break;
             }
+        }
+
+        public bool IsConfigToContinue() {
+            return !string.IsNullOrEmpty(Config.DrawName);
+        }
+
+        public void SaveAndExit(bool saveAndExit) {
+            if (!saveAndExit) {
+                _config.ResetConfiguration();
+            }
+
+#if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
 
         #region Scene management
