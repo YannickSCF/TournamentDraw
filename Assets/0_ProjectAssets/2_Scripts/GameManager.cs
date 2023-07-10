@@ -154,5 +154,28 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
         #endregion
         #endregion
+
+        #region Audio Management
+        public bool IsGeneralVolumeMuted() {
+            return true;
+        }
+        public float GetGeneralVolume() {
+            return 0.8f;
+        }
+
+        public bool IsMusicVolumeMuted() {
+            return false;
+        }
+        public float GetMusicVolume() {
+            return 0.3f;
+        }
+
+        public bool IsSFXVolumeMuted() {
+            return true;
+        }
+        public float GetSFXVolume() {
+            return 1f;
+        }
+        #endregion
     }
 }

@@ -1,18 +1,20 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.GeneralApp.View.UI.Windows;
 using YannickSCF.TournamentDraw.Scriptables;
-// Custom dependencies
 using YannickSCF.TournamentDraw.Views.Configurator.DrawOptions;
 using YannickSCF.TournamentDraw.Views.Configurator.Events;
 using YannickSCF.TournamentDraw.Views.Configurator.ParticipantList;
 
-namespace YannickSCF.TournamentDraw.Views.Configurator {
-    public class DrawConfiguratorView : WindowView {
-        
+namespace YannickSCF.TournamentDraw.Views.MainScene.Configurator {
+    public class ConfiguratorWindowView : WindowView {
+
+        [SerializeField] private Animator _animator;
+
         [Header("Configurator sub-views")]
         [SerializeField] private ParticipantsListView participantsPanel;
         [SerializeField] private DrawOptionsView drawOptionsPanel;
@@ -45,17 +47,37 @@ namespace YannickSCF.TournamentDraw.Views.Configurator {
 
         public override void Open() {
             base.Open();
+            _animator.SetBool("Show", true);
 
             // Set view related with info selected checkboxes
             participantsPanel.SetTableInfoSelectedColumns(AppConstants.ParticipantInfoDefault);
             drawOptionsPanel.SetParticipantInfoSelected(AppConstants.ParticipantInfoDefault);
         }
 
-        public override void Close() {
-            base.Close();
+        public override void Show() {
+            base.Show();
+            _animator.SetBool("Show", true);
 
+            // Set view related with info selected checkboxes
+            participantsPanel.SetTableInfoSelectedColumns(AppConstants.ParticipantInfoDefault);
+            drawOptionsPanel.SetParticipantInfoSelected(AppConstants.ParticipantInfoDefault);
+        }
+
+        public override void Hide() {
+            _animator.SetBool("Show", false);
+            StartCoroutine(WaitToAnimationsEnds(base.Hide));
+        }
+
+        public override void Close() {
+            _animator.SetBool("Show", false);
+            StartCoroutine(WaitToAnimationsEnds(base.Close));
+        }
+
+        private IEnumerator WaitToAnimationsEnds(Action actionToDo) {
+            yield return new WaitUntil(() => _animator.GetCurrentAnimatorStateInfo(0).IsName("configurator_hidden"));
             participantsPanel.ResetParticipantsPanel();
             drawOptionsPanel.ResetDrawOptions();
+            actionToDo?.Invoke();
         }
 
         public void UpdateErrors(List<string> errorsList) {

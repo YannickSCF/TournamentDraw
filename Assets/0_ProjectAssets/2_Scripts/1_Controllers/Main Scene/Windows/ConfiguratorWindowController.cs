@@ -2,21 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-// Custom Dependencies
 using YannickSCF.GeneralApp.Controller.UI.Windows;
-using YannickSCF.GeneralApp.View.UI.Windows;
 using YannickSCF.TournamentDraw.Importers;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Models;
 using YannickSCF.TournamentDraw.Scriptables;
-using YannickSCF.TournamentDraw.Views.Configurator;
 using YannickSCF.TournamentDraw.Views.Configurator.Events;
 
-namespace YannickSCF.TournamentDraw.Controllers.Configurator {
+namespace YannickSCF.TournamentDraw.Views.MainScene.Configurator {
 
-    public class DrawConfiguratorController : WindowController<DrawConfiguratorView> {
-
-        [SerializeField] private DrawConfiguratorView view;
+    public class ConfiguratorWindowController : WindowController<ConfiguratorWindowView> {
 
         private DrawConfiguration _config;
 
@@ -76,7 +71,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
             base.Init(windowId);
 
             _config = GameManager.Instance.Config;
-            view.InitData(_config);
+            View.InitData(_config);
         }
 
         public void SetAllCallback(Action closeAction, Action finishAction) {
@@ -98,12 +93,12 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 // Get all participants
                 List<ParticipantModel> participants = FileImporter.ImportParticipantsFromFile(filePath);
                 if (participants.Count > 0) {
-                    view.SetFilePath(filePath);
+                    View.SetFilePath(filePath);
                     // Fulfill table (reseting it first)
-                    view.ResetAllTable();
+                    View.ResetAllTable();
                     _config.Participants.Clear();
                     foreach (ParticipantModel participant in participants) {
-                        view.LoadParticipantOnTable(participant.Country, participant.Surname,
+                        View.LoadParticipantOnTable(participant.Country, participant.Surname,
                             participant.Name, participant.Rank, participant.Styles,
                             participant.AcademyName, participant.SchoolName,
                             participant.TierLevel);
@@ -116,7 +111,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 }
             }
 
-            view.SetTotalParticipantsText(_config.Participants.Count.ToString());
+            View.SetTotalParticipantsText(_config.Participants.Count.ToString());
             AllChecks();
         }
 
@@ -126,7 +121,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
             CheckMinParticipants();
             CheckNamesAndSurnames();
 
-            view.SetTotalParticipantsText(_config.Participants.Count.ToString());
+            View.SetTotalParticipantsText(_config.Participants.Count.ToString());
         }
 
         private void ParticipantRemoved() {
@@ -135,7 +130,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
             CheckMinParticipants();
             CheckNamesAndSurnames();
 
-            view.SetTotalParticipantsText(_config.Participants.Count.ToString());
+            View.SetTotalParticipantsText(_config.Participants.Count.ToString());
         }
 
         private void ParticipantDataUpdated(
@@ -248,7 +243,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 res = true;
             }
 
-            view.UpdateErrors(errorsList);
+            View.UpdateErrors(errorsList);
             return res;
         }
 
@@ -256,7 +251,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
             bool res = false;
             numberOfParticipantsError = 0;
 
-            foreach(ParticipantModel participant in _config.Participants) {
+            foreach (ParticipantModel participant in _config.Participants) {
                 if (string.IsNullOrEmpty(participant.Surname) || string.IsNullOrEmpty(participant.Name)) {
                     ++numberOfParticipantsError;
                 }
@@ -269,7 +264,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 res = true;
             }
 
-            view.UpdateErrors(errorsList);
+            View.UpdateErrors(errorsList);
             return res;
         }
 
@@ -282,11 +277,11 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 res = true;
             }
 
-            view.UpdateErrors(errorsList);
+            View.UpdateErrors(errorsList);
             return res;
         }
         private bool CheckDrawName() {
-            return CheckDrawName(view.GetDrawName());
+            return CheckDrawName(View.GetDrawName());
         }
 
         private bool CheckNumberOfPoules(string newNumberOfPoulesStr, out int numberOfPoules) {
@@ -306,11 +301,11 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 }
             }
 
-            view.UpdateErrors(errorsList);
+            View.UpdateErrors(errorsList);
             return res;
         }
         private bool CheckNumberOfPoules() {
-            return CheckNumberOfPoules(view.GetNumberOfPoules().ToString(), out int emptyAux);
+            return CheckNumberOfPoules(View.GetNumberOfPoules().ToString(), out int emptyAux);
         }
 
         private bool CheckMaxPouleSize(string newMaxPouleSizeStr, out int maxPouleSize) {
@@ -330,11 +325,11 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 }
             }
 
-            view.UpdateErrors(errorsList);
+            View.UpdateErrors(errorsList);
             return res;
         }
         private bool CheckMaxPouleSize() {
-            return CheckMaxPouleSize(view.GetMaxPouleSize().ToString(), out int emptyAux);
+            return CheckMaxPouleSize(View.GetMaxPouleSize().ToString(), out int emptyAux);
         }
 
         private bool CheckPoulesAndParticipants() {
@@ -377,7 +372,7 @@ namespace YannickSCF.TournamentDraw.Controllers.Configurator {
                 RemoveErrorFromList(LocalizationKeys.INVALID_POULES_MAX);
             }
 
-            view.UpdateErrors(errorsList);
+            View.UpdateErrors(errorsList);
             return res;
         }
 
