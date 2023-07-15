@@ -32,6 +32,9 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
         private GridLayoutGroup _poluesSpaceLayout;
         private List<PouleView> _allPouleViews;
 
+        private DrawScenePhaseView _currentState = DrawScenePhaseView.Start;
+        public DrawScenePhaseView CurrentState { get => _currentState; }
+
         #region Mono
         private void Awake() {
             _poluesSpaceLayout = _poulesSpace.content.GetComponent<GridLayoutGroup>();
@@ -41,12 +44,16 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
             _startDrawButton.onClick.AddListener(() => DrawPanelViewEvents.ThrowOnStartButtonClicked());
             _nextParticipantButton.onClick.AddListener(() => DrawPanelViewEvents.ThrowOnNextButtonClicked());
             _saveDrawButton.onClick.AddListener(() => DrawPanelViewEvents.ThrowOnSaveButtonClicked());
+
+            _settingsMenuButton.onClick.AddListener(() => DrawPanelViewEvents.ThrowOnSettingsButtonClicked());
         }
 
         private void OnDisable() {
             _startDrawButton.onClick.RemoveAllListeners();
             _nextParticipantButton.onClick.RemoveAllListeners();
             _saveDrawButton.onClick.RemoveAllListeners();
+
+            _settingsMenuButton.onClick.RemoveAllListeners();
         }
         #endregion
 
@@ -96,7 +103,8 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
         }
 
         public void SwitchDrawPhaseView(DrawScenePhaseView phaseToSwitch) {
-            
+            _currentState = phaseToSwitch;
+
             _animator.SetInteger("State", (int)phaseToSwitch);
 
             switch (phaseToSwitch) {

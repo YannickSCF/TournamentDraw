@@ -34,12 +34,25 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             DrawPanelViewEvents.OnStartButtonClicked += StartButtonPressed;
             DrawPanelViewEvents.OnNextButtonClicked += RevealNewParticipant;
             DrawPanelViewEvents.OnSaveButtonClicked += SaveDataPressed;
+
+            DrawPanelViewEvents.OnSettingsButtonClicked += ShowMenu;
+        }
+
+
+        private void Update() {
+            if (Input.GetKey(KeyCode.Escape)) {
+                if (menuPopup == null) {
+                    ShowMenu();
+                }
+            }
         }
 
         private void OnDisable() {
             DrawPanelViewEvents.OnStartButtonClicked -= StartButtonPressed;
             DrawPanelViewEvents.OnNextButtonClicked -= RevealNewParticipant;
             DrawPanelViewEvents.OnSaveButtonClicked -= SaveDataPressed;
+
+            DrawPanelViewEvents.OnSettingsButtonClicked -= ShowMenu;
         }
         #endregion
 
