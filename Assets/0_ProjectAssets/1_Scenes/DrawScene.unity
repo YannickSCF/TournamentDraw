@@ -2177,6 +2177,8 @@ MonoBehaviour:
   _nextParticipantButton: {fileID: 300448075}
   _saveDrawButton: {fileID: 301222795}
   _settingsMenuButton: {fileID: 2449915764879480409}
+  _separatorPercentage: 0.03
+  _poulePercentage: 0.225
   _poulesSpace: {fileID: 9179047364031462354}
   _poulePrefab: {fileID: 5485923382301783276, guid: e2b332c10a2fa35458bc03ad2e886dd1, type: 3}
 --- !u!95 &2449915764047143548

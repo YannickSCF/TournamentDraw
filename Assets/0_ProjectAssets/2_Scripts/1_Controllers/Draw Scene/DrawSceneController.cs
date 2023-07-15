@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using YannickSCF.GeneralApp.Controller.UI.Popups;
 using YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors;
 using YannickSCF.TournamentDraw.FileManagement;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
@@ -24,6 +25,10 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         private int c_pouleIndex = -1;
         private bool isDrawAlreadyStarted = false;
 
+        private MenuPopupController menuPopup;
+
+        private GameManager _gameManager;
+
         #region Mono
         private void OnEnable() {
             DrawPanelViewEvents.OnStartButtonClicked += StartButtonPressed;
@@ -39,7 +44,8 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         #endregion
 
         public void Init() {
-            _config = GameManager.Instance.Config;
+            _gameManager = GameManager.Instance;
+            _config = _gameManager.Config;
 
             int participantsAlreadyRevealed = InitPouleModels();
 
@@ -79,7 +85,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.OnGoing);
 
             if (!isDrawAlreadyStarted) {
-                SeedSelectorController seedSelector = GameManager.Instance.BaseUIController.ShowPopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
+                SeedSelectorController seedSelector = _gameManager.BaseUIController.ShowPopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
                 seedSelector.SetCallbacks(ChangeSeedAndStart, CloseSeedSelector);
             }
         }
@@ -90,12 +96,12 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             participantSelector = BaseSelector.GetBaseSelector(_config.ParticipantSelection);
             participantSelector.InitializeSelector(_config.Participants, newSeed);
 
-            GameManager.Instance.BaseUIController.ClosePopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
+            _gameManager.BaseUIController.ClosePopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
         }
 
         private void CloseSeedSelector() {
             _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.Start);
-            GameManager.Instance.BaseUIController.HidePopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
+            _gameManager.BaseUIController.HidePopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
         }
 
         private void RevealNewParticipant() {
@@ -115,14 +121,58 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         private void SaveDataPressed() {
-            SaveDataPopupController saveData = GameManager.Instance.BaseUIController.ShowPopup<SaveDataPopupController, SaveDataPopupView>("SaveData");
+            SaveDataPopupController saveData = _gameManager.BaseUIController.ShowPopup<SaveDataPopupController, SaveDataPopupView>("SaveData");
             saveData.SetClosePopupCallback(CloseSaveDataPopup);
         }
 
         private void CloseSaveDataPopup() {
-            GameManager.Instance.BaseUIController.ClosePopup<SaveDataPopupController, SaveDataPopupView>("SaveData");
+            _gameManager.BaseUIController.ClosePopup<SaveDataPopupController, SaveDataPopupView>("SaveData");
         }
         #endregion
+
+        [ContextMenu("Show Menu")]
+        private void ShowMenu() {
+            menuPopup = _gameManager.BaseUIController.ShowPopup<MenuPopupController, MenuPopupView>("Menu");
+            menuPopup.SetCallbacks(CloseMenu, SettingsMenuClicked, ExitMenuClicked);
+        }
+
+        private void CloseMenu() {
+            _gameManager.BaseUIController.ClosePopup<MenuPopupController, MenuPopupView>("Menu");
+        }
+
+        private void SettingsMenuClicked() {
+            menuPopup.OnPopupHidden += OpenSettings;
+            _gameManager.BaseUIController.HidePopup<MenuPopupController, MenuPopupView>("Menu");
+        }
+        private void OpenSettings(PopupController<MenuPopupView> popup) {
+            menuPopup.OnPopupHidden -= OpenSettings;
+            SettingsPopupController settingsPopup = _gameManager.BaseUIController.ShowPopup<SettingsPopupController, SettingsPopupView>("SettingsPopup");
+            settingsPopup.SetCallback(CloseSettings);
+        }
+        private void CloseSettings() {
+            _gameManager.BaseUIController.ClosePopup<SettingsPopupController, SettingsPopupView>("SettingsPopup");
+            _gameManager.BaseUIController.ShowPopup<MenuPopupController, MenuPopupView>("Menu");
+        }
+
+        private void ExitMenuClicked() {
+            menuPopup.OnPopupHidden += OpenExit;
+            _gameManager.BaseUIController.HidePopup<MenuPopupController, MenuPopupView>("Menu");
+        }
+        private void OpenExit(PopupController<MenuPopupView> popup) {
+            menuPopup.OnPopupHidden -= OpenExit;
+            ExitAppPopupController exitPopup = _gameManager.BaseUIController.ShowPopup<ExitAppPopupController, ExitAppPopupView>("AskExit");
+            exitPopup.SetSaveAndExitOption(true);
+            exitPopup.SetCallbacks(CloseAskExit, Exit);
+        }
+
+        private void CloseAskExit() {
+            _gameManager.BaseUIController.ClosePopup<ExitAppPopupController, ExitAppPopupView>("AskExit");
+            _gameManager.BaseUIController.ShowPopup<MenuPopupController, MenuPopupView>("Menu");
+        }
+
+        private void Exit(bool saveBefore) {
+            _gameManager.SaveAndExit(saveBefore);
+        }
 
         private int GetPouleIndex() {
             switch (_config.PouleAssign) {

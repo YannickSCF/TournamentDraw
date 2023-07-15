@@ -21,3 +21,7 @@ MonoBehaviour:
     _popup: {fileID: 6808254675774954497, guid: 97e03a48a40091b41b8c8bd28d1d6be0, type: 3}
   - _popupId: Error
     _popup: {fileID: 1458716430843953165, guid: 66e188ca2b15ee047982ba5c8dfb9953, type: 3}
+  - _popupId: Menu
+    _popup: {fileID: 8964264446080428797, guid: c4c6068bb3c3ca547b876af3f96a0b18, type: 3}
+  - _popupId: SettingsPopup
+    _popup: {fileID: 4737238000192462991, guid: 068ba4a9171f3514b83243b94506841d, type: 3}
