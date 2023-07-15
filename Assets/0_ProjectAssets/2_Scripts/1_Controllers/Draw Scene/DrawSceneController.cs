@@ -80,7 +80,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
             if (!isDrawAlreadyStarted) {
                 SeedSelectorController seedSelector = GameManager.Instance.BaseUIController.ShowPopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
-                seedSelector.SetCallbacks(ChangeSeedAndStart);
+                seedSelector.SetCallbacks(ChangeSeedAndStart, CloseSeedSelector);
             }
         }
 
@@ -91,6 +91,11 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             participantSelector.InitializeSelector(_config.Participants, newSeed);
 
             GameManager.Instance.BaseUIController.ClosePopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
+        }
+
+        private void CloseSeedSelector() {
+            _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.Start);
+            GameManager.Instance.BaseUIController.HidePopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
         }
 
         private void RevealNewParticipant() {

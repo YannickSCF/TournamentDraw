@@ -1,9 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using YannickSCF.GeneralApp.Controller.UI.Popups;
 
 namespace YannickSCF.TournamentDraw.Popups {
@@ -12,6 +7,7 @@ namespace YannickSCF.TournamentDraw.Popups {
         private int _seed = 0;
 
         private Action<int> _onFinishSelection;
+        private Action _onClose;
 
         System.Random rnd = new System.Random();
 
@@ -27,6 +23,7 @@ namespace YannickSCF.TournamentDraw.Popups {
 
             View.OnRandomizedSeed += RandomizeSeed;
             View.OnFinishedSelection += FinishSelection;
+            View.OnCloseSelection += CloseSelection;
         }
 
         protected override void OnDisable() {
@@ -35,11 +32,13 @@ namespace YannickSCF.TournamentDraw.Popups {
 
             View.OnRandomizedSeed -= RandomizeSeed;
             View.OnFinishedSelection -= FinishSelection;
+            View.OnCloseSelection -= CloseSelection;
         }
         #endregion
 
-        public void SetCallbacks(Action<int> onFinishSelection) {
+        public void SetCallbacks(Action<int> onFinishSelection, Action onClose) {
             _onFinishSelection = onFinishSelection;
+            _onClose = onClose;
         }
 
         private void ChangeSeed(string strValue) {
@@ -59,6 +58,10 @@ namespace YannickSCF.TournamentDraw.Popups {
 
         private void FinishSelection() {
             _onFinishSelection?.Invoke(_seed);
+        }
+
+        private void CloseSelection() {
+            _onClose?.Invoke();
         }
 
         public override void Close() {

@@ -13,10 +13,12 @@ namespace YannickSCF.TournamentDraw.Popups {
 
         public event CommonEventsDelegates.SimpleEvent OnRandomizedSeed;
         public event CommonEventsDelegates.SimpleEvent OnFinishedSelection;
+        public event CommonEventsDelegates.SimpleEvent OnCloseSelection;
 
         [SerializeField] private TMP_InputField _seedInputField;
         [SerializeField] private Button _randomizeSeedButton;
         [SerializeField] private Button _finishButton;
+        [SerializeField] private Button _closeButton;
 
         #region Mono
         private void OnEnable() {
@@ -24,6 +26,7 @@ namespace YannickSCF.TournamentDraw.Popups {
 
             _randomizeSeedButton.onClick.AddListener(() => OnRandomizedSeed?.Invoke());
             _finishButton.onClick.AddListener(() => OnFinishedSelection?.Invoke());
+            _closeButton.onClick.AddListener(() => OnCloseSelection?.Invoke());
         }
 
         private void OnDisable() {
@@ -31,6 +34,7 @@ namespace YannickSCF.TournamentDraw.Popups {
 
             _randomizeSeedButton.onClick.RemoveAllListeners();
             _finishButton.onClick.RemoveAllListeners();
+            _closeButton.onClick.RemoveAllListeners();
         }
         #endregion
 
