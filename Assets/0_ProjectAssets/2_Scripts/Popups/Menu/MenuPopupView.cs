@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.GeneralApp.View.UI.Popups;
+using static YannickSCF.GeneralApp.CommonEventsDelegates;
 
 namespace YannickSCF.TournamentDraw.Popups {
     public class MenuPopupView : PopupView {
 
-        public event CommonEventsDelegates.SimpleEvent CloseButton;
-        public event CommonEventsDelegates.SimpleEvent SettingsButton;
-        public event CommonEventsDelegates.SimpleEvent ExitButton;
+        public event SimpleEventDelegate CloseButton;
+        public event SimpleEventDelegate SettingsButton;
+        public event SimpleEventDelegate ExitButton;
 
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _settingsButton;

@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using YannickSCF.TournamentDraw;
+using static YannickSCF.GeneralApp.CommonEventsDelegates;
 
 [RequireComponent(typeof(Collider))]
 public class LootBox : MonoBehaviour
 {
-    public event CommonEventsDelegates.SimpleEvent OnVFXCanInit;
+    public event SimpleEventDelegate OnVFXCanInit;
 
     public delegate void LootBoxEvent(LootBox thisLootBox);
     public event LootBoxEvent OnStartReveal;

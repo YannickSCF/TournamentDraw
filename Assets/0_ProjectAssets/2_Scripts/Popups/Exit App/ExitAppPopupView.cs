@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using YannickSCF.GeneralApp.View.UI.Popups;
+using static YannickSCF.GeneralApp.CommonEventsDelegates;
 
 namespace YannickSCF.TournamentDraw.Popups {
     public class ExitAppPopupView : PopupView {
 
-        public event CommonEventsDelegates.SimpleEvent OnCloseButtonButtonPressed;
-        public event CommonEventsDelegates.BooleanEvent OnExitButtonPressed;
+        public event SimpleEventDelegate OnCloseButtonButtonPressed;
+        public event BooleanEventDelegate OnExitButtonPressed;
 
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _exitButton;

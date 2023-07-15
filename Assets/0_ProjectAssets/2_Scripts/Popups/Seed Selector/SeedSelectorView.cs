@@ -5,15 +5,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.GeneralApp.View.UI.Popups;
+using static YannickSCF.GeneralApp.CommonEventsDelegates;
 
 namespace YannickSCF.TournamentDraw.Popups {
     public class SeedSelectorView : PopupView {
 
-        public event CommonEventsDelegates.StringEvent OnSeedChanged;
+        public event StringEventDelegate OnSeedChanged;
 
-        public event CommonEventsDelegates.SimpleEvent OnRandomizedSeed;
-        public event CommonEventsDelegates.SimpleEvent OnFinishedSelection;
-        public event CommonEventsDelegates.SimpleEvent OnCloseSelection;
+        public event SimpleEventDelegate OnRandomizedSeed;
+        public event SimpleEventDelegate OnFinishedSelection;
+        public event SimpleEventDelegate OnCloseSelection;
 
         [SerializeField] private TMP_InputField _seedInputField;
         [SerializeField] private Button _randomizeSeedButton;

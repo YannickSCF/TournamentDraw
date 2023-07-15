@@ -4,10 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.GeneralApp.View.UI.Popups;
+using static YannickSCF.GeneralApp.CommonEventsDelegates;
 
 namespace YannickSCF.TournamentDraw.Popups {
     public class ErrorPopupView : PopupView {
-        public event CommonEventsDelegates.SimpleEvent OnCloseButtonPressed;
+
+        public event SimpleEventDelegate OnCloseButtonPressed;
 
         [SerializeField] private TextMeshProUGUI _titleText;
         [SerializeField] private TextMeshProUGUI _descriptionText;

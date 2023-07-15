@@ -6,11 +6,12 @@ using UnityEngine.UI;
 using YannickSCF.GeneralApp.View.UI.Windows;
 using YannickSCF.TournamentDraw.Views.CommonComponents.Volume;
 using YannickSCF.TournamentDraw.Views.CommonEvents.Settings;
+using static YannickSCF.GeneralApp.CommonEventsDelegates;
 
 namespace YannickSCF.TournamentDraw.Views.MainScene.Windows.Settings {
     public class SettingsWindowView : WindowView {
 
-        public event CommonEventsDelegates.SimpleEvent OnCloseSettings;
+        public event SimpleEventDelegate OnCloseSettings;
 
         [SerializeField] private Button _closeButton;
         [SerializeField] private VolumeView _generalVolume;

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.GeneralApp.View.UI.Popups;
+using static YannickSCF.GeneralApp.CommonEventsDelegates;
 
 namespace YannickSCF.TournamentDraw.Popups {
     public class SaveDataPopupView : PopupView {
 
-        public event CommonEventsDelegates.SimpleEvent OnCloseButtonPressed;
-        public event CommonEventsDelegates.SimpleEvent OnSaveJSONButtonPressed;
-        public event CommonEventsDelegates.SimpleEvent OnSavePDFButtonPressed;
+        public event SimpleEventDelegate OnCloseButtonPressed;
+        public event SimpleEventDelegate OnSaveJSONButtonPressed;
+        public event SimpleEventDelegate OnSavePDFButtonPressed;
 
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _saveInJSON;

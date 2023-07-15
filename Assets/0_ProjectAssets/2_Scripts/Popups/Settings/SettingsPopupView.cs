@@ -3,11 +3,12 @@ using UnityEngine.UI;
 using YannickSCF.GeneralApp.View.UI.Popups;
 using YannickSCF.TournamentDraw.Views.CommonComponents.Volume;
 using YannickSCF.TournamentDraw.Views.CommonEvents.Settings;
+using static YannickSCF.GeneralApp.CommonEventsDelegates;
 
 namespace YannickSCF.TournamentDraw.Popups {
     public class SettingsPopupView : PopupView {
 
-        public event CommonEventsDelegates.SimpleEvent BackButton;
+        public event SimpleEventDelegate BackButton;
 
         [SerializeField] private Button _closeButton;
         [SerializeField] private VolumeView _generalVolume;
