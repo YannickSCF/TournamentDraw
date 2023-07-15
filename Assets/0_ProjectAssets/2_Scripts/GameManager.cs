@@ -7,6 +7,7 @@ using YannickSCF.GeneralApp.View.UI.LoadingPanel.Events;
 using YannickSCF.TournamentDraw.Controllers.DrawScene;
 using YannickSCF.TournamentDraw.Controllers.MainScene;
 using YannickSCF.TournamentDraw.Scriptables;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -20,7 +21,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
         [Header("Main Controllers")]
         [SerializeField] private BaseUIController _baseUIController;
-        [SerializeField] private BaseAudioController _baseAudioController;
+        [SerializeField] private AudioController _audioController;
         [SerializeField] private SceneController _sceneController;
 
         [Header("Debug Values")]
@@ -57,8 +58,27 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
         private void Start() {
             SwitchState(debug ? openPanelAuto : States.Initial);
+
+            SetGameToSettings();
         }
         #endregion
+
+        private void SetGameToSettings() {
+            _audioController.MuteSource(GeneralApp.AudioSources.General, IsGeneralVolumeMuted());
+            _audioController.SetGeneralVolume(GeneralApp.AudioSources.General, GetGeneralVolume());
+
+            _audioController.MuteSource(GeneralApp.AudioSources.Music, IsMusicVolumeMuted());
+            _audioController.SetGeneralVolume(GeneralApp.AudioSources.Music, GetMusicVolume());
+
+            _audioController.MuteSource(GeneralApp.AudioSources.SFX, IsSFXVolumeMuted());
+            _audioController.SetGeneralVolume(GeneralApp.AudioSources.SFX, GetSFXVolume());
+
+            if (IsGeneralVolumeMuted() && IsMusicVolumeMuted()) {
+                _audioController.PlayBackground("Suspense_Rises");
+            } else {
+                _audioController.SoftPlayBackground("Suspense_Rises");
+            }
+        }
 
         public void SwitchState(States stateToSwitch) {
             if (c_state == States.None) {
@@ -157,21 +177,21 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
         #region Audio Management
         public bool IsGeneralVolumeMuted() {
-            return true;
+            return false;
         }
         public float GetGeneralVolume() {
-            return 0.8f;
+            return 0.5f;
         }
 
         public bool IsMusicVolumeMuted() {
             return false;
         }
         public float GetMusicVolume() {
-            return 0.3f;
+            return 1f;
         }
 
         public bool IsSFXVolumeMuted() {
-            return true;
+            return false;
         }
         public float GetSFXVolume() {
             return 1f;

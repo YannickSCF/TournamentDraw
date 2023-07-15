@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YannickSCF.GeneralApp.Controller.UI.Windows;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
+using YannickSCF.TournamentDraw.Views.CommonEvents.Settings;
 using YannickSCF.TournamentDraw.Views.MainScene.Windows.Settings;
 
 namespace YannickSCF.TournamentDraw.Controllers.MainScene.Windows.Settings {
@@ -17,9 +18,9 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Windows.Settings {
 
             View.OnCloseSettings += CloseWindow;
 
-            SettingsWindowViewEvents.OnGeneralVolumeMuted += GeneralVolumeMuted;
-            SettingsWindowViewEvents.OnMusicVolumeMuted += MusicVolumeMuted;
-            SettingsWindowViewEvents.OnSFXVolumeMuted += SFXVolumeMuted;
+            SettingsViewsEvents.OnGeneralVolumeMuted += GeneralVolumeMuted;
+            SettingsViewsEvents.OnMusicVolumeMuted += MusicVolumeMuted;
+            SettingsViewsEvents.OnSFXVolumeMuted += SFXVolumeMuted;
         }
 
         protected override void OnDisable() {
@@ -27,9 +28,9 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Windows.Settings {
 
             View.OnCloseSettings -= CloseWindow;
 
-            SettingsWindowViewEvents.OnGeneralVolumeMuted -= GeneralVolumeMuted;
-            SettingsWindowViewEvents.OnMusicVolumeMuted -= MusicVolumeMuted;
-            SettingsWindowViewEvents.OnSFXVolumeMuted -= SFXVolumeMuted;
+            SettingsViewsEvents.OnGeneralVolumeMuted -= GeneralVolumeMuted;
+            SettingsViewsEvents.OnMusicVolumeMuted -= MusicVolumeMuted;
+            SettingsViewsEvents.OnSFXVolumeMuted -= SFXVolumeMuted;
         }
         #endregion
 
@@ -39,15 +40,15 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Windows.Settings {
         }
 
         private void GeneralVolumeMuted(bool isMuted) {
-            View.SetGeneralVolumeSliderInteractable(isMuted);
+            View.SetGeneralVolumeSliderInteractable(!isMuted);
         }
 
         private void MusicVolumeMuted(bool isMuted) {
-            View.SetGeneralVolumeSliderInteractable(isMuted);
+            View.SetMusicVolumeSliderInteractable(!isMuted);
         }
 
         private void SFXVolumeMuted(bool isMuted) {
-            View.SetGeneralVolumeSliderInteractable(isMuted);
+            View.SetSFXVolumeSliderInteractable(!isMuted);
         }
         #endregion
 

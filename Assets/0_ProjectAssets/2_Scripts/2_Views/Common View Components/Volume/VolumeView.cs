@@ -32,12 +32,20 @@ namespace YannickSCF.TournamentDraw.Views.CommonComponents.Volume {
         }
         #endregion
 
-        public void SetMuted(bool isMuted) {
-            _muteButton.SetIsOnWithoutNotify(isMuted);
+        public void SetMuted(bool isMuted, bool notify = false) {
+            if (notify) {
+                _muteButton.isOn = isMuted;
+            } else {
+                _muteButton.SetIsOnWithoutNotify(isMuted);
+            }
         }
 
-        public void SetValue(float volumeValue) {
-            _volumeSlider.SetValueWithoutNotify(volumeValue);
+        public void SetValue(float volumeValue, bool notify = false) {
+            if (notify) {
+                _volumeSlider.value = volumeValue;
+            } else {
+                _volumeSlider.SetValueWithoutNotify(volumeValue);
+            }
         }
 
         public void SetSliderInteractable(bool isInteractable) {

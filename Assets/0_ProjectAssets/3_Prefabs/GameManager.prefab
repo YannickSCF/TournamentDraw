@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1337071379}
-  - component: {fileID: 1337071380}
+  - component: {fileID: 8966183973893008914}
   m_Layer: 0
   m_Name: AudioController
   m_TagString: Untagged
@@ -81,7 +81,7 @@ Transform:
   m_Father: {fileID: 6242430476589794343}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1337071380
+--- !u!114 &8966183973893008914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1337071378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1402c9a660767604787e60b69dd6f65c, type: 3}
+  m_Script: {fileID: 11500000, guid: 29b9793375c5cda46a3276e071d2c1e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _audiosDatabase: {fileID: 11400000, guid: 4ed6b8435beb0f440b994ab6dc902286, type: 2}
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseUIController: {fileID: 199045128420671915}
-  _baseAudioController: {fileID: 1337071380}
+  _audioController: {fileID: 8966183973893008914}
   _sceneController: {fileID: 688586892}
   debug: 0
   _debugConfig: {fileID: 11400000, guid: 7ee46acff764eca4c95709cff1780e41, type: 2}

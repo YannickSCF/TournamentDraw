@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.GeneralApp.View.UI.Windows;
 using YannickSCF.TournamentDraw.Views.CommonComponents.Volume;
+using YannickSCF.TournamentDraw.Views.CommonEvents.Settings;
 
 namespace YannickSCF.TournamentDraw.Views.MainScene.Windows.Settings {
     public class SettingsWindowView : WindowView {
@@ -52,24 +53,24 @@ namespace YannickSCF.TournamentDraw.Views.MainScene.Windows.Settings {
         }
 
         private void GeneralMuted(bool isOn) {
-            SettingsWindowViewEvents.ThrowOnGeneralVolumeMuted(isOn);
+            SettingsViewsEvents.ThrowOnGeneralVolumeMuted(isOn);
         }
         private void GeneralSetted(float volumeValue) {
-            SettingsWindowViewEvents.ThrowOnGeneralVolumeChanged(volumeValue);
+            SettingsViewsEvents.ThrowOnGeneralVolumeChanged(volumeValue);
         }
 
         private void MusicMuted(bool isOn) {
-            SettingsWindowViewEvents.ThrowOnMusicVolumeMuted(isOn);
+            SettingsViewsEvents.ThrowOnMusicVolumeMuted(isOn);
         }
         private void MusicSetted(float volumeValue) {
-            SettingsWindowViewEvents.ThrowOnMusicVolumeChanged(volumeValue);
+            SettingsViewsEvents.ThrowOnMusicVolumeChanged(volumeValue);
         }
 
         private void SFXMuted(bool isOn) {
-            SettingsWindowViewEvents.ThrowOnSFXVolumeMuted(isOn);
+            SettingsViewsEvents.ThrowOnSFXVolumeMuted(isOn);
         }
         private void SFXSetted(float volumeValue) {
-            SettingsWindowViewEvents.ThrowOnSFXVolumeChanged(volumeValue);
+            SettingsViewsEvents.ThrowOnSFXVolumeChanged(volumeValue);
         }
         #endregion
 
@@ -99,33 +100,33 @@ namespace YannickSCF.TournamentDraw.Views.MainScene.Windows.Settings {
         }
 
         public void SetGeneralVolume(bool isMuted, float volumeValue) {
-            _generalVolume.SetMuted(isMuted);
-            _generalVolume.SetValue(volumeValue);
+            _generalVolume.SetMuted(isMuted, true);
+            _generalVolume.SetValue(volumeValue, true);
 
             SetGeneralVolumeSliderInteractable(!isMuted);
         }
         public void SetGeneralVolumeSliderInteractable(bool isInteractable) {
-            _generalVolume.SetSliderInteractable(!isInteractable);
+            _generalVolume.SetSliderInteractable(isInteractable);
         }
 
         public void SetMusicVolume(bool isMuted, float volumeValue) {
-            _musicVolume.SetMuted(isMuted);
-            _musicVolume.SetValue(volumeValue);
+            _musicVolume.SetMuted(isMuted, true);
+            _musicVolume.SetValue(volumeValue, true);
 
             SetMusicVolumeSliderInteractable(!isMuted);
         }
         public void SetMusicVolumeSliderInteractable(bool isInteractable) {
-            _musicVolume.SetSliderInteractable(!isInteractable);
+            _musicVolume.SetSliderInteractable(isInteractable);
         }
 
         public void SetSFXVolume(bool isMuted, float volumeValue) {
-            _sfxVolume.SetMuted(isMuted);
-            _sfxVolume.SetValue(volumeValue);
+            _sfxVolume.SetMuted(isMuted, true);
+            _sfxVolume.SetValue(volumeValue, true);
 
             SetSFXVolumeSliderInteractable(!isMuted);
         }
         public void SetSFXVolumeSliderInteractable(bool isInteractable) {
-            _sfxVolume.SetSliderInteractable(!isInteractable);
+            _sfxVolume.SetSliderInteractable(isInteractable);
         }
     }
 }

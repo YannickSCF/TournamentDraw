@@ -800,6 +800,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SFX Volume Title (TMP)
       objectReference: {fileID: 0}
+    - target: {fileID: 5373633207629960295, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_text
+      value: Volumen Sonidos
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
 --- !u!114 &2064300136673250876 stripped
@@ -944,6 +948,10 @@ PrefabInstance:
     - target: {fileID: 5373633207629949849, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_Name
       value: Music Volume Title (TMP)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207629960295, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_text
+      value: "Volumen M\xFAsica"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
