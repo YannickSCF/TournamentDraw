@@ -721,6 +721,7 @@ GameObject:
   - component: {fileID: 6217142490255937498}
   - component: {fileID: 6217142490255937492}
   - component: {fileID: 6217142490255937493}
+  - component: {fileID: 6912216604040386281}
   m_Layer: 5
   m_Name: Seed Selector Popup
   m_TagString: Untagged
@@ -778,6 +779,27 @@ MonoBehaviour:
   _randomizeSeedButton: {fileID: 6217142490843960990}
   _finishButton: {fileID: 6217142491436199638}
   _closeButton: {fileID: 6657086860346724812}
+  _popupAnimator: {fileID: 6912216604040386281}
+--- !u!95 &6912216604040386281
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6217142490255937499}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7652491358f679b4ba386268c3191e5c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &6217142490506637551
 GameObject:
   m_ObjectHideFlags: 0

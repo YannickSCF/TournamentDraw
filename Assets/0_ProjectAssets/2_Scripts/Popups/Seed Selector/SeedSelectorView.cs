@@ -21,6 +21,8 @@ namespace YannickSCF.TournamentDraw.Popups {
         [SerializeField] private Button _finishButton;
         [SerializeField] private Button _closeButton;
 
+        [SerializeField] private Animator _popupAnimator;
+
         #region Mono
         private void OnEnable() {
             _seedInputField.onValueChanged.AddListener(OnInputChanged);
@@ -45,6 +47,31 @@ namespace YannickSCF.TournamentDraw.Popups {
         }
         #endregion
 
+        public override void Open() {
+            base.Open();
+            _popupAnimator.SetBool("Show", true);
+        }
+
+        public override void Show() {
+            base.Show();
+            _popupAnimator.SetBool("Show", true);
+        }
+
+        public override void Hide() {
+            _popupAnimator.SetBool("Show", false);
+            StartCoroutine(WaitToHideCoroutine());
+        }
+
+        private IEnumerator WaitToHideCoroutine() {
+            yield return new WaitUntil(() => _popupAnimator.GetCurrentAnimatorStateInfo(0).IsName("popup_out_idle"));
+            base.Hide();
+        }
+
+        public override void Close() {
+            base.Close();
+            _popupAnimator.SetBool("Show", false);
+        }
+
         public void SetEmptyOption() {
             _seedInputField.SetTextWithoutNotify("");
         }
@@ -55,10 +82,6 @@ namespace YannickSCF.TournamentDraw.Popups {
 
         public void SetFinishButtonInteractable(bool isInteractable) {
             _finishButton.interactable = isInteractable;
-        }
-
-        public override void Close() {
-            base.Close();
         }
     }
 }

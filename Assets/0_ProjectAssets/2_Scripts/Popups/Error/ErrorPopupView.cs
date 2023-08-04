@@ -15,6 +15,8 @@ namespace YannickSCF.TournamentDraw.Popups {
         [SerializeField] private TextMeshProUGUI _descriptionText;
         [SerializeField] private Button _closeButton;
 
+        [SerializeField] private Animator _popupAnimator;
+
         #region Mono
         private void OnEnable() {
             _closeButton.onClick.AddListener(() => OnCloseButtonPressed?.Invoke());
@@ -24,6 +26,31 @@ namespace YannickSCF.TournamentDraw.Popups {
             _closeButton.onClick.RemoveAllListeners();
         }
         #endregion
+
+        public override void Open() {
+            base.Open();
+            _popupAnimator.SetBool("Show", true);
+        }
+
+        public override void Show() {
+            base.Show();
+            _popupAnimator.SetBool("Show", true);
+        }
+
+        public override void Hide() {
+            _popupAnimator.SetBool("Show", false);
+            StartCoroutine(WaitToHideCoroutine());
+        }
+
+        private IEnumerator WaitToHideCoroutine() {
+            yield return new WaitUntil(() => _popupAnimator.GetCurrentAnimatorStateInfo(0).IsName("popup_out_idle"));
+            base.Hide();
+        }
+
+        public override void Close() {
+            base.Close();
+            _popupAnimator.SetBool("Show", false);
+        }
 
         public void SetErrorTexts(string title, string description) {
             _titleText.text = title;

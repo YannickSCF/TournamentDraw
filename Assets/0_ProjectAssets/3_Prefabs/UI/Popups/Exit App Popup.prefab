@@ -1163,6 +1163,7 @@ GameObject:
   - component: {fileID: 6808254675774954496}
   - component: {fileID: 6808254675774955007}
   - component: {fileID: 6808254675774955006}
+  - component: {fileID: 2852758226974557288}
   m_Layer: 5
   m_Name: Exit App Popup
   m_TagString: Untagged
@@ -1219,6 +1220,27 @@ MonoBehaviour:
   _closeButton: {fileID: 949070206486408927}
   _exitButton: {fileID: 6808254674807733516}
   _exitAndSaveButton: {fileID: 2526160156309148295}
+  _popupAnimator: {fileID: 2852758226974557288}
+--- !u!95 &2852758226974557288
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808254675774954497}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7652491358f679b4ba386268c3191e5c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &6808254676133809611
 GameObject:
   m_ObjectHideFlags: 0

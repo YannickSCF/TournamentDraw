@@ -109,7 +109,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             participantSelector = BaseSelector.GetBaseSelector(_config.ParticipantSelection);
             participantSelector.InitializeSelector(_config.Participants, newSeed);
 
-            _gameManager.BaseUIController.ClosePopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
+            _gameManager.BaseUIController.HidePopup<SeedSelectorController, SeedSelectorView>("SeedSelector");
         }
 
         private void CloseSeedSelector() {
@@ -139,7 +139,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         private void CloseSaveDataPopup() {
-            _gameManager.BaseUIController.ClosePopup<SaveDataPopupController, SaveDataPopupView>("SaveData");
+            _gameManager.BaseUIController.HidePopup<SaveDataPopupController, SaveDataPopupView>("SaveData");
         }
         #endregion
 
@@ -150,7 +150,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         private void CloseMenu() {
-            _gameManager.BaseUIController.ClosePopup<MenuPopupController, MenuPopupView>("Menu");
+            _gameManager.BaseUIController.HidePopup<MenuPopupController, MenuPopupView>("Menu");
         }
 
         private void SettingsMenuClicked() {
@@ -163,7 +163,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             settingsPopup.SetCallback(CloseSettings);
         }
         private void CloseSettings() {
-            _gameManager.BaseUIController.ClosePopup<SettingsPopupController, SettingsPopupView>("SettingsPopup");
+            _gameManager.BaseUIController.HidePopup<SettingsPopupController, SettingsPopupView>("SettingsPopup");
             _gameManager.BaseUIController.ShowPopup<MenuPopupController, MenuPopupView>("Menu");
         }
 
@@ -179,7 +179,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         private void CloseAskExit() {
-            _gameManager.BaseUIController.ClosePopup<ExitAppPopupController, ExitAppPopupView>("AskExit");
+            _gameManager.BaseUIController.HidePopup<ExitAppPopupController, ExitAppPopupView>("AskExit");
             _gameManager.BaseUIController.ShowPopup<MenuPopupController, MenuPopupView>("Menu");
         }
 

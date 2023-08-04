@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2180497292528196655}
   - component: {fileID: 2180497292528196653}
   - component: {fileID: 2180497292528196652}
+  - component: {fileID: 335389531705188593}
   m_Layer: 5
   m_Name: Save Data Popup
   m_TagString: Untagged
@@ -67,6 +68,27 @@ MonoBehaviour:
   _closeButton: {fileID: 5553694122566639446}
   _saveInJSON: {fileID: 2180497293476887843}
   _saveInPDF: {fileID: 5553694122850266864}
+  _popupAnimator: {fileID: 335389531705188593}
+--- !u!95 &335389531705188593
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2180497292528196654}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7652491358f679b4ba386268c3191e5c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &2180497292823645668
 GameObject:
   m_ObjectHideFlags: 0

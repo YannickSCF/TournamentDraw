@@ -1081,6 +1081,7 @@ GameObject:
   - component: {fileID: 8964264446080428796}
   - component: {fileID: 8964264446080428795}
   - component: {fileID: 8964264446080428794}
+  - component: {fileID: 3298343094230835236}
   m_Layer: 5
   m_Name: Menu Popup
   m_TagString: Untagged
@@ -1137,3 +1138,24 @@ MonoBehaviour:
   _closeButton: {fileID: 1132602789972698917}
   _settingsButton: {fileID: 1132602790430059112}
   _exitButton: {fileID: 1132602790377748006}
+  _popupAnimator: {fileID: 3298343094230835236}
+--- !u!95 &3298343094230835236
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8964264446080428797}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7652491358f679b4ba386268c3191e5c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
