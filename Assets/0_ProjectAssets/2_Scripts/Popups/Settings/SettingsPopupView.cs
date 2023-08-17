@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using YannickSCF.GeneralApp.View.UI.Popups;
@@ -14,6 +15,8 @@ namespace YannickSCF.TournamentDraw.Popups {
         [SerializeField] private VolumeView _generalVolume;
         [SerializeField] private VolumeView _musicVolume;
         [SerializeField] private VolumeView _sfxVolume;
+
+        [SerializeField] private Animator _popupAnimator;
 
         #region Mono
         private void OnEnable() {
@@ -69,6 +72,21 @@ namespace YannickSCF.TournamentDraw.Popups {
             SettingsViewsEvents.ThrowOnSFXVolumeChanged(volumeValue);
         }
         #endregion
+
+        public override void Show() {
+            base.Show();
+            _popupAnimator.SetBool("Show", true);
+        }
+
+        public override void Hide() {
+            _popupAnimator.SetBool("Show", false);
+            StartCoroutine(WaitToHideCoroutine());
+        }
+
+        private IEnumerator WaitToHideCoroutine() {
+            yield return new WaitUntil(() => _popupAnimator.GetCurrentAnimatorStateInfo(0).IsName("menu_out_idle"));
+            base.Hide();
+        }
 
         public void SetGeneralVolume(bool isMuted, float volumeValue) {
             _generalVolume.SetMuted(isMuted, true);

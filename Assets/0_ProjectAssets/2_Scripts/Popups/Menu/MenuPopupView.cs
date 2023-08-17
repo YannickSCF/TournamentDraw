@@ -44,7 +44,7 @@ namespace YannickSCF.TournamentDraw.Popups {
         }
 
         private IEnumerator WaitToHideCoroutine() {
-            yield return new WaitUntil(() => _popupAnimator.GetCurrentAnimatorStateInfo(0).IsName("popup_out_idle"));
+            yield return new WaitUntil(() => _popupAnimator.GetCurrentAnimatorStateInfo(0).IsName("menu_out_idle"));
             base.Hide();
         }
 
