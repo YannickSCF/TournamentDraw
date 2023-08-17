@@ -6,38 +6,48 @@ using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Scriptables;
 
 namespace YannickSCF.TournamentDraw.Popups {
-    public class SaveDataPopupController : PopupController<SaveDataPopupView> {
+    public class SaveDataPopupData : PopupData {
+        private Action _closePopupAction;
+
+        public SaveDataPopupData(
+            string popupId,
+            Action closePopupAction) : base(popupId) {
+            _closePopupAction = closePopupAction;
+        }
+
+        public Action ClosePopupAction { get => _closePopupAction; }
+    }
+
+    public class SaveDataPopupController : PopupController {
+
+        private SaveDataPopupView _view;
 
         private Action _onClosePopup;
 
         #region Mono
+        private void Awake() {
+            _view = GetView<SaveDataPopupView>();
+        }
+
         protected override void OnEnable() {
             base.OnEnable();
 
-            View.OnCloseButtonPressed += CloseButtonPressed;
-            View.OnSaveJSONButtonPressed += SaveJSON;
-            View.OnSavePDFButtonPressed += SavePDF;
+            _view.OnCloseButtonPressed += CloseButtonPressed;
+            _view.OnSaveJSONButtonPressed += SaveJSON;
+            _view.OnSavePDFButtonPressed += SavePDF;
         }
 
         protected override void OnDisable() {
             base.OnDisable();
 
-            View.OnCloseButtonPressed -= CloseButtonPressed;
-            View.OnSaveJSONButtonPressed -= SaveJSON;
-            View.OnSavePDFButtonPressed -= SavePDF;
+            _view.OnCloseButtonPressed -= CloseButtonPressed;
+            _view.OnSaveJSONButtonPressed -= SaveJSON;
+            _view.OnSavePDFButtonPressed -= SavePDF;
 
         }
         #endregion
 
-        public void SetClosePopupCallback(Action onClosePopup) {
-            _onClosePopup = onClosePopup;
-        }
-
-        public override void Close() {
-            base.Close();
-            // TODO: Algun mensaje (?)
-        }
-
+        #region Event listeners methods
         private void CloseButtonPressed() {
             _onClosePopup?.Invoke();
         }
@@ -48,7 +58,16 @@ namespace YannickSCF.TournamentDraw.Popups {
         }
 
         private void SavePDF() {
+            // TODO
             throw new NotImplementedException();
+        }
+        #endregion
+
+        public override void Init(PopupData popupData) {
+            SaveDataPopupData saveDataPopupData = (SaveDataPopupData)popupData;
+            _onClosePopup = saveDataPopupData.ClosePopupAction;
+
+            base.Init(popupData);
         }
     }
 }

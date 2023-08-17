@@ -1204,7 +1204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581d414b10106f34fb95b690fbece035, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  View: {fileID: 6808254675774955006}
+  _popupView: {fileID: 6808254675774955006}
 --- !u!114 &6808254675774955006
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -27,11 +27,6 @@ namespace YannickSCF.TournamentDraw.Popups {
         }
         #endregion
 
-        public override void Open() {
-            base.Open();
-            _popupAnimator.SetBool("Show", true);
-        }
-
         public override void Show() {
             base.Show();
             _popupAnimator.SetBool("Show", true);
@@ -45,11 +40,6 @@ namespace YannickSCF.TournamentDraw.Popups {
         private IEnumerator WaitToHideCoroutine() {
             yield return new WaitUntil(() => _popupAnimator.GetCurrentAnimatorStateInfo(0).IsName("popup_out_idle"));
             base.Hide();
-        }
-
-        public override void Close() {
-            base.Close();
-            _popupAnimator.SetBool("Show", false);
         }
 
         public void SetErrorTexts(string title, string description) {

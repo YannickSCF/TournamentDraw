@@ -58,9 +58,12 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Initial {
                         _gameManager.Config = FileImporter.ImportDrawFormJSON(filePath);
                         SwitchState(InitialButtonsStates.ConfigurationDraw);
                     } else {
-                        ErrorPopupController errorPopup = _gameManager.BaseUIController.ShowPopup<ErrorPopupController, ErrorPopupView>("Error");
-                        errorPopup.SetErrorTexts("Error: Carga fallida", "El formato del fichero seleccionado no es válido");
-                        errorPopup.SetCallback(CloseErrorPopup);
+                        ErrorPopupData errorPopupData = new ErrorPopupData("Error", 
+                            "Error: Carga fallida",
+                            "El formato del fichero seleccionado no es válido",
+                            CloseErrorPopup);
+
+                        _gameManager.BaseUIController.ShowPopup(errorPopupData);
                     }
                     break;
                 case ButtonType.Back: GoBack(); break;
@@ -96,9 +99,10 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Initial {
                     _settingsCallback?.Invoke();
                     break;
                 case InitialButtonsStates.Exit:
-                    ExitAppPopupController exitPopup = _gameManager.BaseUIController.ShowPopup<ExitAppPopupController, ExitAppPopupView>("AskExit");
-                    exitPopup.SetCallbacks(CloseExitPopup, ExitApp);
-                    exitPopup.SetSaveAndExitOption(false);
+                    ExitPopupData exitPopupData = new ExitPopupData("AskExit",
+                        false, CloseExitPopup, ExitApp);
+
+                    _gameManager.BaseUIController.ShowPopup(exitPopupData);
                     break;
                 case InitialButtonsStates.ConfigurationDraw:
                     _configurationCallback?.Invoke();
@@ -109,12 +113,12 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Initial {
         }
 
         private void CloseExitPopup() {
-            _gameManager.BaseUIController.ClosePopup<ExitAppPopupController, ExitAppPopupView>("AskExit");
+            _gameManager.BaseUIController.HidePopup("AskExit");
             GoBack();
         }
 
         private void CloseErrorPopup() {
-            _gameManager.BaseUIController.ClosePopup<ErrorPopupController, ErrorPopupView>("Error");
+            _gameManager.BaseUIController.HidePopup("Error");
         }
 
         private void ExitApp(bool saveAndExit) {

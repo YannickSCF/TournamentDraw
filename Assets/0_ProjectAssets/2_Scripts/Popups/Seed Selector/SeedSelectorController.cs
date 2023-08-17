@@ -2,7 +2,25 @@ using System;
 using YannickSCF.GeneralApp.Controller.UI.Popups;
 
 namespace YannickSCF.TournamentDraw.Popups {
-    public class SeedSelectorController : PopupController<SeedSelectorView> {
+    public class SeedPopupData : PopupData {
+        private Action _closePopupAction;
+        private Action<int> _finishSelectionAction;
+
+        public SeedPopupData(
+            string popupId,
+            Action closePopupAction,
+            Action<int> finishSelectionAction) : base(popupId) {
+            _closePopupAction = closePopupAction;
+            _finishSelectionAction = finishSelectionAction;
+        }
+
+        public Action ClosePopupAction { get => _closePopupAction; }
+        public Action<int> FinishSelectionAction { get => _finishSelectionAction; }
+    }
+
+    public class SeedSelectorController : PopupController {
+
+        private SeedSelectorView _seedView;
 
         private int _seed = 0;
 
@@ -12,48 +30,48 @@ namespace YannickSCF.TournamentDraw.Popups {
         System.Random rnd = new System.Random();
 
         #region Mono
+        private void Awake() {
+            _seedView = GetView<SeedSelectorView>();
+        }
+
         private void Start() {
             _seed = rnd.Next();
-            View.SetNewOption(_seed);
+            _seedView.SetNewOption(_seed);
         }
 
         protected override void OnEnable() {
             base.OnEnable();
-            View.OnSeedChanged += ChangeSeed;
+            _seedView.OnSeedChanged += ChangeSeed;
 
-            View.OnRandomizedSeed += RandomizeSeed;
-            View.OnFinishedSelection += FinishSelection;
-            View.OnCloseSelection += CloseSelection;
+            _seedView.OnRandomizedSeed += RandomizeSeed;
+            _seedView.OnFinishedSelection += FinishSelection;
+            _seedView.OnCloseSelection += CloseSelection;
         }
 
         protected override void OnDisable() {
             base.OnDisable();
-            View.OnSeedChanged -= ChangeSeed;
+            _seedView.OnSeedChanged -= ChangeSeed;
 
-            View.OnRandomizedSeed -= RandomizeSeed;
-            View.OnFinishedSelection -= FinishSelection;
-            View.OnCloseSelection -= CloseSelection;
+            _seedView.OnRandomizedSeed -= RandomizeSeed;
+            _seedView.OnFinishedSelection -= FinishSelection;
+            _seedView.OnCloseSelection -= CloseSelection;
         }
         #endregion
 
-        public void SetCallbacks(Action<int> onFinishSelection, Action onClose) {
-            _onFinishSelection = onFinishSelection;
-            _onClose = onClose;
-        }
-
+        #region Event listeners methods
         private void ChangeSeed(string strValue) {
             if (int.TryParse(strValue, out int newSeed)) {
                 _seed = newSeed;
-                View.SetFinishButtonInteractable(true);
+                _seedView.SetFinishButtonInteractable(true);
             } else {
-                View.SetEmptyOption();
-                View.SetFinishButtonInteractable(false);
+                _seedView.SetEmptyOption();
+                _seedView.SetFinishButtonInteractable(false);
             }
         }
 
         private void RandomizeSeed() {
             int newSeed = rnd.Next();
-            View.SetNewOption(newSeed);
+            _seedView.SetNewOption(newSeed);
         }
 
         private void FinishSelection() {
@@ -63,9 +81,15 @@ namespace YannickSCF.TournamentDraw.Popups {
         private void CloseSelection() {
             _onClose?.Invoke();
         }
+        #endregion
 
-        public override void Close() {
-            base.Close();
+        public override void Init(PopupData popupData) {
+            SeedPopupData seedPopupData = (SeedPopupData)popupData;
+
+            _onClose = seedPopupData.ClosePopupAction;
+            _onFinishSelection = seedPopupData.FinishSelectionAction;
+
+            base.Init(popupData);
         }
     }
 }

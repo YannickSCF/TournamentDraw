@@ -392,7 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5252127794380180629}
   m_Layer: 5
-  m_Name: Popups Hidden Display
+  m_Name: Popups Pool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -600,7 +600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _popupsDatabase: {fileID: 11400000, guid: 66af0b41fd70b2745bbcf3af103f1598, type: 2}
   _popupsDisplay: {fileID: 1438073807877025289}
-  _hiddenPopupsDisplay: {fileID: 5252127794380180629}
+  _popupsPoolDisplay: {fileID: 5252127794380180629}
   _popupBackground: {fileID: 7816243877085341363}
   _backgroundActiveAlpha: 0.5
   _timeToSetFinalBackground: 0

@@ -4,15 +4,33 @@ using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Views.CommonEvents.Settings;
 
 namespace YannickSCF.TournamentDraw.Popups {
-    public class SettingsPopupController : PopupController<SettingsPopupView> {
+    public class SettingsPopupData : PopupData {
+        private Action _backAction;
+
+        public SettingsPopupData(
+            string popupId,
+            Action backAction) : base(popupId) {
+            _backAction = backAction;
+        }
+
+        public Action BackAction { get => _backAction; }
+    }
+
+    public class SettingsPopupController : PopupController {
+
+        private SettingsPopupView _view;
 
         private Action _backAction;
 
         #region Mono
+        private void Awake() {
+            _view = GetView<SettingsPopupView>();
+        }
+
         protected override void OnEnable() {
             base.OnEnable();
 
-            View.BackButton += OnBackButton;
+            _view.BackButton += OnBackButton;
 
             SettingsViewsEvents.OnGeneralVolumeMuted += GeneralVolumeMuted;
             SettingsViewsEvents.OnMusicVolumeMuted += MusicVolumeMuted;
@@ -22,7 +40,7 @@ namespace YannickSCF.TournamentDraw.Popups {
         protected override void OnDisable() {
             base.OnDisable();
 
-            View.BackButton -= OnBackButton;
+            _view.BackButton -= OnBackButton;
 
             SettingsViewsEvents.OnGeneralVolumeMuted -= GeneralVolumeMuted;
             SettingsViewsEvents.OnMusicVolumeMuted -= MusicVolumeMuted;
@@ -36,30 +54,29 @@ namespace YannickSCF.TournamentDraw.Popups {
         }
 
         private void GeneralVolumeMuted(bool isMuted) {
-            View.SetGeneralVolumeSliderInteractable(!isMuted);
+            _view.SetGeneralVolumeSliderInteractable(!isMuted);
         }
 
         private void MusicVolumeMuted(bool isMuted) {
-            View.SetMusicVolumeSliderInteractable(!isMuted);
+            _view.SetMusicVolumeSliderInteractable(!isMuted);
         }
 
         private void SFXVolumeMuted(bool isMuted) {
-            View.SetSFXVolumeSliderInteractable(!isMuted);
+            _view.SetSFXVolumeSliderInteractable(!isMuted);
         }
         #endregion
 
-        public void SetCallback(Action closeAction) {
-            _backAction = closeAction;
-        }
+        public override void Init(PopupData popupData) {
+            SettingsPopupData settingsPopupData = (SettingsPopupData)popupData;
+            _backAction = settingsPopupData.BackAction;
 
-        public override void Init(string windowId) {
-            base.Init(windowId);
+            base.Init(popupData);
 
             GameManager _gameManager = GameManager.Instance;
 
-            View.SetGeneralVolume(_gameManager.IsGeneralVolumeMuted(), _gameManager.GetGeneralVolume());
-            View.SetMusicVolume(_gameManager.IsMusicVolumeMuted(), _gameManager.GetMusicVolume());
-            View.SetSFXVolume(_gameManager.IsSFXVolumeMuted(), _gameManager.GetSFXVolume());
+            _view.SetGeneralVolume(_gameManager.IsGeneralVolumeMuted(), _gameManager.GetGeneralVolume());
+            _view.SetMusicVolume(_gameManager.IsMusicVolumeMuted(), _gameManager.GetMusicVolume());
+            _view.SetSFXVolume(_gameManager.IsSFXVolumeMuted(), _gameManager.GetSFXVolume());
         }
     }
 }
