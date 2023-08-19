@@ -912,6 +912,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6242430476952800649}
     m_Modifications:
+    - target: {fileID: 1289747666736137020, guid: 23458aa336fd93f479364854dc5acf1f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.16078432
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289747666736137020, guid: 23458aa336fd93f479364854dc5acf1f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.4509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289747666736137020, guid: 23458aa336fd93f479364854dc5acf1f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.827451
+      objectReference: {fileID: 0}
+    - target: {fileID: 1289747666736137020, guid: 23458aa336fd93f479364854dc5acf1f, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 8de3905c96926cd40ba42306580896be, type: 3}
     - target: {fileID: 7376009553097806114, guid: 23458aa336fd93f479364854dc5acf1f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1028,6 +1044,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7376009553252286422, guid: 23458aa336fd93f479364854dc5acf1f, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: f62188c18d0acc34ea1adbca2504ca4a, type: 2}
     m_RemovedComponents:
     - {fileID: 7376009553097806142, guid: 23458aa336fd93f479364854dc5acf1f, type: 3}
     - {fileID: 7376009553097806143, guid: 23458aa336fd93f479364854dc5acf1f, type: 3}

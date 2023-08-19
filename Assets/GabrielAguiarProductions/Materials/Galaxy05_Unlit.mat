@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Galaxy05_Unlit
-  m_Shader: {fileID: -6465566751694194690, guid: e87f59bf3642c1746883b9bafcdd04c7,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e87f59bf3642c1746883b9bafcdd04c7, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -29,6 +28,18 @@ Material:
         m_Texture: {fileID: 8900000, guid: 5722270d3f4c261428990f6de6a0a67a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - Vector1_1B19E5E6: 20
@@ -37,6 +48,8 @@ Material:
     - Vector1_767F2B2D: 2
     - Vector1_A15033D2: 1
     - Vector1_E6B832D7: 10
+    - _QueueControl: 0
+    - _QueueOffset: 0
     m_Colors:
     - Color_1A1AF88E: {r: 0, g: 3.2944708, b: 12.996038, a: 1}
     - Color_3FCEB46F: {r: 4.313781, g: 0.50196034, b: 23.968628, a: 1}

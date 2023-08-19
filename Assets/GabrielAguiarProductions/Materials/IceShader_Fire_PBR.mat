@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: IceShader_Fire_PBR
+  m_Shader: {fileID: -6465566751694194690, guid: 987e07c277358324a8a2049407ae790d, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_220A120D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_2EECBA67:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_3FE4834F:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_A035942E:
+        m_Texture: {fileID: 2800000, guid: 7b315a73dd349a54e877dd995e030f5d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_A4D0DD2:
+        m_Texture: {fileID: 2800000, guid: 6b3a1c2249bd68d47affdd073b4d537c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_AEB575E4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - CracksAmount_: 0
+    - RiseWall_: 1
+    - Vector1_10508723: 1
+    - Vector1_1AF18EB5: 0
+    - Vector1_5505957B: 1.41
+    - Vector1_8128F054: 1
+    - Vector1_89C1F41F: 1.48
+    - Vector1_89E6ECB6: 2.44
+    - Vector1_A461645: 1
+    - Vector1_A853CFA6: 1
+    - Vector1_C10C4247: 0.71
+    - Vector1_DF9C465A: 0.1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    m_Colors:
+    - Color_1E58BB8F: {r: 0, g: 0, b: 0, a: 0}
+    - Color_1EEE927B: {r: 0, g: 0, b: 0, a: 1}
+    - Color_4613A442: {r: 0.98039216, g: 0.60175467, b: 0.047058802, a: 1}
+    - Color_50363F98: {r: 3.2111173, g: 1.1680359, b: 0.45392752, a: 1}
+    - Color_A147EEFA: {r: 0, g: 0, b: 0, a: 1}
+    - Color_B22601E: {r: 3.6314201, g: 12.844469, b: 9.019728, a: 1}
+    - Color_BF002A83: {r: 0, g: 0, b: 0, a: 1}
+    - Vector2_1ABCC4D4: {r: 1, g: 1, b: 0, a: 0}
+    - Vector2_674729D8: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
+--- !u!114 &1006255519218907145
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
