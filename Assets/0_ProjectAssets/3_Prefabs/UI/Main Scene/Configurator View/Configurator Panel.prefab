@@ -1294,6 +1294,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7319447076854810429}
     m_Modifications:
+    - target: {fileID: 662447467715333663, guid: 30e17429539633e459a057836e61c604, type: 3}
+      propertyPath: m_text
+      value: "Debes a\xF1adir al menos 4 participantes"
+      objectReference: {fileID: 0}
     - target: {fileID: 662447468266235042, guid: 30e17429539633e459a057836e61c604, type: 3}
       propertyPath: m_Name
       value: Final & Errors panel
