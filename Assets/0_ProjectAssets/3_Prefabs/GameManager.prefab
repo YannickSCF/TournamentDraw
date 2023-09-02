@@ -614,6 +614,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6242430476589794343}
   - component: {fileID: 6242430476589794340}
+  - component: {fileID: 5819188657736776719}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -654,10 +655,29 @@ MonoBehaviour:
   _baseUIController: {fileID: 199045128420671915}
   _audioController: {fileID: 8966183973893008914}
   _sceneController: {fileID: 688586892}
+  _dataController: {fileID: 5819188657736776719}
   debug: 0
   _debugConfig: {fileID: 11400000, guid: 7ee46acff764eca4c95709cff1780e41, type: 2}
   openPanelAuto: 1
   _config: {fileID: 11400000, guid: c963936eda91ab94c867a9c7f5fc06f0, type: 2}
+  IsGeneralVolumeMuted: 0
+  IsMusicVolumeMuted: 0
+  IsSFXVolumeMuted: 0
+  GeneralVolume: 1
+  MusicVolume: 1
+  SfxVolume: 1
+--- !u!114 &5819188657736776719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242430476589794341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b5af156c838e243b56587e1fd7229b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6242430476952800885
 GameObject:
   m_ObjectHideFlags: 0

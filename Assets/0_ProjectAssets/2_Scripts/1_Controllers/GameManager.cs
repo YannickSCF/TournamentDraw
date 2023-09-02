@@ -23,6 +23,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         [SerializeField] private BaseUIController _baseUIController;
         [SerializeField] private AudioController _audioController;
         [SerializeField] private SceneController _sceneController;
+        [SerializeField] private DataController _dataController;
 
         [Header("Debug Values")]
         [SerializeField] private bool debug = false;
@@ -57,6 +58,12 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         private void Start() {
+            if (_dataController.HasDrawConfigurationSaved()) {
+                _config = _dataController.GetDrawConfiguration(_config);
+            } else {
+                _config.ResetConfiguration();
+            }
+
             SwitchState(debug ? openPanelAuto : States.Initial);
 
             SetGameToSettings();
@@ -113,6 +120,8 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         public void SaveAndExit(bool saveAndExit) {
             if (!saveAndExit) {
                 _config.ResetConfiguration();
+            } else {
+                SaveData();
             }
 
 #if UNITY_EDITOR
@@ -120,6 +129,10 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 #else
             Application.Quit();
 #endif
+        }
+
+        public void SaveData() {
+            _dataController.SaveDrawConfiguration(_config);
         }
 
         #region Scene management

@@ -153,6 +153,8 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             if (!participantSelector.IsAnyParticipantToReveal()) {
                 _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.Finished);
             }
+
+            _gameManager.SaveData();
         }
 
         private void SaveDataPressed() {
@@ -188,7 +190,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
         private void ExitMenuClicked() {
             ExitPopupData exitPopupData = new ExitPopupData("AskExit",
-                true, CloseAskExit, Exit);
+                false, CloseAskExit, Exit);
 
             _gameManager.BaseUIController.ShowPopup(exitPopupData);
         }

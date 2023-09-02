@@ -53,6 +53,7 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
         }
 
         private void OnConfiguratorFinished() {
+            GameManager.Instance.SaveData();
             GameManager.Instance.SwitchState(States.Draw);
         }
         #endregion
