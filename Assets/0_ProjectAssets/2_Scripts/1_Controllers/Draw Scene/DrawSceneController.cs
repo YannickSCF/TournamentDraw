@@ -32,7 +32,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         #region Mono
         private void OnEnable() {
             DrawPanelViewEvents.OnStartButtonClicked += StartButtonPressed;
-            DrawPanelViewEvents.OnNextButtonClicked += RevealNewParticipant;
+            DrawPanelViewEvents.OnNextButtonClicked += OnNextButtonClicked;
             DrawPanelViewEvents.OnSaveButtonClicked += SaveDataPressed;
 
             DrawPanelViewEvents.OnSettingsButtonClicked += ShowMenu;
@@ -54,7 +54,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
         private void OnDisable() {
             DrawPanelViewEvents.OnStartButtonClicked -= StartButtonPressed;
-            DrawPanelViewEvents.OnNextButtonClicked -= RevealNewParticipant;
+            DrawPanelViewEvents.OnNextButtonClicked -= OnNextButtonClicked;
             DrawPanelViewEvents.OnSaveButtonClicked -= SaveDataPressed;
 
             DrawPanelViewEvents.OnSettingsButtonClicked -= ShowMenu;
@@ -75,6 +75,12 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             }
 
             _view.Init(_config.DrawName, _config.NumberOfPoules, _config.MaxPouleSize, participantsAlreadyRevealed);
+
+            if (participantsAlreadyRevealed > 0) {
+                for (int i = 0; i < participantsAlreadyRevealed; ++i) {
+                    RevealNewParticipant(true);
+                }
+            }
         }
 
         private int InitPouleModels() {
@@ -129,14 +135,18 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             _gameManager.BaseUIController.HidePopup("SeedSelector");
         }
 
-        private void RevealNewParticipant() {
+        private void OnNextButtonClicked() {
+            RevealNewParticipant(false);
+        }
+
+        private void RevealNewParticipant(bool revealMuted) {
             ParticipantModel revealedParticipant = participantSelector.GetNextParticipant();
 
             int pouleIndex = GetPouleIndex();
             _view.AddParticipantToPoule(
                 revealedParticipant.FullName,
                 revealedParticipant.AcademyName,
-                pouleIndex);
+                pouleIndex, revealMuted);
 
             _allPoules[pouleIndex].PouleParticipants.Add(revealedParticipant);
 

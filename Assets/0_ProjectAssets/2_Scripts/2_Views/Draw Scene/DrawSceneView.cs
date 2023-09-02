@@ -62,10 +62,6 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
             CreatePoules(numberOfPoules, maxPouleSize);
 
             if (participantsAlreadyRevealed > 0) {
-                for (int i = 0; i < participantsAlreadyRevealed; ++i) {
-                    DrawPanelViewEvents.ThrowOnNextButtonClicked();
-                }
-
                 SwitchDrawPhaseView(DrawScenePhaseView.OnGoing);
             } else {
                 SwitchDrawPhaseView(DrawScenePhaseView.Start);
@@ -100,8 +96,8 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
             }
         }
 
-        public void AddParticipantToPoule(string completeName, string academyName, int pouleIndex) {
-            _allPouleViews[pouleIndex].AddParticipantToPoule(completeName, academyName);
+        public void AddParticipantToPoule(string completeName, string academyName, int pouleIndex, bool revealMuted) {
+            _allPouleViews[pouleIndex].AddParticipantToPoule(completeName, academyName, revealMuted);
         }
 
         public void SwitchDrawPhaseView(DrawScenePhaseView phaseToSwitch) {

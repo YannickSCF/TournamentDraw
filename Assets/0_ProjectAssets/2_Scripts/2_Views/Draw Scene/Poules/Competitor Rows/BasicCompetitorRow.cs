@@ -13,6 +13,7 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
         [SerializeField] private TextMeshProUGUI _competitorAcademyText;
 
         private bool rowFilled = false;
+        private bool _showWithoutSound = false;
 
         public bool IsRowFilled { get => rowFilled; }
 
@@ -22,7 +23,9 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
             rowFilled = false;
         }
 
-        public void SetNameAndAcademy(string competitorName, string academyName) {
+        public void SetNameAndAcademy(string competitorName, string academyName, bool revealMuted = false) {
+            _showWithoutSound = revealMuted;
+
             _competitorNameText.text = competitorName;
             _competitorAcademyText.text = academyName;
 
@@ -42,7 +45,9 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
         }
 
         public void PlayLightsaberSFX() {
-            PouleNameRevealed?.Invoke("lightsaber-move");
+            if (!_showWithoutSound) {
+                PouleNameRevealed?.Invoke("lightsaber-move");
+            }
         }
     }
 }

@@ -48,10 +48,10 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules {
             }
         }
 
-        public void AddParticipantToPoule(string completeName, string academyName) {
+        public void AddParticipantToPoule(string completeName, string academyName, bool revealMuted = false) {
             foreach (BasicCompetitorRow row in _allRows) {
                 if (!row.IsRowFilled) {
-                    row.SetNameAndAcademy(completeName, academyName);
+                    row.SetNameAndAcademy(completeName, academyName, revealMuted);
                     break;
                 }
             }
