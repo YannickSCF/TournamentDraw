@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -90}
-  m_SizeDelta: {x: -100, y: 100}
+  m_AnchoredPosition: {x: 0, y: -70}
+  m_SizeDelta: {x: -100, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3192794345519302037
 CanvasRenderer:
@@ -66,10 +66,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tournament Draw
+  m_text: Sorteo de torneos
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}
-  m_sharedMaterial: {fileID: 5855034373977009550, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 395e09ab33e2258468c95bc1bbe93819, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
