@@ -8,7 +8,12 @@ namespace YannickSCF.TournamentDraw.Views.CommonComponents.Volume {
         public event BooleanEventDelegate OnMuteButtonPressed;
         public event FloatEventDelegate OnVolumeSettedPressed;
 
+        [Header("Mute volume toggle")]
         [SerializeField] private Toggle _muteButton;
+        [SerializeField] private Image _volumeImage;
+        [SerializeField] private Sprite _unmutedSprite;
+        [SerializeField] private Sprite _mutedSprite;
+        [Header("Volume Slider")]
         [SerializeField] private Slider _volumeSlider;
 
         #region Mono
@@ -26,6 +31,8 @@ namespace YannickSCF.TournamentDraw.Views.CommonComponents.Volume {
         #region Event listeners methods
         private void MuteButtonPressed(bool isOn) {
             OnMuteButtonPressed?.Invoke(isOn);
+
+            _volumeImage.sprite = isOn ? _mutedSprite : _unmutedSprite;
         }
 
         private void VolumeSliderChanged(float newVolume) {
@@ -39,6 +46,8 @@ namespace YannickSCF.TournamentDraw.Views.CommonComponents.Volume {
             } else {
                 _muteButton.SetIsOnWithoutNotify(isMuted);
             }
+
+            _volumeImage.sprite = isMuted ? _mutedSprite : _unmutedSprite;
         }
 
         public void SetValue(float volumeValue, bool notify = false) {
