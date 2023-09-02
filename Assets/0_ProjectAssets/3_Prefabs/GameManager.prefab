@@ -660,12 +660,7 @@ MonoBehaviour:
   _debugConfig: {fileID: 11400000, guid: 7ee46acff764eca4c95709cff1780e41, type: 2}
   openPanelAuto: 1
   _config: {fileID: 11400000, guid: c963936eda91ab94c867a9c7f5fc06f0, type: 2}
-  IsGeneralVolumeMuted: 0
-  IsMusicVolumeMuted: 0
-  IsSFXVolumeMuted: 0
-  GeneralVolume: 1
-  MusicVolume: 1
-  SfxVolume: 1
+  _settings: {fileID: 11400000, guid: ffe6cfb877159dc49bf23811056e2a72, type: 2}
 --- !u!114 &5819188657736776719
 MonoBehaviour:
   m_ObjectHideFlags: 0

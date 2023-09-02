@@ -53,7 +53,7 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
         }
 
         private void OnConfiguratorFinished() {
-            GameManager.Instance.SaveData();
+            GameManager.Instance.SaveDrawData();
             GameManager.Instance.SwitchState(States.Draw);
         }
         #endregion
@@ -80,6 +80,7 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
         }
 
         private void OnSettingsClosed() {
+            GameManager.Instance.SaveSettingsData();
             _settingsWindow.OnWindowHidden += ShowInitialFromSettings;
             _sceneCanvas.HideWindow<SettingsWindowController, SettingsWindowView>("Settings");
         }

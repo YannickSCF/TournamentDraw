@@ -1,4 +1,5 @@
 using UnityEngine;
+using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Views.CommonEvents.Settings;
 
 namespace YannickSCF.TournamentDraw.Controllers.ThreeD {
@@ -7,6 +8,11 @@ namespace YannickSCF.TournamentDraw.Controllers.ThreeD {
         [SerializeField] private AudioSource _audioSource;
 
         #region Mono
+        private void Start() {
+            _audioSource.mute = GameManager.Instance.IsSFXVolumeMuted;
+            _audioSource.volume = GameManager.Instance.SFXVolume;
+        }
+
         private void OnEnable() {
             SettingsViewsEvents.OnSFXVolumeMuted += SFXVolumeMuted;
             SettingsViewsEvents.OnSFXVolumeChanged += SFXVolumeChanged;

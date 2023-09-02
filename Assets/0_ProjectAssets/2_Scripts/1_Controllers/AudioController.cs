@@ -61,7 +61,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
         private void SFXVolumeChanged(float floatValue) {
             SetGeneralVolume(GeneralApp.AudioSources.SFX, floatValue);
-            GameManager.Instance.SfxVolume = floatValue;
+            GameManager.Instance.SFXVolume = floatValue;
         }
         #endregion
     }

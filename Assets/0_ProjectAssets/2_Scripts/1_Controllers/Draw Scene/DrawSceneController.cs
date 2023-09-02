@@ -154,7 +154,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
                 _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.Finished);
             }
 
-            _gameManager.SaveData();
+            _gameManager.SaveDrawData();
         }
 
         private void SaveDataPressed() {
@@ -185,6 +185,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         private void SettingsBackToMenu() {
+            _gameManager.SaveSettingsData();
             _gameManager.BaseUIController.HidePopup("SettingsPopup");
         }
 

@@ -26,21 +26,22 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         [SerializeField] private DataController _dataController;
 
         [Header("Debug Values")]
-        [SerializeField] private bool debug = false;
+        [SerializeField] private bool _debug = false;
         [SerializeField, ConditionalHide("debug", true)] private DrawConfiguration _debugConfig;
         [SerializeField, ConditionalHide("debug", true)] private States openPanelAuto = States.Initial;
 
         [Header("Settings files")]
         [SerializeField] private DrawConfiguration _config;
+        [SerializeField] private SettingsConfiguration _settings;
 
         private States c_state = States.None;
 
         public BaseUIController BaseUIController { get => _baseUIController; }
 
         public DrawConfiguration Config {
-            get { return debug ? _debugConfig : _config; }
+            get { return _debug ? _debugConfig : _config; }
             set {
-                if (debug) {
+                if (_debug) {
                     _debugConfig = value;
                 } else {
                     _config = value;
@@ -58,32 +59,30 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         private void Start() {
-            if (_dataController.HasDrawConfigurationSaved()) {
-                _config = _dataController.GetDrawConfiguration(_config);
-            } else {
-                _config.ResetConfiguration();
-            }
+            LoadSavedData();
 
-            SwitchState(debug ? openPanelAuto : States.Initial);
+            SwitchState(_debug ? openPanelAuto : States.Initial);
 
             SetGameToSettings();
         }
+
+        private void OnApplicationQuit() {
+#if UNITY_EDITOR
+            if (!_debug) {
+                _config.ResetConfiguration();
+                _settings.ResetConfiguration();
+            }
+#endif
+        }
         #endregion
 
-        private void SetGameToSettings() {
-            _audioController.MuteSource(GeneralApp.AudioSources.General, IsGeneralVolumeMuted);
-            _audioController.SetGeneralVolume(GeneralApp.AudioSources.General, GeneralVolume);
+        private void LoadSavedData() {
+            if (_dataController.HasDrawConfigurationSaved()) {
+                _config = _dataController.GetDrawConfiguration(_config);
+            }
 
-            _audioController.MuteSource(GeneralApp.AudioSources.Music, IsMusicVolumeMuted);
-            _audioController.SetGeneralVolume(GeneralApp.AudioSources.Music, MusicVolume);
-
-            _audioController.MuteSource(GeneralApp.AudioSources.SFX, IsSFXVolumeMuted);
-            _audioController.SetGeneralVolume(GeneralApp.AudioSources.SFX, SfxVolume);
-
-            if (IsGeneralVolumeMuted && IsMusicVolumeMuted) {
-                _audioController.PlayBackground("Suspense_Rises");
-            } else {
-                _audioController.SoftPlayBackground("Suspense_Rises");
+            if (_dataController.HasSettingsConfigurationSaved()) {
+                _settings = _dataController.GetSettingsConfiguration(_settings);
             }
         }
 
@@ -94,6 +93,23 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             } else if (_sceneController.CurrentSceneIndex != (int)stateToSwitch - 1) {
                 ChangeSingleScene((int)stateToSwitch - 1, false);
                 c_state = stateToSwitch;
+            }
+        }
+
+        private void SetGameToSettings() {
+            _audioController.MuteSource(GeneralApp.AudioSources.General, IsGeneralVolumeMuted);
+            _audioController.SetGeneralVolume(GeneralApp.AudioSources.General, GeneralVolume);
+
+            _audioController.MuteSource(GeneralApp.AudioSources.Music, IsMusicVolumeMuted);
+            _audioController.SetGeneralVolume(GeneralApp.AudioSources.Music, MusicVolume);
+
+            _audioController.MuteSource(GeneralApp.AudioSources.SFX, IsSFXVolumeMuted);
+            _audioController.SetGeneralVolume(GeneralApp.AudioSources.SFX, SFXVolume);
+
+            if (IsGeneralVolumeMuted && IsMusicVolumeMuted) {
+                _audioController.PlayBackground("Suspense_Rises");
+            } else {
+                _audioController.SoftPlayBackground("Suspense_Rises");
             }
         }
 
@@ -121,7 +137,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             if (!saveAndExit) {
                 _config.ResetConfiguration();
             } else {
-                SaveData();
+                SaveDrawData();
             }
 
 #if UNITY_EDITOR
@@ -131,8 +147,12 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 #endif
         }
 
-        public void SaveData() {
+        public void SaveDrawData() {
             _dataController.SaveDrawConfiguration(_config);
+        }
+
+        public void SaveSettingsData() {
+            _dataController.SaveSettingsConfiguration(_settings);
         }
 
         #region Scene management
@@ -189,14 +209,13 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         #endregion
 
         #region Audio Management
-        // TEMP DATA
-        public bool IsGeneralVolumeMuted = false;
-        public bool IsMusicVolumeMuted = false;
-        public bool IsSFXVolumeMuted = false;
+        public bool IsGeneralVolumeMuted { get => _settings.GeneralVolumeMuted; set => _settings.GeneralVolumeMuted = value; }
+        public bool IsMusicVolumeMuted { get => _settings.MusicVolumeMuted; set => _settings.MusicVolumeMuted = value; }
+        public bool IsSFXVolumeMuted { get => _settings.SFXVolumeMuted; set => _settings.SFXVolumeMuted = value; }
 
-        public float GeneralVolume = 1f;
-        public float MusicVolume = 1f;
-        public float SfxVolume = 1f;
+        public float GeneralVolume { get => _settings.GeneralVolume; set => _settings.GeneralVolume = value; }
+        public float MusicVolume { get => _settings.MusicVolume; set => _settings.MusicVolume = value; }
+        public float SFXVolume { get => _settings.SFXVolume; set => _settings.SFXVolume = value; }
         #endregion
     }
 }
