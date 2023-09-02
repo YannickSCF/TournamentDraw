@@ -509,6 +509,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2604826418547753328, guid: 75f4759353d8c2046a537857288a9c92, type: 3}
+      propertyPath: m_text
+      value: Guardar
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604826419531326276, guid: 75f4759353d8c2046a537857288a9c92, type: 3}
+      propertyPath: m_text
+      value: Siguiente atleta
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604826419765969868, guid: 75f4759353d8c2046a537857288a9c92, type: 3}
+      propertyPath: m_text
+      value: Comenzar
+      objectReference: {fileID: 0}
     - target: {fileID: 4878739864911834545, guid: 75f4759353d8c2046a537857288a9c92, type: 3}
       propertyPath: m_Name
       value: Draw Scene Objects
