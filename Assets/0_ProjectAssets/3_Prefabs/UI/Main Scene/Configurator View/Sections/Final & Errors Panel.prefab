@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundType: 0
+  _soundType: 3
   soundToPlayOnClick: None
   soundToPlayOnClickDown: 
   soundToPlayOnClickUp: 

@@ -135,10 +135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _soundType: 0
-  soundToPlayOnClick: 
-  soundToPlayOnClickDown: 
-  soundToPlayOnClickUp: 
+  _soundType: 3
+  soundToPlayOnClick: None
+  soundToPlayOnClickDown: Click-Low-Down
+  soundToPlayOnClickUp: Click-Low-Up
 --- !u!1 &6144571274799771842
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,6 +1406,14 @@ PrefabInstance:
     - target: {fileID: 662447468438119998, guid: 30e17429539633e459a057836e61c604, type: 3}
       propertyPath: m_Interactable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083274797608356682, guid: 30e17429539633e459a057836e61c604, type: 3}
+      propertyPath: soundToPlayOnClickUp
+      value: Click-Low-Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083274797608356682, guid: 30e17429539633e459a057836e61c604, type: 3}
+      propertyPath: soundToPlayOnClickDown
+      value: Click-Low-Down
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30e17429539633e459a057836e61c604, type: 3}

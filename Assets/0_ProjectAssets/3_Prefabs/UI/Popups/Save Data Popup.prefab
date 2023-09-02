@@ -547,7 +547,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundToPlay: Click-Low
+  _soundType: 3
+  soundToPlayOnClick: None
+  soundToPlayOnClickDown: Click-Low-Down
+  soundToPlayOnClickUp: Click-Low-Up
 --- !u!1 &2180497293610298856
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,7 +987,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundToPlay: Click-Low
+  _soundType: 3
+  soundToPlayOnClick: None
+  soundToPlayOnClickDown: Click-Low-Down
+  soundToPlayOnClickUp: Click-Low-Up
 --- !u!1 &5553694122651242417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,7 +1218,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundToPlay: Click-Low
+  _soundType: 3
+  soundToPlayOnClick: None
+  soundToPlayOnClickDown: Click-Low-Down
+  soundToPlayOnClickUp: Click-Low-Up
 --- !u!1 &5553694123606433791
 GameObject:
   m_ObjectHideFlags: 0

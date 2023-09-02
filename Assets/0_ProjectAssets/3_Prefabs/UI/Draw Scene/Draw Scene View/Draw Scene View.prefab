@@ -751,8 +751,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1118538355328783876}
   m_HandleRect: {fileID: 1118538355328783879}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1209,7 +1209,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundToPlay: Click-Low
+  _soundType: 3
+  soundToPlayOnClick: None
+  soundToPlayOnClickDown: Click-Low-Down
+  soundToPlayOnClickUp: Click-Low-Up
 --- !u!1 &5843569142907712664
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,7 +1923,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundToPlay: Click-Low
+  _soundType: 3
+  soundToPlayOnClick: None
+  soundToPlayOnClickDown: Click-Low-Down
+  soundToPlayOnClickUp: Click-Low-Up
 --- !u!1 &8135574901431528072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,7 +2078,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundToPlay: Click-Low
+  _soundType: 3
+  soundToPlayOnClick: None
+  soundToPlayOnClickDown: Click-Low-Down
+  soundToPlayOnClickUp: Click-Low-Up
 --- !u!1 &8135574901432309833
 GameObject:
   m_ObjectHideFlags: 0
@@ -2224,7 +2233,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundToPlay: Click-Low
+  _soundType: 3
+  soundToPlayOnClick: None
+  soundToPlayOnClickDown: Click-Low-Down
+  soundToPlayOnClickUp: Click-Low-Up
 --- !u!1 &8135574901945997983
 GameObject:
   m_ObjectHideFlags: 0
