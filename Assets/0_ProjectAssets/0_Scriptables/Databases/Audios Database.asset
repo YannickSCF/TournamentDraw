@@ -24,3 +24,5 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 78ee25db0b922274d91c45f42d35e57c, type: 3}
   - _clipName: lightsaber-move
     _clip: {fileID: 8300000, guid: d8fe1967da8651f4cb300c36308bc867, type: 3}
+  - _clipName: crackling-fireplace
+    _clip: {fileID: 8300000, guid: 40fe53029aba81042b7f8a33cc8efaef, type: 3}

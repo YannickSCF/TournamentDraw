@@ -9,7 +9,7 @@ using YannickSCF.TournamentDraw.Scriptables;
 using YannickSCF.TournamentDraw.Views.Draw.Panel;
 using YannickSCF.TournamentDraw.Views.DrawScene.Events;
 
-namespace YannickSCF.TournamentDraw.Controllers.Draw {
+namespace YannickSCF.TournamentDraw.Controllers.ThreeD.Draw {
     public class DrawPanelController : MonoBehaviour {
 
         [SerializeField] private DrawPanelView drawPanelView;
