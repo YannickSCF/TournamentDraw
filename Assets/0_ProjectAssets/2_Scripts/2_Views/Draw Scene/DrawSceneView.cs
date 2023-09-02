@@ -65,9 +65,11 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
                 for (int i = 0; i < participantsAlreadyRevealed; ++i) {
                     DrawPanelViewEvents.ThrowOnNextButtonClicked();
                 }
-            }
 
-            SwitchDrawPhaseView(DrawScenePhaseView.Start);
+                SwitchDrawPhaseView(DrawScenePhaseView.OnGoing);
+            } else {
+                SwitchDrawPhaseView(DrawScenePhaseView.Start);
+            }
         }
 
         private void CreatePoules(int numberOfPoules, int maxPouleSize) {
@@ -103,18 +105,20 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
         }
 
         public void SwitchDrawPhaseView(DrawScenePhaseView phaseToSwitch) {
-            _currentState = phaseToSwitch;
+            if (_currentState != DrawScenePhaseView.Finished) {
+                _currentState = phaseToSwitch;
 
-            _animator.SetInteger("State", (int)phaseToSwitch);
+                _animator.SetInteger("State", (int)phaseToSwitch);
 
-            switch (phaseToSwitch) {
-                case DrawScenePhaseView.Start:
-                default:
-                    break;
-                case DrawScenePhaseView.OnGoing:
-                    break;
-                case DrawScenePhaseView.Finished:
-                    break;
+                switch (phaseToSwitch) {
+                    case DrawScenePhaseView.Start:
+                    default:
+                        break;
+                    case DrawScenePhaseView.OnGoing:
+                        break;
+                    case DrawScenePhaseView.Finished:
+                        break;
+                }
             }
         }
     }

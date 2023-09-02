@@ -95,6 +95,11 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
                 participantsAlreadyRevealed += poule.PouleParticipants.Count;
             }
 
+            if (participantsAlreadyRevealed > 0) {
+                _allPoules.ForEach(x => x.PouleParticipants.Clear());
+                _config.Poules.ForEach(x => x.PouleParticipants.Clear());
+            }
+
             return participantsAlreadyRevealed;
         }
 
