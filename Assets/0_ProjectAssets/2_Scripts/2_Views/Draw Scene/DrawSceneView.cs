@@ -72,7 +72,7 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
             _allPouleViews = new List<PouleView>();
 
             PouleView pouleView = Instantiate(_poulePrefab, _poulesSpace.content).GetComponent<PouleView>();
-            pouleView.InitPoule("Poule 0", maxPouleSize);
+            pouleView.InitPoule("Poule A", maxPouleSize);
             Vector2 pouleSize = new Vector2(_poulesSpace.content.rect.size.x * _poulePercentage, pouleView.GetComponent<RectTransform>().rect.size.y);
 
             GridLayoutGroup gridLayout = _poulesSpace.content.GetComponent<GridLayoutGroup>();
@@ -83,7 +83,7 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
 
             for (int i = 1; i < numberOfPoules; i++) {
                 PouleView inputField = Instantiate(_poulePrefab.gameObject, _poulesSpace.content).GetComponent<PouleView>();
-                inputField.InitPoule("Poule " + (i + 1), maxPouleSize);
+                inputField.InitPoule("Poule " + ((char)(65 + i)).ToString(), maxPouleSize);
 
                 _allPouleViews.Add(inputField);
             }
