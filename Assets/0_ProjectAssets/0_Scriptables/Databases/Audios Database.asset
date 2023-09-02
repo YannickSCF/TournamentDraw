@@ -22,3 +22,5 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 4bc4f179977f979439a1999d103e2d7a, type: 3}
   - _clipName: Click-Low-Up
     _clip: {fileID: 8300000, guid: 78ee25db0b922274d91c45f42d35e57c, type: 3}
+  - _clipName: lightsaber-move
+    _clip: {fileID: 8300000, guid: d8fe1967da8651f4cb300c36308bc867, type: 3}

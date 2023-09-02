@@ -1,8 +1,11 @@
 using TMPro;
 using UnityEngine;
+using static YannickSCF.GeneralApp.CommonEventsDelegates;
 
 namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
     public class BasicCompetitorRow : MonoBehaviour {
+
+        public static event StringEventDelegate PouleNameRevealed;
 
         [SerializeField] private Animator _revealAnimator;
         [Header("Basic Competitor INFO")]
@@ -36,6 +39,10 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
 
         public float GetRowHeight() {
             return GetComponent<RectTransform>().sizeDelta.y;
+        }
+
+        public void PlayLightsaberSFX() {
+            PouleNameRevealed?.Invoke("lightsaber-move");
         }
     }
 }

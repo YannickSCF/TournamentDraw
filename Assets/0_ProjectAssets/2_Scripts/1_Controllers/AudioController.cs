@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YannickSCF.GeneralApp.Controller.Audio;
 using YannickSCF.TournamentDraw.Views.CommonEvents.Settings;
+using YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow;
 
 namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
     public class AudioController : BaseAudioController {
@@ -18,6 +19,8 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             SettingsViewsEvents.OnMusicVolumeChanged += MusicVolumeChanged;
             SettingsViewsEvents.OnSFXVolumeMuted += SFXVolumeMuted;
             SettingsViewsEvents.OnSFXVolumeChanged += SFXVolumeChanged;
+
+            BasicCompetitorRow.PouleNameRevealed += PlaySFX;
         }
 
         protected override void OnDisable() {
@@ -29,6 +32,8 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             SettingsViewsEvents.OnMusicVolumeChanged -= MusicVolumeChanged;
             SettingsViewsEvents.OnSFXVolumeMuted -= SFXVolumeMuted;
             SettingsViewsEvents.OnSFXVolumeChanged -= SFXVolumeChanged;
+
+            BasicCompetitorRow.PouleNameRevealed -= PlaySFX;
         }
         #endregion
 
