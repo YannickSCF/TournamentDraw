@@ -14,11 +14,13 @@ namespace YannickSCF.TournamentDraw.FileManagement {
             new FileBrowser().SaveFileBrowser(bp, tournamentName, ".json", path => {
                 Debug.Log(path);
 
-                using (StreamWriter writer = File.CreateText(path)) {
-                    {
-                        writer.Write(jsonContent);
+                if(path != null) {
+                    using (StreamWriter writer = File.CreateText(path)) {
+                        {
+                            writer.Write(jsonContent);
+                        }
+                        writer.Close();
                     }
-                    writer.Close();
                 }
             });
         }

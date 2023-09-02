@@ -14,23 +14,24 @@ namespace YannickSCF.TournamentDraw.Importers {
             string myPath = "(holi)";
 
             new FileBrowser().OpenFileBrowser(browserProperties, path => {
-                myPath = path;
-                IDeserializer deserializer;
+                if (path != null) {
+                    myPath = path;
+                    IDeserializer deserializer;
+                    if (path.ToLower().EndsWith(".json")) {
+                        deserializer = new JSONDeserializer();
+                    } else if (path.ToLower().EndsWith(".csv")) {
+                        deserializer = new CSVDeserializer();
+                    } else {
+                        deserializer = new CSVDeserializer();
+                    }
 
-                if (path.ToLower().EndsWith(".json")) {
-                    deserializer = new JSONDeserializer();
-                } else if (path.ToLower().EndsWith(".csv")) {
-                    deserializer = new CSVDeserializer();
-                } else {
-                    deserializer = new CSVDeserializer();
+                    List<ParticipantModel> participants = deserializer.GetParticipantsFromFile(path);
+
+                    //PouleBuilder pouleBuilder = new AlphaPouleBuilder();
+                    //ITierListBuilder tierListBuilder = new StyleTierListBuilder();
+                    //_ = pouleBuilder.BuildPoules(participants, tierListBuilder);
+                    Debug.Log("OpenFileBrowser Finished!");
                 }
-
-                List<ParticipantModel> participants = deserializer.GetParticipantsFromFile(path);
-
-                //PouleBuilder pouleBuilder = new AlphaPouleBuilder();
-                //ITierListBuilder tierListBuilder = new StyleTierListBuilder();
-                //_ = pouleBuilder.BuildPoules(participants, tierListBuilder);
-                Debug.Log("OpenFileBrowser Finished!");
             });
 
             Debug.Log("Returned path: " + myPath);
