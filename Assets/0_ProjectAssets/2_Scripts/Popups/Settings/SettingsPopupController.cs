@@ -74,9 +74,9 @@ namespace YannickSCF.TournamentDraw.Popups {
 
             GameManager _gameManager = GameManager.Instance;
 
-            _view.SetGeneralVolume(_gameManager.IsGeneralVolumeMuted(), _gameManager.GetGeneralVolume());
-            _view.SetMusicVolume(_gameManager.IsMusicVolumeMuted(), _gameManager.GetMusicVolume());
-            _view.SetSFXVolume(_gameManager.IsSFXVolumeMuted(), _gameManager.GetSFXVolume());
+            _view.SetGeneralVolume(_gameManager.IsGeneralVolumeMuted, _gameManager.GeneralVolume);
+            _view.SetMusicVolume(_gameManager.IsMusicVolumeMuted, _gameManager.MusicVolume);
+            _view.SetSFXVolume(_gameManager.IsSFXVolumeMuted, _gameManager.SfxVolume);
         }
     }
 }

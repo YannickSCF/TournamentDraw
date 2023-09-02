@@ -64,16 +64,16 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         #endregion
 
         private void SetGameToSettings() {
-            _audioController.MuteSource(GeneralApp.AudioSources.General, IsGeneralVolumeMuted());
-            _audioController.SetGeneralVolume(GeneralApp.AudioSources.General, GetGeneralVolume());
+            _audioController.MuteSource(GeneralApp.AudioSources.General, IsGeneralVolumeMuted);
+            _audioController.SetGeneralVolume(GeneralApp.AudioSources.General, GeneralVolume);
 
-            _audioController.MuteSource(GeneralApp.AudioSources.Music, IsMusicVolumeMuted());
-            _audioController.SetGeneralVolume(GeneralApp.AudioSources.Music, GetMusicVolume());
+            _audioController.MuteSource(GeneralApp.AudioSources.Music, IsMusicVolumeMuted);
+            _audioController.SetGeneralVolume(GeneralApp.AudioSources.Music, MusicVolume);
 
-            _audioController.MuteSource(GeneralApp.AudioSources.SFX, IsSFXVolumeMuted());
-            _audioController.SetGeneralVolume(GeneralApp.AudioSources.SFX, GetSFXVolume());
+            _audioController.MuteSource(GeneralApp.AudioSources.SFX, IsSFXVolumeMuted);
+            _audioController.SetGeneralVolume(GeneralApp.AudioSources.SFX, SfxVolume);
 
-            if (IsGeneralVolumeMuted() && IsMusicVolumeMuted()) {
+            if (IsGeneralVolumeMuted && IsMusicVolumeMuted) {
                 _audioController.PlayBackground("Suspense_Rises");
             } else {
                 _audioController.SoftPlayBackground("Suspense_Rises");
@@ -176,26 +176,14 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         #endregion
 
         #region Audio Management
-        public bool IsGeneralVolumeMuted() {
-            return false;
-        }
-        public float GetGeneralVolume() {
-            return 0.5f;
-        }
+        // TEMP DATA
+        public bool IsGeneralVolumeMuted = false;
+        public bool IsMusicVolumeMuted = false;
+        public bool IsSFXVolumeMuted = false;
 
-        public bool IsMusicVolumeMuted() {
-            return false;
-        }
-        public float GetMusicVolume() {
-            return 1f;
-        }
-
-        public bool IsSFXVolumeMuted() {
-            return false;
-        }
-        public float GetSFXVolume() {
-            return 1f;
-        }
+        public float GeneralVolume = 1f;
+        public float MusicVolume = 1f;
+        public float SfxVolume = 1f;
         #endregion
     }
 }

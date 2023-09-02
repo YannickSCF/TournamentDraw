@@ -61,9 +61,9 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Windows.Settings {
 
             GameManager _gameManager = GameManager.Instance;
 
-            View.SetGeneralVolume(_gameManager.IsGeneralVolumeMuted(), _gameManager.GetGeneralVolume());
-            View.SetMusicVolume(_gameManager.IsMusicVolumeMuted(), _gameManager.GetMusicVolume());
-            View.SetSFXVolume(_gameManager.IsSFXVolumeMuted(), _gameManager.GetSFXVolume());
+            View.SetGeneralVolume(_gameManager.IsGeneralVolumeMuted, _gameManager.GeneralVolume);
+            View.SetMusicVolume(_gameManager.IsMusicVolumeMuted, _gameManager.MusicVolume);
+            View.SetSFXVolume(_gameManager.IsSFXVolumeMuted, _gameManager.SfxVolume);
         }
     }
 }
