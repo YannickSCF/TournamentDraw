@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Poules (max) size:'
+  m_text: "Tama\xF1o (m\xE1x) de poule:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}
   m_sharedMaterial: {fileID: 5855034373977009550, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}
@@ -1355,7 +1355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Number of poules:'
+  m_text: "N\xFAmero de poules:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}
   m_sharedMaterial: {fileID: 5855034373977009550, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}

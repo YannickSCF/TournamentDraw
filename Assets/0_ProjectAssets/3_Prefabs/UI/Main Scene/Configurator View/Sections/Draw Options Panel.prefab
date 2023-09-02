@@ -134,7 +134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Draw Options
+  m_text: Opciones de sorteo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}
   m_sharedMaterial: {fileID: 5855034373977009550, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}
@@ -686,6 +686,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7372517072221907411}
     m_Modifications:
+    - target: {fileID: 6975450420985033553, guid: 23f59c819f12cb548927e6fd3d7d414e, type: 3}
+      propertyPath: m_text
+      value: Nombre del sorteo
+      objectReference: {fileID: 0}
     - target: {fileID: 6975450421343603480, guid: 23f59c819f12cb548927e6fd3d7d414e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -773,6 +777,10 @@ PrefabInstance:
     - target: {fileID: 6975450421343603481, guid: 23f59c819f12cb548927e6fd3d7d414e, type: 3}
       propertyPath: m_Name
       value: Draw Name
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975450421714413500, guid: 23f59c819f12cb548927e6fd3d7d414e, type: 3}
+      propertyPath: m_text
+      value: Nombre...
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23f59c819f12cb548927e6fd3d7d414e, type: 3}
@@ -1316,6 +1324,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7372517072221907411}
     m_Modifications:
+    - target: {fileID: 146577342971038249, guid: 86ded7ad0265e3443a6c098e8e222cb1, type: 3}
+      propertyPath: m_text
+      value: "N\xFAmero de competidores: 0"
+      objectReference: {fileID: 0}
     - target: {fileID: 146577344389211054, guid: 86ded7ad0265e3443a6c098e8e222cb1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
