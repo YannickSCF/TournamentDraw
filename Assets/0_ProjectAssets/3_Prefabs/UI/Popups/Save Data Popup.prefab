@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 2180497293476887844}
   - component: {fileID: 2180497293476887843}
   - component: {fileID: 2180497293476887842}
+  - component: {fileID: 8311954488628680691}
   m_Layer: 5
   m_Name: Save JSON Button
   m_TagString: Untagged
@@ -534,6 +535,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &8311954488628680691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2180497293476887840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &2180497293610298856
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,6 +832,7 @@ GameObject:
   - component: {fileID: 5553694122566639446}
   - component: {fileID: 5553694122566639441}
   - component: {fileID: 5553694122566639440}
+  - component: {fileID: 9147711974796357937}
   m_Layer: 5
   m_Name: Close Button
   m_TagString: Untagged
@@ -957,6 +972,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 1.0000002
+--- !u!114 &9147711974796357937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553694122566639442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &5553694122651242417
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,6 +1074,7 @@ GameObject:
   - component: {fileID: 5553694122850266865}
   - component: {fileID: 5553694122850266864}
   - component: {fileID: 5553694122850266867}
+  - component: {fileID: 558142967016251432}
   m_Layer: 5
   m_Name: Save PDF Button
   m_TagString: Untagged
@@ -1171,6 +1200,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &558142967016251432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553694122850266877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &5553694123606433791
 GameObject:
   m_ObjectHideFlags: 0

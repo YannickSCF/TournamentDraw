@@ -1008,6 +1008,7 @@ GameObject:
   - component: {fileID: 6217142490843960985}
   - component: {fileID: 6217142490843960990}
   - component: {fileID: 6217142490843960991}
+  - component: {fileID: 7315275208989223804}
   m_Layer: 5
   m_Name: Random Button
   m_TagString: Untagged
@@ -1133,6 +1134,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &7315275208989223804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6217142490843960989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &6217142490899245457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,6 +1618,7 @@ GameObject:
   - component: {fileID: 6217142491436199633}
   - component: {fileID: 6217142491436199638}
   - component: {fileID: 6217142491436199639}
+  - component: {fileID: 925166672041430357}
   m_Layer: 5
   m_Name: Finish Button
   m_TagString: Untagged
@@ -1729,6 +1744,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &925166672041430357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6217142491436199637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &9183250718223655838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,6 +1771,7 @@ GameObject:
   - component: {fileID: 6657086860346724812}
   - component: {fileID: 3650842144985052794}
   - component: {fileID: 3979277659057234344}
+  - component: {fileID: 8099499301616597768}
   m_Layer: 5
   m_Name: Close Button
   m_TagString: Untagged
@@ -1882,3 +1911,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 1.0000002
+--- !u!114 &8099499301616597768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9183250718223655838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low

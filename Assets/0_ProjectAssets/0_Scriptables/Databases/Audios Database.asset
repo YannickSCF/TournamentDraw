@@ -15,4 +15,10 @@ MonoBehaviour:
   _allBackgroundMusic:
   - _clipName: Suspense_Rises
     _clip: {fileID: 8300000, guid: 40bf9969d97cfc946a43b5f813a46251, type: 3}
-  _allSFXSounds: []
+  _allSFXSounds:
+  - _clipName: Click-Low
+    _clip: {fileID: 8300000, guid: 2ee27994ba240d14f9592cf802c83c99, type: 3}
+  - _clipName: Click-Low-Down
+    _clip: {fileID: 8300000, guid: 4bc4f179977f979439a1999d103e2d7a, type: 3}
+  - _clipName: Click-Low-Up
+    _clip: {fileID: 8300000, guid: 78ee25db0b922274d91c45f42d35e57c, type: 3}

@@ -809,7 +809,8 @@ GameObject:
   - component: {fileID: 662447468438119992}
   - component: {fileID: 662447468438119996}
   - component: {fileID: 662447468438119999}
-  - component: {fileID: 1320244551787800071}
+  - component: {fileID: 2083274797608356682}
+  - component: {fileID: 2108658064550252017}
   m_Layer: 5
   m_Name: FinishedButton
   m_TagString: Untagged
@@ -876,7 +877,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1320244551787800071
+--- !u!114 &2083274797608356682
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -885,7 +886,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 662447468438119995}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adcfb06c77933ca4faffd8189e01f673, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundType: 0
+  soundToPlayOnClick: None
+  soundToPlayOnClickDown: 
+  soundToPlayOnClickUp: 
+--- !u!114 &2108658064550252017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662447468438119995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a6be5599aa11a428f306eb41186ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:

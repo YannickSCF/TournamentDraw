@@ -331,6 +331,7 @@ GameObject:
   - component: {fileID: 2087837128539863965}
   - component: {fileID: 2087837128539863966}
   - component: {fileID: 2087837128539863967}
+  - component: {fileID: 1035549289409369046}
   m_Layer: 5
   m_Name: Close Button
   m_TagString: Untagged
@@ -470,6 +471,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 1
+--- !u!114 &1035549289409369046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087837128539863905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &2087837128561623324
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +699,27 @@ PrefabInstance:
       value: SFX Volume Slider
       objectReference: {fileID: 0}
     - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 297.725
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -697,7 +731,27 @@ PrefabInstance:
       value: SFX Volumen Mute
       objectReference: {fileID: 0}
     - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 71.250015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633206813751285, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -705,7 +759,15 @@ PrefabInstance:
       value: SFX Volume UI
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207361318948, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -834,7 +896,27 @@ PrefabInstance:
       value: Music Volume Slider
       objectReference: {fileID: 0}
     - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 297.725
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -846,7 +928,27 @@ PrefabInstance:
       value: Music Volumen Mute
       objectReference: {fileID: 0}
     - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 71.250015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633206813751285, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -854,7 +956,15 @@ PrefabInstance:
       value: Music Volume UI
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207361318948, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -987,7 +1097,27 @@ PrefabInstance:
       value: General Volume Slider
       objectReference: {fileID: 0}
     - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 297.725
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205753833067, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35.625
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -999,7 +1129,27 @@ PrefabInstance:
       value: General Volumen Mute
       objectReference: {fileID: 0}
     - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 71.250015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633206570359331, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633206813751285, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -1007,7 +1157,15 @@ PrefabInstance:
       value: General Volume UI
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207361318948, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}

@@ -201,7 +201,7 @@
       "dependencies": {
         "com.unity.localization": "1.3.2"
       },
-      "hash": "310abea42b0914ed125ce520787a0a762dd1d512"
+      "hash": "03df124cffebdf8f15e9c0ba790dec4585fc9122"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

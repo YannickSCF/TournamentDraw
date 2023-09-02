@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 2161927313739735786}
   - component: {fileID: 2161927313739735787}
   - component: {fileID: 2161927313739735784}
+  - component: {fileID: 7176490776415016323}
   m_Layer: 5
   m_Name: Back Button
   m_TagString: Untagged
@@ -282,6 +283,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &7176490776415016323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161927313739735782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &3634030947459321841
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +713,10 @@ PrefabInstance:
       value: -35.625
       objectReference: {fileID: 0}
     - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -743,7 +761,15 @@ PrefabInstance:
       value: General Volume UI
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207361318948, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -904,6 +930,10 @@ PrefabInstance:
       value: -35.625
       objectReference: {fileID: 0}
     - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -948,7 +978,15 @@ PrefabInstance:
       value: Music Volume UI
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207361318948, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
@@ -1105,6 +1143,10 @@ PrefabInstance:
       value: -35.625
       objectReference: {fileID: 0}
     - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633205799702395, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -1149,7 +1191,15 @@ PrefabInstance:
       value: SFX Volume UI
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373633207154045848, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373633207361318948, guid: a8e13a670b8ad804494e9d4c03ac640a, type: 3}

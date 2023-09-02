@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1132602789972698917}
   - component: {fileID: 1132602789972698916}
   - component: {fileID: 1132602789972698919}
+  - component: {fileID: 6861988059956609541}
   m_Layer: 5
   m_Name: Close Button
   m_TagString: Untagged
@@ -153,6 +154,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 1.0000002
+--- !u!114 &6861988059956609541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132602789972698937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &1132602790377748027
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +180,7 @@ GameObject:
   - component: {fileID: 1132602790377748007}
   - component: {fileID: 1132602790377748006}
   - component: {fileID: 1132602790377748025}
+  - component: {fileID: 1543590754514967145}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -291,6 +306,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &1543590754514967145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132602790377748027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &1132602790430059117
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +332,7 @@ GameObject:
   - component: {fileID: 1132602790430059113}
   - component: {fileID: 1132602790430059112}
   - component: {fileID: 1132602790430059115}
+  - component: {fileID: 3045444728569430138}
   m_Layer: 5
   m_Name: Settings Button
   m_TagString: Untagged
@@ -429,6 +458,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &3045444728569430138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132602790430059117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &1132602790610573242
 GameObject:
   m_ObjectHideFlags: 0

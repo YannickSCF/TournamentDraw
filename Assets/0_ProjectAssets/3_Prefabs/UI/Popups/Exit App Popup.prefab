@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 949070206486408926}
   - component: {fileID: 949070206486408927}
   - component: {fileID: 949070206486408924}
+  - component: {fileID: 1757317803827989549}
   m_Layer: 5
   m_Name: No Button
   m_TagString: Untagged
@@ -138,6 +139,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &1757317803827989549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949070206486408914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &949070207214778932
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +607,7 @@ GameObject:
   - component: {fileID: 2526160156309148292}
   - component: {fileID: 2526160156309148295}
   - component: {fileID: 2526160156309148294}
+  - component: {fileID: 6427480414062739611}
   m_Layer: 5
   m_Name: Yes & Save Button
   m_TagString: Untagged
@@ -718,6 +733,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &6427480414062739611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526160156309148296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &6808254674450017350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,6 +1055,7 @@ GameObject:
   - component: {fileID: 6808254674807733515}
   - component: {fileID: 6808254674807733516}
   - component: {fileID: 6808254674807733517}
+  - component: {fileID: 3767707466263414332}
   m_Layer: 5
   m_Name: Yes Button
   m_TagString: Untagged
@@ -1152,6 +1181,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: -5, y: -3}
   m_UseGraphicAlpha: 1
+--- !u!114 &3767707466263414332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6808254674807733519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &6808254675774954497
 GameObject:
   m_ObjectHideFlags: 0

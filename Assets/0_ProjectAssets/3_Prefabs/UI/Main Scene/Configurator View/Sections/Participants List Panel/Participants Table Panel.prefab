@@ -1519,6 +1519,7 @@ GameObject:
   - component: {fileID: 5101428915574962825}
   - component: {fileID: 5101428915574962824}
   - component: {fileID: 5101428915574962827}
+  - component: {fileID: 2600290761834066288}
   m_Layer: 5
   m_Name: LoadFileBtn
   m_TagString: Untagged
@@ -1629,6 +1630,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2600290761834066288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101428915574962837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe166430a491644b840a785a6b340a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay: Click-Low
 --- !u!1 &5101428915652775558
 GameObject:
   m_ObjectHideFlags: 0
