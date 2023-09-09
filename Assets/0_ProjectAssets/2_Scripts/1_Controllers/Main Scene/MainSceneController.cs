@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 using YannickSCF.GeneralApp.Controller.UI.Windows;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
@@ -6,7 +7,6 @@ using YannickSCF.TournamentDraw.Controllers.MainScene.Initial;
 using YannickSCF.TournamentDraw.Views.MainScene.Initial;
 using YannickSCF.TournamentDraw.Controllers.MainScene.Windows.Settings;
 using YannickSCF.TournamentDraw.Views.MainScene.Windows.Settings;
-using System;
 using YannickSCF.TournamentDraw.Views.MainScene.Configurator;
 
 namespace YannickSCF.TournamentDraw.Controllers.MainScene {
@@ -15,10 +15,15 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
         [Header("Scene Objects")]
         [SerializeField] private SpriteRenderer _backgroundImage;
         [SerializeField] private WindowsController _sceneCanvas;
+        [SerializeField] private TextMeshProUGUI _version;
 
         private InitialWindowController _initialWindow;
         private SettingsWindowController _settingsWindow;
         private ConfiguratorWindowController _configWindow;
+
+        private void Start() {
+            _version.text = "Version: " + Application.version;
+        }
 
         public void Init() {
             _initialWindow = _sceneCanvas.ShowWindow<InitialWindowController, InitialWindowView>("Initial");
