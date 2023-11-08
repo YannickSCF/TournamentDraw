@@ -7,7 +7,9 @@ using YannickSCF.TournamentDraw.Controllers.MainScene.Initial;
 using YannickSCF.TournamentDraw.Views.MainScene.Initial;
 using YannickSCF.TournamentDraw.Controllers.MainScene.Windows.Settings;
 using YannickSCF.TournamentDraw.Views.MainScene.Windows.Settings;
-using YannickSCF.TournamentDraw.Views.MainScene.Configurator;
+using YannickSCF.LSTournaments.Common.Scriptables.Data;
+using YannickSCF.LSTournaments.Common.Controllers;
+using YannickSCF.LSTournaments.Common.Views;
 
 namespace YannickSCF.TournamentDraw.Controllers.MainScene {
     public class MainSceneController : MonoBehaviour {
@@ -19,7 +21,7 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
 
         private InitialWindowController _initialWindow;
         private SettingsWindowController _settingsWindow;
-        private ConfiguratorWindowController _configWindow;
+        private ConfiguratorController _configWindow;
 
         private void Start() {
             _version.text = "Version: " + Application.version;
@@ -32,25 +34,25 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
 
         #region Methods to manage draw configuration from NEW
         private void OpenConfigurationWindow() {
-            GameManager.Instance.Config.ResetConfiguration();
+            GameManager.Instance.Config = new TournamentData();
             _initialWindow.OnWindowHidden += ShowConfiguratorFromInitial;
             _sceneCanvas.HideWindow<InitialWindowController, InitialWindowView>("Initial");
         }
 
         private void ShowConfiguratorFromInitial(WindowController<InitialWindowView> window) {
-            _configWindow = _sceneCanvas.ShowWindow<ConfiguratorWindowController, ConfiguratorWindowView>("Config");
-            _configWindow.SetAllCallback(OnConfiguratorClosed, OnConfiguratorFinished);
+            _configWindow = _sceneCanvas.ShowWindow<ConfiguratorController, ConfiguratorView>("Config");
+            _configWindow.SetCallbacks(OnConfiguratorClosed, OnConfiguratorFinished);
 
             _initialWindow.OnWindowHidden -= ShowConfiguratorFromInitial;
         }
 
         private void OnConfiguratorClosed() {
-            GameManager.Instance.Config.ResetConfiguration();
+            GameManager.Instance.Config = new TournamentData();
             _configWindow.OnWindowHidden += ShowInitialFromConfig;
-            _sceneCanvas.HideWindow<ConfiguratorWindowController, ConfiguratorWindowView>("Config");
+            _sceneCanvas.HideWindow<ConfiguratorController, ConfiguratorView>("Config");
         }
-
-        private void ShowInitialFromConfig(WindowController<ConfiguratorWindowView> window) {
+        // TOUPDATE
+        private void ShowInitialFromConfig(WindowController<ConfiguratorView> window) {
             _sceneCanvas.ShowWindow<InitialWindowController, InitialWindowView>("Initial");
             _initialWindow.GoBack();
 

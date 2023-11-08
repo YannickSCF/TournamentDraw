@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YannickSCF.GeneralApp.Controller.UI.Windows;
-using YannickSCF.TournamentDraw.Importers;
+using YannickSCF.LSTournaments.Common.Tools.Importer;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Popups;
 using YannickSCF.TournamentDraw.Views.MainScene.Initial;
@@ -53,12 +53,12 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Initial {
                     SwitchState(InitialButtonsStates.ConfigurationDraw);
                     break;
                 case ButtonType.LoadDraw:
-                    string filePath = FileImporter.SelectFileWithBrowser();
+                    string filePath = FileImporter.SelectTournamentDataFileWithBrowser();
                     if (!string.IsNullOrEmpty(filePath)) {
-                        _gameManager.Config = FileImporter.ImportDrawFormJSON(filePath);
+                        _gameManager.Config = FileImporter.ImportTournamentData(filePath);
                         SwitchState(InitialButtonsStates.ConfigurationDraw);
                     } else {
-                        ErrorPopupData errorPopupData = new ErrorPopupData("Error", 
+                        ErrorPopupData errorPopupData = new ErrorPopupData("Error",
                             "Error: Carga fallida",
                             "El formato del fichero seleccionado no es válido",
                             CloseErrorPopup);

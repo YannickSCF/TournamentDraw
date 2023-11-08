@@ -1,4 +1,5 @@
 using UnityEngine;
+using YannickSCF.LSTournaments.Common.Scriptables.Data;
 using YannickSCF.TournamentDraw.Scriptables;
 
 namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
@@ -11,12 +12,12 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             return PlayerPrefs.HasKey(DRAW_CONFIGURATION_PLAYER_PREF);
         }
 
-        public void SaveDrawConfiguration(DrawConfiguration config) {
+        public void SaveDrawConfiguration(TournamentData config) {
             PlayerPrefs.SetString(DRAW_CONFIGURATION_PLAYER_PREF, JsonUtility.ToJson(config));
             PlayerPrefs.Save();
         }
 
-        public DrawConfiguration GetDrawConfiguration(DrawConfiguration config) {
+        public TournamentData GetDrawConfiguration(TournamentData config) {
             string drawConfigJSON = PlayerPrefs.GetString(DRAW_CONFIGURATION_PLAYER_PREF);
             JsonUtility.FromJsonOverwrite(drawConfigJSON, config);
             return config;

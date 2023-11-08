@@ -13,6 +13,7 @@
     "com.unity.visualeffectgraph": "12.1.9",
     "com.unity.visualscripting": "1.8.0",
     "com.yannickscf.countries-data": "https://github.com/YannickSCF/Countries-Data.git?path=/Assets",
+    "com.yannickscf.ls-tournament-common": "https://github.com/YannickSCF/LS-Tournament-Common.git?path=/Assets",
     "com.yannickscf.project-basecode-template": "https://github.com/YannickSCF/project-basecode-template.git?path=/Assets",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",

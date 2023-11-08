@@ -8,6 +8,7 @@ using YannickSCF.TournamentDraw.Controllers.DrawScene;
 using YannickSCF.TournamentDraw.Controllers.MainScene;
 using YannickSCF.TournamentDraw.Scriptables;
 using System;
+using YannickSCF.LSTournaments.Common.Scriptables.Data;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -27,18 +28,18 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
         [Header("Debug Values")]
         [SerializeField] private bool _debug = false;
-        [SerializeField, ConditionalHide("debug", true)] private DrawConfiguration _debugConfig;
+        [SerializeField, ConditionalHide("debug", true)] private TournamentData _debugConfig;
         [SerializeField, ConditionalHide("debug", true)] private States openPanelAuto = States.Initial;
 
         [Header("Settings files")]
-        [SerializeField] private DrawConfiguration _config;
+        [SerializeField] private TournamentData _config;
         [SerializeField] private SettingsConfiguration _settings;
 
         private States c_state = States.None;
 
         public BaseUIController BaseUIController { get => _baseUIController; }
 
-        public DrawConfiguration Config {
+        public TournamentData Config {
             get { return _debug ? _debugConfig : _config; }
             set {
                 if (_debug) {
@@ -69,7 +70,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         private void OnApplicationQuit() {
 #if UNITY_EDITOR
             if (!_debug) {
-                _config.ResetConfiguration();
+                _config = new TournamentData();
                 _settings.ResetConfiguration();
             }
 #endif
@@ -130,12 +131,12 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         public bool IsConfigToContinue() {
-            return !string.IsNullOrEmpty(Config.DrawName);
+            return !string.IsNullOrEmpty(Config.TournamentName);
         }
 
         public void SaveAndExit(bool saveAndExit) {
             if (!saveAndExit) {
-                _config.ResetConfiguration();
+                _config = new TournamentData();
             } else {
                 SaveDrawData();
             }

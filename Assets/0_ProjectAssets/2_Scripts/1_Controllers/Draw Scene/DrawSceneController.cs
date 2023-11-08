@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using YannickSCF.GeneralApp.Controller.UI.Popups;
 using YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors;
-using YannickSCF.TournamentDraw.FileManagement;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Models;
 using YannickSCF.TournamentDraw.Popups;
@@ -63,7 +62,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
         public void Init() {
             _gameManager = GameManager.Instance;
-            _config = _gameManager.Config;
+            //_config = _gameManager.Config; // TO UPDATE
 
             int participantsAlreadyRevealed = InitPouleModels();
 

@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 using YannickSCF.GeneralApp.Controller.UI.Popups;
-using YannickSCF.TournamentDraw.FileManagement;
+using YannickSCF.LSTournaments.Common.Scriptables.Data;
+using YannickSCF.LSTournaments.Common.Tools.FileManagement;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Scriptables;
 
@@ -53,8 +54,8 @@ namespace YannickSCF.TournamentDraw.Popups {
         }
 
         private void SaveJSON() {
-            DrawConfiguration config = GameManager.Instance.Config;
-            FileExporter.SaveFileBrowser(config.DrawName, JsonUtility.ToJson(config));
+            TournamentData config = GameManager.Instance.Config;
+            FileExporter.SaveFileBrowser(config.TournamentName, JsonUtility.ToJson(config));
         }
 
         private void SavePDF() {

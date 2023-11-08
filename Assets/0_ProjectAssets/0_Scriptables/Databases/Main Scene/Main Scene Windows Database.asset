@@ -16,6 +16,6 @@ MonoBehaviour:
   - _windowId: Initial
     _window: {fileID: 8573941898085814234, guid: c4512269cb009d54499b54d5323fe779, type: 3}
   - _windowId: Config
-    _window: {fileID: 7319447076854810428, guid: e5975ad2200b97141a3819a880202147, type: 3}
+    _window: {fileID: 894501036788243814, guid: e3977860b2faccd44997ce075afed3b3, type: 3}
   - _windowId: Settings
     _window: {fileID: 7489268843690913303, guid: e1d1842f60dde774e9788fce1bce9f4f, type: 3}
