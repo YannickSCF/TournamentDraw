@@ -301,15 +301,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Atlas (BCN)
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 8f8bec565bcd9284fafdeb77ec49854d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d7ca675a6a37e364f88f01ce8e8ce19d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: b2ea656c4f731324386e2dfc8be23c8a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280906707
-  m_fontColor: {r: 0.827451, g: 0.4509804, b: 0.16078432, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -513,15 +513,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Yannick Santa Cruz Feuillias
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a566b78ba6df2984690b4eab1e7e2bea, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 8f8bec565bcd9284fafdeb77ec49854d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d7ca675a6a37e364f88f01ce8e8ce19d, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: b2ea656c4f731324386e2dfc8be23c8a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280906707
-  m_fontColor: {r: 0.827451, g: 0.4509804, b: 0.16078432, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

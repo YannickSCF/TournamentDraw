@@ -51,7 +51,7 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
             _configWindow.OnWindowHidden += ShowInitialFromConfig;
             _sceneCanvas.HideWindow<ConfiguratorController, ConfiguratorView>("Config");
         }
-        // TOUPDATE
+
         private void ShowInitialFromConfig(WindowController<ConfiguratorView> window) {
             _sceneCanvas.ShowWindow<InitialWindowController, InitialWindowView>("Initial");
             _initialWindow.GoBack();

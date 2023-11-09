@@ -424,6 +424,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3192794345519302036, guid: 138341c23bb35dd4c8ad91554bfc803d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 3192794345750698658, guid: 138341c23bb35dd4c8ad91554bfc803d, type: 3}
       propertyPath: m_RootOrder
       value: 3

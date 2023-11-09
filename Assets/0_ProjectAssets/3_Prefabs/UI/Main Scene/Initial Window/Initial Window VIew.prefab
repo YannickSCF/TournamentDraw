@@ -225,6 +225,10 @@ PrefabInstance:
       value: Empezar sorteo
       objectReference: {fileID: 0}
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
@@ -353,6 +357,10 @@ PrefabInstance:
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_fontSize
       value: 54.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -486,6 +494,10 @@ PrefabInstance:
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_fontSize
       value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -622,6 +634,10 @@ PrefabInstance:
       value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
@@ -738,6 +754,10 @@ PrefabInstance:
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_text
       value: Salir
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_HorizontalAlignment
@@ -878,6 +898,10 @@ PrefabInstance:
       value: "< Atr\xE1s"
       objectReference: {fileID: 0}
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 1
       objectReference: {fileID: 0}
@@ -1010,6 +1034,10 @@ PrefabInstance:
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_fontSize
       value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4217919154865152340, guid: a59549a1e8199684cac82eafc8db0140, type: 3}
       propertyPath: m_HorizontalAlignment
