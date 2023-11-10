@@ -7,7 +7,6 @@ using YannickSCF.TournamentDraw.Controllers.MainScene.Initial;
 using YannickSCF.TournamentDraw.Views.MainScene.Initial;
 using YannickSCF.TournamentDraw.Controllers.MainScene.Windows.Settings;
 using YannickSCF.TournamentDraw.Views.MainScene.Windows.Settings;
-using YannickSCF.LSTournaments.Common.Scriptables.Data;
 using YannickSCF.LSTournaments.Common.Controllers;
 using YannickSCF.LSTournaments.Common.Views;
 
@@ -34,20 +33,21 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
 
         #region Methods to manage draw configuration from NEW
         private void OpenConfigurationWindow() {
-            GameManager.Instance.Config = new TournamentData();
+            GameManager.Instance.Config.ResetData();
             _initialWindow.OnWindowHidden += ShowConfiguratorFromInitial;
             _sceneCanvas.HideWindow<InitialWindowController, InitialWindowView>("Initial");
         }
 
         private void ShowConfiguratorFromInitial(WindowController<InitialWindowView> window) {
             _configWindow = _sceneCanvas.ShowWindow<ConfiguratorController, ConfiguratorView>("Config");
+            _configWindow.SetData(GameManager.Instance.Config);
             _configWindow.SetCallbacks(OnConfiguratorClosed, OnConfiguratorFinished);
 
             _initialWindow.OnWindowHidden -= ShowConfiguratorFromInitial;
         }
 
         private void OnConfiguratorClosed() {
-            GameManager.Instance.Config = new TournamentData();
+            GameManager.Instance.Config.ResetData();
             _configWindow.OnWindowHidden += ShowInitialFromConfig;
             _sceneCanvas.HideWindow<ConfiguratorController, ConfiguratorView>("Config");
         }

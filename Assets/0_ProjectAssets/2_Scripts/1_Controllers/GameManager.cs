@@ -70,7 +70,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         private void OnApplicationQuit() {
 #if UNITY_EDITOR
             if (!_debug) {
-                _config = new TournamentData();
+                _config.ResetData();
                 _settings.ResetConfiguration();
             }
 #endif
@@ -136,7 +136,7 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
         public void SaveAndExit(bool saveAndExit) {
             if (!saveAndExit) {
-                _config = new TournamentData();
+                _config.ResetData();
             } else {
                 SaveDrawData();
             }

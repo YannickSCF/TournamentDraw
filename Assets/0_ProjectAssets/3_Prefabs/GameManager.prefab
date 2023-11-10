@@ -657,9 +657,9 @@ MonoBehaviour:
   _sceneController: {fileID: 688586892}
   _dataController: {fileID: 5819188657736776719}
   _debug: 0
-  _debugConfig: {fileID: 11400000, guid: a4092ba67320539458e6ed7ca34ac822, type: 2}
+  _debugConfig: {fileID: 11400000, guid: 473688b5bc9440a4fb83ec1e8309ac39, type: 2}
   openPanelAuto: 1
-  _config: {fileID: 11400000, guid: 473688b5bc9440a4fb83ec1e8309ac39, type: 2}
+  _config: {fileID: 11400000, guid: a4092ba67320539458e6ed7ca34ac822, type: 2}
   _settings: {fileID: 11400000, guid: ffe6cfb877159dc49bf23811056e2a72, type: 2}
 --- !u!114 &5819188657736776719
 MonoBehaviour:
