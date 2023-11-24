@@ -38,11 +38,11 @@ MonoBehaviour:
   _tierIsVisible: 1
   _tierSize: 5
   _saberColorCanExpand: 0
-  _saberColorIsVisible: 0
+  _saberColorIsVisible: 1
   _saberColorSize: 6
   _birthDateCanExpand: 0
-  _birthDateIsVisible: 0
+  _birthDateIsVisible: 1
   _birthDateSize: 7.5
   _startDateCanExpand: 0
-  _startDateIsVisible: 0
+  _startDateIsVisible: 1
   _startDateSize: 7.5

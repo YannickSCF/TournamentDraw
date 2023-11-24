@@ -49,6 +49,7 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene {
             GameManager.Instance.Config.ResetData();
             _configWindow.OnWindowHidden += ShowInitialFromConfig;
             _sceneCanvas.HideWindow<ConfiguratorController, ConfiguratorView>("Config");
+            _sceneCanvas.CloseWindow<ConfiguratorController, ConfiguratorView>("Config");
         }
 
         private void ShowInitialFromConfig(WindowController<ConfiguratorView> window) {
