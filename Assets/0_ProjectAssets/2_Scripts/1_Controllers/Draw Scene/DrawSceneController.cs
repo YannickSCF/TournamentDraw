@@ -28,8 +28,8 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
         [SerializeField] private AthleteRevealOrder _cRevealOrder = AthleteRevealOrder.NextInNextPoule;
 
-        private int _cPouleIndex = 0;
-        private int _cAthleteIndex = 0;
+        private int _cPouleIndex = -1;
+        private int _cAthleteIndex = -1;
         private bool _isDrawAlreadyStarted = false;
         private bool _isDrawFinished = false;
 
@@ -109,17 +109,15 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
                 _allPoules = _data.Poules;
             }
 
-            int participantsAlreadyRevealed = 0;
-            foreach (PouleDataModel poule in _allPoules) {
-                participantsAlreadyRevealed += poule.AthletesIds.Count;
-            }
-
-            if (participantsAlreadyRevealed > 0) {
+            int athletesAlreadyRevealed = 0;
+            _data.Poules.ForEach(x => athletesAlreadyRevealed += x.AthletesIds.Count);
+            // TODO: Review if this is needed
+            if (athletesAlreadyRevealed > 0) {
                 _allPoules.ForEach(x => x.AthletesIds.Clear());
                 _data.Poules.ForEach(x => x.AthletesIds.Clear());
             }
 
-            return participantsAlreadyRevealed;
+            return athletesAlreadyRevealed;
         }
 
         #region Event listeners methods
@@ -176,44 +174,58 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             RevealNextInNextPoule(revealMuted);
         }
         private void RevealCompletePoule(bool revealMuted) {
+            ++_cPouleIndex;
+
             foreach (string athleteId in _allPoules[_cPouleIndex].AthletesIds) {
                 RevealAthlete(_data.GetAthleteById(athleteId), revealMuted);
             }
 
-            ++_cPouleIndex;
-            _isDrawFinished = _cPouleIndex >= _allPoules.Count;
+            CheckIfDrawIsFinished();
         }
         private void RevealNextInAllPoules(bool revealMuted) {
+            _cPouleIndex = 0;
+            ++_cAthleteIndex;
+
             foreach (PouleDataModel pouleData in _allPoules) {
-                RevealAthlete(_data.GetAthleteById(pouleData.AthletesIds[_cAthleteIndex]), revealMuted);
+                if (_cAthleteIndex >= 0 && _cAthleteIndex < pouleData.AthletesIds.Count) {
+                    RevealAthlete(_data.GetAthleteById(pouleData.AthletesIds[_cAthleteIndex]), revealMuted);
+                }
                 ++_cPouleIndex;
             }
 
-            ++_cAthleteIndex;
-            _cPouleIndex = 0;
-            _isDrawFinished = _cAthleteIndex >= _allPoules[0].AthletesIds.Count;
+            CheckIfDrawIsFinished();
         }
         private void RevealNextInPoule(bool revealMuted) {
-            RevealAthlete(_data.GetAthleteById(_allPoules[_cPouleIndex].AthletesIds[_cAthleteIndex]), revealMuted);
-
+            if (_cPouleIndex < 0 || _cPouleIndex >= _allPoules.Count) _cPouleIndex = 0;
             ++_cAthleteIndex;
+
             if (_cAthleteIndex >= _allPoules[_cPouleIndex].AthletesIds.Count) {
                 _cAthleteIndex = 0;
                 ++_cPouleIndex;
-
-                _isDrawFinished = _cPouleIndex >= _allPoules.Count;
             }
-        }
-        private void RevealNextInNextPoule(bool revealMuted) {
+
             RevealAthlete(_data.GetAthleteById(_allPoules[_cPouleIndex].AthletesIds[_cAthleteIndex]), revealMuted);
 
+            CheckIfDrawIsFinished();
+        }
+        private void RevealNextInNextPoule(bool revealMuted) {
             ++_cPouleIndex;
             if (_cPouleIndex >= _allPoules.Count) {
                 _cPouleIndex = 0;
                 ++_cAthleteIndex;
-
-                _isDrawFinished = _cPouleIndex >= _allPoules.Count;
             }
+
+            if (_cAthleteIndex < 0 || _cAthleteIndex >= _allPoules[_cPouleIndex].AthletesIds.Count) _cAthleteIndex = 0;
+            RevealAthlete(_data.GetAthleteById(_allPoules[_cPouleIndex].AthletesIds[_cAthleteIndex]), revealMuted);
+
+            CheckIfDrawIsFinished();
+        }
+
+        private void CheckIfDrawIsFinished() {
+            int athletesAlreadyRevealed = 0;
+            _data.Poules.ForEach(x => athletesAlreadyRevealed += x.AthletesIds.Count);
+
+            _isDrawFinished = athletesAlreadyRevealed >= _data.PouleCountAndSizes[0, 0] * _data.PouleCountAndSizes[0, 1] + _data.PouleCountAndSizes[1, 0] * _data.PouleCountAndSizes[1, 1];
         }
         #endregion
 
