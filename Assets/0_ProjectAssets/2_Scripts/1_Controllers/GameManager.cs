@@ -1,15 +1,16 @@
-using UnityEngine;
 
-using YannickSCF.GeneralApp.Controller.Audio;
+// Dependencies
+using System;
+using UnityEngine;
+// Custom dependencies
+using YannickSCF.GeneralApp;
 using YannickSCF.GeneralApp.Controller.Scenes;
 using YannickSCF.GeneralApp.Controller.UI;
 using YannickSCF.GeneralApp.View.UI.LoadingPanel.Events;
 using YannickSCF.TournamentDraw.Controllers.DrawScene;
 using YannickSCF.TournamentDraw.Controllers.MainScene;
 using YannickSCF.TournamentDraw.Scriptables;
-using System;
 using YannickSCF.LSTournaments.Common.Scriptables.Data;
-using YannickSCF.GeneralApp;
 
 #if UNITY_EDITOR
 using UnityEditor;

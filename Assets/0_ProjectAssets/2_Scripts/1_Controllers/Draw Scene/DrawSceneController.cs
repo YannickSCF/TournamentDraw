@@ -1,34 +1,47 @@
 
-using System;
+// Dependencies
 using System.Collections.Generic;
 using UnityEngine;
-using YannickSCF.GeneralApp.Controller.UI.Popups;
-using YannickSCF.TournamentDraw.Controllers.Draw.ParticipantSelectors;
+// Custom dependencies
+using YannickSCF.LSTournaments.Common;
+using YannickSCF.LSTournaments.Common.Controllers;
+using YannickSCF.LSTournaments.Common.Models.Athletes;
+using YannickSCF.LSTournaments.Common.Models.Poules;
+using YannickSCF.LSTournaments.Common.Scriptables.Data;
+using YannickSCF.LSTournaments.Common.Tools.Poule;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
-using YannickSCF.TournamentDraw.Models;
 using YannickSCF.TournamentDraw.Popups;
-using YannickSCF.TournamentDraw.Scriptables;
 using YannickSCF.TournamentDraw.Views.DrawScene;
 using YannickSCF.TournamentDraw.Views.DrawScene.Events;
 
 namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
     public class DrawSceneController : MonoBehaviour {
+        // TODO: Change place (?) To a script related with draw settings
+        public enum AthleteRevealOrder { NextInNextPoule, NextInPoule, NextInAllPoules, CompletePoule, Custom };
 
         [SerializeField] private DrawSceneView _view;
         [SerializeField] private SpriteRenderer _backgroundImage;
 
-        private DrawConfiguration _config;
+        private TournamentData _data;
 
-        private BaseSelector participantSelector;
-        private List<PouleModel> _allPoules;
-        private int c_pouleIndex = -1;
-        private bool isDrawAlreadyStarted = false;
+        private List<PouleDataModel> _allPoules;
 
-        private MenuPopupController menuPopup;
+        [SerializeField] private AthleteRevealOrder _cRevealOrder = AthleteRevealOrder.NextInNextPoule;
+
+        private int _cPouleIndex = 0;
+        private int _cAthleteIndex = 0;
+        private bool _isDrawAlreadyStarted = false;
+        private bool _isDrawFinished = false;
 
         private GameManager _gameManager;
 
+        public AthleteRevealOrder CRevealOrder { get => _cRevealOrder; set => _cRevealOrder = value; }
+
         #region Mono
+        private void Awake() {
+            _allPoules = new List<PouleDataModel>();
+        }
+
         private void OnEnable() {
             DrawPanelViewEvents.OnStartButtonClicked += StartButtonPressed;
             DrawPanelViewEvents.OnNextButtonClicked += OnNextButtonClicked;
@@ -62,18 +75,18 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
         public void Init() {
             _gameManager = GameManager.Instance;
-            //_config = _gameManager.Config; // TO UPDATE
+            _data = DataManager.Instance.AppData;
 
             int participantsAlreadyRevealed = InitPouleModels();
 
             if (participantsAlreadyRevealed > 0) {
-                isDrawAlreadyStarted = true;
+                _isDrawAlreadyStarted = true;
 
-                participantSelector = BaseSelector.GetBaseSelector(_config.ParticipantSelection);
-                participantSelector.InitializeSelector(_config.Participants, _config.Seed);
+                Randomizer.SetSeed(_data.Seed);
+                _allPoules = PouleUtils.CreatePoules(_data.GetNamingData().Value, _data.Athletes, _data.FillerTypeInfo, _data.FillerSubtypeInfo, _data.GetPouleMaxSize());
             }
 
-            _view.Init(_config.DrawName, _config.NumberOfPoules, _config.MaxPouleSize, participantsAlreadyRevealed);
+            _view.Init(_data.TournamentName, _data.GetPouleCount(), _data.GetPouleMaxSize(), participantsAlreadyRevealed);
 
             if (participantsAlreadyRevealed > 0) {
                 for (int i = 0; i < participantsAlreadyRevealed; ++i) {
@@ -83,26 +96,27 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         private int InitPouleModels() {
-            if (_config.Poules.Count <= 0) {
-                _allPoules = new List<PouleModel>();
-                for (int i = 0; i < _config.NumberOfPoules; ++i) {
-                    _allPoules.Add(new PouleModel((i + 1).ToString()));
+            if (_data.Poules.Count <= 0) {
+                _allPoules = new List<PouleDataModel>();
+                List<string> names = PouleUtils.GetPoulesNames(_data.GetNamingData().Value);
+                for (int i = 0; i < names.Count; ++i) {
+                    _allPoules.Add(new PouleDataModel(names[i]));
                 }
 
-                _config.Poules = _allPoules;
+                _data.Poules = _allPoules;
                 return 0;
             } else {
-                _allPoules = _config.Poules;
+                _allPoules = _data.Poules;
             }
 
             int participantsAlreadyRevealed = 0;
-            foreach (PouleModel poule in _allPoules) {
-                participantsAlreadyRevealed += poule.PouleParticipants.Count;
+            foreach (PouleDataModel poule in _allPoules) {
+                participantsAlreadyRevealed += poule.AthletesIds.Count;
             }
 
             if (participantsAlreadyRevealed > 0) {
-                _allPoules.ForEach(x => x.PouleParticipants.Clear());
-                _config.Poules.ForEach(x => x.PouleParticipants.Clear());
+                _allPoules.ForEach(x => x.AthletesIds.Clear());
+                _data.Poules.ForEach(x => x.AthletesIds.Clear());
             }
 
             return participantsAlreadyRevealed;
@@ -112,7 +126,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         private void StartButtonPressed() {
             _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.OnGoing);
 
-            if (!isDrawAlreadyStarted) {
+            if (!_isDrawAlreadyStarted) {
                 SeedPopupData seedPopupData = new SeedPopupData("SeedSelector",
                     CloseSeedSelector, ChangeSeedAndStart);
 
@@ -126,10 +140,10 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         private void ChangeSeedAndStart(int newSeed) {
-            _config.Seed = newSeed;
+            _data.Seed = newSeed;
+            Randomizer.SetSeed(_data.Seed);
 
-            participantSelector = BaseSelector.GetBaseSelector(_config.ParticipantSelection);
-            participantSelector.InitializeSelector(_config.Participants, newSeed);
+            _allPoules = PouleUtils.CreatePoules(_data.GetNamingData().Value, _data.Athletes, _data.FillerTypeInfo, _data.FillerSubtypeInfo, _data.GetPouleMaxSize());
 
             _gameManager.BaseUIController.HidePopup("SeedSelector");
         }
@@ -139,21 +153,75 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         private void RevealNewParticipant(bool revealMuted) {
-            ParticipantModel revealedParticipant = participantSelector.GetNextParticipant();
+            // TODO: Add full name as a setting
+            // TODO: Add show academy as a setting
+            switch (_cRevealOrder) {
+                case AthleteRevealOrder.Custom: RevealCustom(revealMuted); break;
+                case AthleteRevealOrder.CompletePoule: RevealCompletePoule(revealMuted); break;
+                case AthleteRevealOrder.NextInAllPoules: RevealNextInAllPoules(revealMuted); break;
+                case AthleteRevealOrder.NextInPoule: RevealNextInPoule(revealMuted); break;
+                case AthleteRevealOrder.NextInNextPoule:
+                default: RevealNextInNextPoule(revealMuted); break;
+            }
 
-            int pouleIndex = GetPouleIndex();
-            _view.AddParticipantToPoule(
-                revealedParticipant.FullName,
-                revealedParticipant.AcademyName,
-                pouleIndex, revealMuted);
-
-            _allPoules[pouleIndex].PouleParticipants.Add(revealedParticipant);
-
-            if (!participantSelector.IsAnyParticipantToReveal()) {
+            if (_isDrawFinished) {
                 _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.Finished);
             }
 
             _gameManager.SaveDrawData();
+        }
+        #region RevealNewParticipant methods
+        private void RevealCustom(bool revealMuted) {
+            // TODO: Add Custom reveal option
+            RevealNextInNextPoule(revealMuted);
+        }
+        private void RevealCompletePoule(bool revealMuted) {
+            foreach (string athleteId in _allPoules[_cPouleIndex].AthletesIds) {
+                RevealAthlete(_data.GetAthleteById(athleteId), revealMuted);
+            }
+
+            ++_cPouleIndex;
+            _isDrawFinished = _cPouleIndex >= _allPoules.Count;
+        }
+        private void RevealNextInAllPoules(bool revealMuted) {
+            foreach (PouleDataModel pouleData in _allPoules) {
+                RevealAthlete(_data.GetAthleteById(pouleData.AthletesIds[_cAthleteIndex]), revealMuted);
+                ++_cPouleIndex;
+            }
+
+            ++_cAthleteIndex;
+            _cPouleIndex = 0;
+            _isDrawFinished = _cAthleteIndex >= _allPoules[0].AthletesIds.Count;
+        }
+        private void RevealNextInPoule(bool revealMuted) {
+            RevealAthlete(_data.GetAthleteById(_allPoules[_cPouleIndex].AthletesIds[_cAthleteIndex]), revealMuted);
+
+            ++_cAthleteIndex;
+            if (_cAthleteIndex >= _allPoules[_cPouleIndex].AthletesIds.Count) {
+                _cAthleteIndex = 0;
+                ++_cPouleIndex;
+
+                _isDrawFinished = _cPouleIndex >= _allPoules.Count;
+            }
+        }
+        private void RevealNextInNextPoule(bool revealMuted) {
+            RevealAthlete(_data.GetAthleteById(_allPoules[_cPouleIndex].AthletesIds[_cAthleteIndex]), revealMuted);
+
+            ++_cPouleIndex;
+            if (_cPouleIndex >= _allPoules.Count) {
+                _cPouleIndex = 0;
+                ++_cAthleteIndex;
+
+                _isDrawFinished = _cPouleIndex >= _allPoules.Count;
+            }
+        }
+        #endregion
+
+        private void RevealAthlete(AthleteInfoModel athlete, bool revealMuted) {
+            _view.AddParticipantToPoule(athlete.GetFullName(), athlete.Academy,
+                _cPouleIndex, revealMuted);
+
+            _data.Poules[_cPouleIndex].AthletesIds.Add(athlete.Id);
         }
 
         private void SaveDataPressed() {
@@ -173,7 +241,6 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
             _gameManager.BaseUIController.ShowPopup(menuPopupData);
         }
-
         private void CloseMenu() {
             _gameManager.BaseUIController.HidePopup("Menu");
         }
@@ -182,7 +249,6 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             SettingsPopupData settingsPopupData = new SettingsPopupData("SettingsPopup", SettingsBackToMenu);
             _gameManager.BaseUIController.ShowPopup(settingsPopupData);
         }
-
         private void SettingsBackToMenu() {
             _gameManager.SaveSettingsData();
             _gameManager.BaseUIController.HidePopup("SettingsPopup");
@@ -194,33 +260,11 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
             _gameManager.BaseUIController.ShowPopup(exitPopupData);
         }
-
         private void CloseAskExit() {
             _gameManager.BaseUIController.HidePopup("AskExit");
         }
-
         private void Exit(bool saveBefore) {
             _gameManager.SaveAndExit(saveBefore);
-        }
-
-        private int GetPouleIndex() {
-            switch (_config.PouleAssign) {
-                case PouleAssignType.PouleByPoule:
-                    // TODO: Disabled option - Look out when poules have different sizes
-                    Debug.LogError(GetType().Name + ": GetPouleIndex (PouleAssignType.PouleByPoule) -> Method not implemented");
-                    throw new NotImplementedException();
-                case PouleAssignType.Custom:
-                    // TODO: Disabled option
-                    Debug.LogError(GetType().Name + ": GetPouleIndex (PouleAssignType.Custom) -> Method not implemented");
-                    throw new NotImplementedException();
-                case PouleAssignType.OneByOne:
-                default:
-                    ++c_pouleIndex;
-                    if (c_pouleIndex >= _config.NumberOfPoules) {
-                        c_pouleIndex = 0;
-                    }
-                    return c_pouleIndex;
-            }
         }
     }
 }

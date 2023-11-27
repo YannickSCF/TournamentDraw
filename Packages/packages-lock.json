@@ -199,7 +199,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "4e5be2a317dd62ac10695b4a3054cff252be6a73"
+      "hash": "0795af0df48ab633860347ac89eecd047430ed77"
     },
     "com.yannickscf.project-basecode-template": {
       "version": "https://github.com/YannickSCF/project-basecode-template.git?path=/Assets",
