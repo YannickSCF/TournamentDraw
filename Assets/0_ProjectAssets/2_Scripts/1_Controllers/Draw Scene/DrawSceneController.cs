@@ -13,11 +13,11 @@ using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Popups;
 using YannickSCF.TournamentDraw.Views.DrawScene;
 using YannickSCF.TournamentDraw.Views.DrawScene.Events;
+using YannickSCF.TournamentDraw.Scriptables;
+using System;
 
 namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
     public class DrawSceneController : MonoBehaviour {
-        // TODO: Change place (?) To a script related with draw settings
-        public enum AthleteRevealOrder { NextInNextPoule, NextInPoule, NextInAllPoules, CompletePoule, Custom };
 
         [SerializeField] private DrawSceneView _view;
         [SerializeField] private SpriteRenderer _backgroundImage;
@@ -26,30 +26,30 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
         private List<PouleDataModel> _allPoules;
 
-        [SerializeField] private AthleteRevealOrder _cRevealOrder = AthleteRevealOrder.NextInNextPoule;
-
         private int _cPouleIndex = -1;
         private int _cAthleteIndex = -1;
         private bool _isDrawAlreadyStarted = false;
         private bool _isDrawFinished = false;
 
         private GameManager _gameManager;
-
-        public AthleteRevealOrder CRevealOrder { get => _cRevealOrder; set => _cRevealOrder = value; }
+        private DrawSettingsModel _drawSettings;
 
         #region Mono
         private void Awake() {
             _allPoules = new List<PouleDataModel>();
+
+            _drawSettings = SettingsManager.Instance.DrawSettings;
         }
 
         private void OnEnable() {
+            _drawSettings.DrawSettingsChanged += OnDrawSettingsChanged;
+
             DrawPanelViewEvents.OnStartButtonClicked += StartButtonPressed;
             DrawPanelViewEvents.OnNextButtonClicked += OnNextButtonClicked;
             DrawPanelViewEvents.OnSaveButtonClicked += SaveDataPressed;
 
             DrawPanelViewEvents.OnSettingsButtonClicked += ShowMenu;
         }
-
 
         private void Update() {
             if (Input.GetKeyUp(KeyCode.Escape)) {
@@ -65,6 +65,8 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         private void OnDisable() {
+            _drawSettings.DrawSettingsChanged -= OnDrawSettingsChanged;
+
             DrawPanelViewEvents.OnStartButtonClicked -= StartButtonPressed;
             DrawPanelViewEvents.OnNextButtonClicked -= OnNextButtonClicked;
             DrawPanelViewEvents.OnSaveButtonClicked -= SaveDataPressed;
@@ -87,6 +89,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
             }
 
             _view.Init(_data.TournamentName, _data.GetPouleCount(), _data.GetPouleMaxSize(), participantsAlreadyRevealed);
+            _view.SetAthletesTextsToUpper(_drawSettings.AllInMayus);
 
             if (participantsAlreadyRevealed > 0) {
                 for (int i = 0; i < participantsAlreadyRevealed; ++i) {
@@ -111,7 +114,7 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
 
             int athletesAlreadyRevealed = 0;
             _data.Poules.ForEach(x => athletesAlreadyRevealed += x.AthletesIds.Count);
-            // TODO: Review if this is needed
+
             if (athletesAlreadyRevealed > 0) {
                 _allPoules.ForEach(x => x.AthletesIds.Clear());
                 _data.Poules.ForEach(x => x.AthletesIds.Clear());
@@ -121,6 +124,23 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         }
 
         #region Event listeners methods
+        private void OnDrawSettingsChanged(DrawSettingsModel.DrawSettingType type) {
+            switch (type) {
+                case DrawSettingsModel.DrawSettingType.AthleteRevealOrder:
+                    break;
+                case DrawSettingsModel.DrawSettingType.AllInMayus:
+                    _view.SetAthletesTextsToUpper(_drawSettings.AllInMayus);
+                    break;
+                case DrawSettingsModel.DrawSettingType.NamingTypeSelected:
+                case DrawSettingsModel.DrawSettingType.ShowCountry:
+                case DrawSettingsModel.DrawSettingType.QuickInfo:
+                    // TODO
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void StartButtonPressed() {
             _view.SwitchDrawPhaseView(DrawSceneView.DrawScenePhaseView.OnGoing);
 
@@ -153,12 +173,12 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         private void RevealNewParticipant(bool revealMuted) {
             // TODO: Add full name as a setting
             // TODO: Add show academy as a setting
-            switch (_cRevealOrder) {
-                case AthleteRevealOrder.Custom: RevealCustom(revealMuted); break;
-                case AthleteRevealOrder.CompletePoule: RevealCompletePoule(revealMuted); break;
-                case AthleteRevealOrder.NextInAllPoules: RevealNextInAllPoules(revealMuted); break;
-                case AthleteRevealOrder.NextInPoule: RevealNextInPoule(revealMuted); break;
-                case AthleteRevealOrder.NextInNextPoule:
+            switch (_drawSettings.RevealOrderSelected) {
+                case DrawSettingsModel.AthleteRevealOrder.Custom: RevealCustom(revealMuted); break;
+                case DrawSettingsModel.AthleteRevealOrder.CompletePoule: RevealCompletePoule(revealMuted); break;
+                case DrawSettingsModel.AthleteRevealOrder.NextInAllPoules: RevealNextInAllPoules(revealMuted); break;
+                case DrawSettingsModel.AthleteRevealOrder.NextInPoule: RevealNextInPoule(revealMuted); break;
+                case DrawSettingsModel.AthleteRevealOrder.NextInNextPoule:
                 default: RevealNextInNextPoule(revealMuted); break;
             }
 
@@ -230,10 +250,31 @@ namespace YannickSCF.TournamentDraw.Controllers.DrawScene {
         #endregion
 
         private void RevealAthlete(AthleteInfoModel athlete, bool revealMuted) {
-            _view.AddParticipantToPoule(athlete.GetFullName(), athlete.Academy,
-                _cPouleIndex, revealMuted);
+            string athleteQuickInfo = GetAthleteQuickInfo(athlete);
+
+            _view.AddParticipantToPoule(athlete.GetFullName(_drawSettings.NamingTypeSelected),
+                athleteQuickInfo, _cPouleIndex, revealMuted);
 
             _data.Poules[_cPouleIndex].AthletesIds.Add(athlete.Id);
+        }
+
+        private string GetAthleteQuickInfo(AthleteInfoModel athlete) {
+            string res;
+
+            switch (_drawSettings.QuickInfo) {
+                case DrawSettingsModel.AthleteQuickDrawInfo.School:
+                    res = athlete.School;
+                    break;
+                case DrawSettingsModel.AthleteQuickDrawInfo.Combined:
+                    res = athlete.Academy + "(" + athlete.School + ")";
+                    break;
+                case DrawSettingsModel.AthleteQuickDrawInfo.Academy:
+                default:
+                    res = athlete.Academy;
+                    break;
+            }
+
+            return res;
         }
 
         private void SaveDataPressed() {

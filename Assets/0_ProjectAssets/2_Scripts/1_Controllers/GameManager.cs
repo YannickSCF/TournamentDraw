@@ -11,6 +11,8 @@ using YannickSCF.TournamentDraw.Controllers.DrawScene;
 using YannickSCF.TournamentDraw.Controllers.MainScene;
 using YannickSCF.TournamentDraw.Scriptables;
 using YannickSCF.LSTournaments.Common.Scriptables.Data;
+using YannickSCF.LSTournaments.Common.Controllers;
+using YannickSCF.GeneralApp.Controller.Audio;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -24,70 +26,94 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
 
         [Header("Main Controllers")]
         [SerializeField] private BaseUIController _baseUIController;
-        [SerializeField] private AudioController _audioController;
+        [SerializeField] private BaseAudioController _audioController;
         [SerializeField] private SceneController _sceneController;
-        [SerializeField] private DataController _dataController;
 
         [Header("Debug Values")]
         [SerializeField] private bool _debug = false;
-        [SerializeField, ConditionalHide("debug", true)] private TournamentData _debugConfig;
         [SerializeField, ConditionalHide("debug", true)] private States openPanelAuto = States.Initial;
 
-        [Header("Settings files")]
-        [SerializeField] private TournamentData _config;
-        [SerializeField] private SettingsConfiguration _settings;
+        private DataManager _dataManager;
+        private SettingsManager _settingsManager;
 
         private States c_state = States.None;
 
         public BaseUIController BaseUIController { get => _baseUIController; }
 
-        public TournamentData Config {
-            get { return _debug ? _debugConfig : _config; }
-            set {
-                if (_debug) {
-                    _debugConfig = value;
-                } else {
-                    _config = value;
-                }
-            }
-        }
-
         #region Mono
         protected override void Awake() {
             base.Awake();
+
+            _dataManager = DataManager.Instance;
+            _settingsManager = SettingsManager.Instance;
+            if (_settingsManager.HasSettingsSaved()) {
+                _settingsManager.LoadSettings();
+            }
+
+            if (_settingsManager.HasDrawSettingsSaved()) {
+                _settingsManager.LoadDrawSettings();
+            }
 
             if (_baseUIController != null && _baseUIController.LoadingController != null) {
                 _baseUIController.LoadingController.gameObject.SetActive(true);
             }
         }
 
-        private void Start() {
-            LoadSavedData();
+        private void OnEnable() {
+            _settingsManager.Settings.SettingsChanged += OnSettingChanged;
+        }
 
+        private void Start() {
             SwitchState(_debug ? openPanelAuto : States.Initial);
 
             SetGameToSettings();
         }
 
+        private void OnDisable() {
+            _settingsManager.Settings.SettingsChanged -= OnSettingChanged;
+        }
+
         private void OnApplicationQuit() {
+            _settingsManager.SaveSettings();
+            _settingsManager.SaveDrawSettings();
 #if UNITY_EDITOR
             if (!_debug) {
-                _config.ResetData();
-                _settings.ResetConfiguration();
+                _dataManager.ResetData();
+                _settingsManager.ResetSettings();
+                _settingsManager.ResetDrawSettings();
             }
 #endif
         }
         #endregion
 
-        private void LoadSavedData() {
-            if (_dataController.HasDrawConfigurationSaved()) {
-                _config = _dataController.GetDrawConfiguration(_config);
-            }
-
-            if (_dataController.HasSettingsConfigurationSaved()) {
-                _settings = _dataController.GetSettingsConfiguration(_settings);
+        #region Events Listeners
+        private void OnSettingChanged(SettingsModel.SettingType type) {
+            switch (type) {
+                case SettingsModel.SettingType.GeneralVolumeMute:
+                    _audioController.MuteSource(AudioSources.General, _settingsManager.Settings.GeneralVolumeMuted);
+                    break;
+                case SettingsModel.SettingType.GeneralVolume:
+                    _audioController.SetGeneralVolume(AudioSources.General, _settingsManager.Settings.GeneralVolume);
+                    break;
+                case SettingsModel.SettingType.MusicVolumeMute:
+                    _audioController.MuteSource(AudioSources.Music, _settingsManager.Settings.MusicVolumeMuted);
+                    break;
+                case SettingsModel.SettingType.MusicVolume:
+                    _audioController.SetGeneralVolume(AudioSources.Music, _settingsManager.Settings.MusicVolume);
+                    break;
+                case SettingsModel.SettingType.SFXVolumeMute:
+                    _audioController.MuteSource(AudioSources.SFX, _settingsManager.Settings.SFXVolumeMuted);
+                    break;
+                case SettingsModel.SettingType.SFXVolume:
+                    _audioController.SetGeneralVolume(AudioSources.SFX, _settingsManager.Settings.SFXVolume);
+                    break;
+                default:
+                    Debug.LogWarning($"Setting type '{Enum.GetName(typeof(SettingsModel.SettingType), type)}' not included on switch!");
+                    break;
             }
         }
+        #endregion
+
 
         public void SwitchState(States stateToSwitch) {
             if (c_state == States.None) {
@@ -100,16 +126,18 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         private void SetGameToSettings() {
-            _audioController.MuteSource(GeneralApp.AudioSources.General, IsGeneralVolumeMuted);
-            _audioController.SetGeneralVolume(GeneralApp.AudioSources.General, GeneralVolume);
+            SettingsModel settings = _settingsManager.Settings;
 
-            _audioController.MuteSource(GeneralApp.AudioSources.Music, IsMusicVolumeMuted);
-            _audioController.SetGeneralVolume(GeneralApp.AudioSources.Music, MusicVolume);
+            _audioController.MuteSource(AudioSources.General, settings.GeneralVolumeMuted);
+            _audioController.SetGeneralVolume(AudioSources.General, settings.GeneralVolume);
 
-            _audioController.MuteSource(GeneralApp.AudioSources.SFX, IsSFXVolumeMuted);
-            _audioController.SetGeneralVolume(GeneralApp.AudioSources.SFX, SFXVolume);
+            _audioController.MuteSource(AudioSources.Music, settings.MusicVolumeMuted);
+            _audioController.SetGeneralVolume(AudioSources.Music, settings.MusicVolume);
 
-            if (IsGeneralVolumeMuted && IsMusicVolumeMuted) {
+            _audioController.MuteSource(AudioSources.SFX, settings.SFXVolumeMuted);
+            _audioController.SetGeneralVolume(AudioSources.SFX, settings.SFXVolume);
+
+            if (settings.GeneralVolumeMuted && settings.MusicVolumeMuted) {
                 _audioController.PlayBackground("Suspense_Rises");
             } else {
                 _audioController.SoftPlayBackground("Suspense_Rises");
@@ -132,13 +160,9 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             }
         }
 
-        public bool IsConfigToContinue() {
-            return !string.IsNullOrEmpty(Config.TournamentName);
-        }
-
         public void SaveAndExit(bool saveAndExit) {
             if (!saveAndExit) {
-                _config.ResetData();
+                _dataManager.ResetData();
             } else {
                 SaveDrawData();
             }
@@ -151,11 +175,11 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
         }
 
         public void SaveDrawData() {
-            _dataController.SaveDrawConfiguration(_config);
+            _dataManager.SaveData();
         }
 
         public void SaveSettingsData() {
-            _dataController.SaveSettingsConfiguration(_settings);
+            SettingsManager.Instance.SaveSettings();
         }
 
         #region Scene management
@@ -209,16 +233,6 @@ namespace YannickSCF.TournamentDraw.MainManagers.Controllers {
             _sceneController.UnloadSceneByIndex(c_sceneToGo);
         }
         #endregion
-        #endregion
-
-        #region Audio Management
-        public bool IsGeneralVolumeMuted { get => _settings.GeneralVolumeMuted; set => _settings.GeneralVolumeMuted = value; }
-        public bool IsMusicVolumeMuted { get => _settings.MusicVolumeMuted; set => _settings.MusicVolumeMuted = value; }
-        public bool IsSFXVolumeMuted { get => _settings.SFXVolumeMuted; set => _settings.SFXVolumeMuted = value; }
-
-        public float GeneralVolume { get => _settings.GeneralVolume; set => _settings.GeneralVolume = value; }
-        public float MusicVolume { get => _settings.MusicVolume; set => _settings.MusicVolume = value; }
-        public float SFXVolume { get => _settings.SFXVolume; set => _settings.SFXVolume = value; }
         #endregion
     }
 }

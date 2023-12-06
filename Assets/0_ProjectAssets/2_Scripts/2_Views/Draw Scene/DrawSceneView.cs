@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -98,6 +97,12 @@ namespace YannickSCF.TournamentDraw.Views.DrawScene {
 
         public void AddParticipantToPoule(string completeName, string academyName, int pouleIndex, bool revealMuted) {
             _allPouleViews[pouleIndex].AddParticipantToPoule(completeName, academyName, revealMuted);
+        }
+
+        public void SetAthletesTextsToUpper(bool toUpper) {
+            foreach (PouleView pouleView in _allPouleViews) {
+                pouleView.SetAthletesTextsToUpper(toUpper);
+            }
         }
 
         public void SwitchDrawPhaseView(DrawScenePhaseView phaseToSwitch) {

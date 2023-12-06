@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YannickSCF.GeneralApp.Controller.UI.Windows;
+using YannickSCF.LSTournaments.Common.Controllers;
 using YannickSCF.LSTournaments.Common.Tools.Importer;
 using YannickSCF.TournamentDraw.MainManagers.Controllers;
 using YannickSCF.TournamentDraw.Popups;
@@ -55,7 +56,7 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Initial {
                 case ButtonType.LoadDraw:
                     string filePath = FileImporter.SelectTournamentDataFileWithBrowser();
                     if (!string.IsNullOrEmpty(filePath)) {
-                        _gameManager.Config = FileImporter.ImportTournamentData(filePath);
+                        DataManager.Instance.AppData = FileImporter.ImportTournamentData(filePath);
                         SwitchState(InitialButtonsStates.ConfigurationDraw);
                     } else {
                         ErrorPopupData errorPopupData = new ErrorPopupData("Error",
@@ -93,7 +94,7 @@ namespace YannickSCF.TournamentDraw.Controllers.MainScene.Initial {
                 default:
                     break;
                 case InitialButtonsStates.StartDraw:
-                    View.SetContinueInteractable(_gameManager.IsConfigToContinue());
+                    View.SetContinueInteractable(DataManager.Instance.HasDataSaved());
                     break;
                 case InitialButtonsStates.Settings:
                     _settingsCallback?.Invoke();

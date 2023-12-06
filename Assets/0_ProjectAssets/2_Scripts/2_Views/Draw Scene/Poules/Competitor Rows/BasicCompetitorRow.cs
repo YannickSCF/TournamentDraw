@@ -34,6 +34,14 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules.CompetitorRow {
             rowFilled = true;
         }
 
+        public void SetTextUpper(bool toUpper) {
+            bool isAlreadyUpper = (_competitorNameText.fontStyle & FontStyles.SmallCaps) == FontStyles.SmallCaps;
+            if (toUpper != isAlreadyUpper) {
+                _competitorNameText.fontStyle ^= FontStyles.SmallCaps;
+                _competitorAcademyText.fontStyle ^= FontStyles.SmallCaps;
+            }
+        }
+
         public void ResetRow() {
             _competitorNameText.text = string.Empty;
             _competitorAcademyText.text = string.Empty;

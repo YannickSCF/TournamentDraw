@@ -9,8 +9,8 @@ namespace YannickSCF.TournamentDraw.Controllers.ThreeD {
 
         #region Mono
         private void Start() {
-            _audioSource.mute = GameManager.Instance.IsSFXVolumeMuted;
-            _audioSource.volume = GameManager.Instance.SFXVolume;
+            _audioSource.mute = SettingsManager.Instance.Settings.SFXVolumeMuted;
+            _audioSource.volume = SettingsManager.Instance.Settings.SFXVolume;
         }
 
         private void OnEnable() {

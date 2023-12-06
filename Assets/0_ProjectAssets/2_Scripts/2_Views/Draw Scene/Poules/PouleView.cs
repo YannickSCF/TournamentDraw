@@ -57,6 +57,12 @@ namespace YannickSCF.TournamentDraw.Views.Draw.Panel.Poules {
             }
         }
 
+        public void SetAthletesTextsToUpper(bool toUpper) {
+            foreach (BasicCompetitorRow row in _allRows) {
+                row.SetTextUpper(toUpper);
+            }
+        }
+
         public float GetWidth() {
             return _rectTransform.rect.width;
         }

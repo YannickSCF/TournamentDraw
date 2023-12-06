@@ -17,13 +17,35 @@ MonoBehaviour:
   _tournamentFormulaName: 
   _seed: 0
   _namingInfo: 0
-  _roundsOfPoules: 0
+  _roundsOfPoules: 1
   _fillerTypeInfo: 0
   _fillerSubtypeInfo: 0
   _pouleCountMaxSize: {x: 0, y: 0}
   _pouleCountMinSize: {x: 0, y: 0}
-  _data: []
+  _poules: []
   _eliminationBracket: []
-  _athletesInfoUsed: []
+  _athletesInfoUsed:
+  - _info: 0
+    _status: 0
+  - _info: 1
+    _status: 0
+  - _info: 2
+    _status: 0
+  - _info: 3
+    _status: 0
+  - _info: 4
+    _status: 0
+  - _info: 5
+    _status: 0
+  - _info: 6
+    _status: 0
+  - _info: 7
+    _status: 0
+  - _info: 8
+    _status: 0
+  - _info: 9
+    _status: 0
+  - _info: 10
+    _status: 0
   _athletes: []
   _athletesStats: []

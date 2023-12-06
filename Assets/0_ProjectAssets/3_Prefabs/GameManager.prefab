@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1337071379}
-  - component: {fileID: 8966183973893008914}
+  - component: {fileID: 2489454416139736516}
   m_Layer: 0
   m_Name: AudioController
   m_TagString: Untagged
@@ -81,7 +81,7 @@ Transform:
   m_Father: {fileID: 6242430476589794343}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8966183973893008914
+--- !u!114 &2489454416139736516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,13 +90,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1337071378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b9793375c5cda46a3276e071d2c1e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 1402c9a660767604787e60b69dd6f65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _audiosDatabase: {fileID: 11400000, guid: 4ed6b8435beb0f440b994ab6dc902286, type: 2}
   _musicAudioSource: {fileID: 3522608765591023206}
   _sfxAudioSource: {fileID: 4298921021938367314}
   _backgroundVolumeDownCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _backgroundVolumeUpCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -116,30 +140,6 @@ MonoBehaviour:
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.056646287
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _backgroundVolumeUpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -614,7 +614,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6242430476589794343}
   - component: {fileID: 6242430476589794340}
-  - component: {fileID: 5819188657736776719}
+  - component: {fileID: 6173400973408531415}
+  - component: {fileID: 8020624726819077713}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -653,15 +654,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseUIController: {fileID: 199045128420671915}
-  _audioController: {fileID: 8966183973893008914}
+  _audioController: {fileID: 2489454416139736516}
   _sceneController: {fileID: 688586892}
-  _dataController: {fileID: 5819188657736776719}
   _debug: 0
-  _debugConfig: {fileID: 11400000, guid: 473688b5bc9440a4fb83ec1e8309ac39, type: 2}
   openPanelAuto: 1
-  _config: {fileID: 11400000, guid: a4092ba67320539458e6ed7ca34ac822, type: 2}
-  _settings: {fileID: 11400000, guid: ffe6cfb877159dc49bf23811056e2a72, type: 2}
---- !u!114 &5819188657736776719
+--- !u!114 &6173400973408531415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -670,9 +667,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 6242430476589794341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3b5af156c838e243b56587e1fd7229b, type: 3}
+  m_Script: {fileID: 11500000, guid: d6f060fde6867384394dee2405411376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _appData: {fileID: 11400000, guid: a4092ba67320539458e6ed7ca34ac822, type: 2}
+  _numberOfSaves: 3
+  _debug: 0
+  _debugAppData: {fileID: 11400000, guid: 473688b5bc9440a4fb83ec1e8309ac39, type: 2}
+--- !u!114 &8020624726819077713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242430476589794341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc9b11ac279fcea4893d14384e0781c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: ffe6cfb877159dc49bf23811056e2a72, type: 2}
+  _drawSettings: {fileID: 11400000, guid: 1a9648ddb5853604ca60144a5d7a2ba3, type: 2}
 --- !u!1 &6242430476952800885
 GameObject:
   m_ObjectHideFlags: 0
