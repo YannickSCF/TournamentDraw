@@ -22,7 +22,7 @@ MonoBehaviour:
   _fillerSubtypeInfo: 0
   _pouleCountMaxSize: {x: 0, y: 0}
   _pouleCountMinSize: {x: 0, y: 0}
-  _data: []
+  _poules: []
   _eliminationBracket: []
   _athletesInfoUsed: []
   _athletes: []
